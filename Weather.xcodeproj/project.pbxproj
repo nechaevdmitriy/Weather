@@ -21,6 +21,7 @@
 		5A8F25D026D3EA560029E186 /* Manrope-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25CC26D3E7970029E186 /* Manrope-VariableFont_wght.ttf */; };
 		5A8F25DF26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F25DD26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift */; };
 		5A8F25E026D4E0560029E186 /* WeatherByHoursCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25DE26D4E0560029E186 /* WeatherByHoursCollectionViewCell.xib */; };
+		5A8F25E226D4F7490029E186 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F25E126D4F7490029E186 /* CurrentWeather.swift */; };
 		B7D1AAAF07A6AE0C7FFAAC8D /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA1D9E4C607156292E9CCB6 /* Pods_Weather.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		5A8F25CC26D3E7970029E186 /* Manrope-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		5A8F25DD26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherByHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A8F25DE26D4E0560029E186 /* WeatherByHoursCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherByHoursCollectionViewCell.xib; sourceTree = "<group>"; };
+		5A8F25E126D4F7490029E186 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		9EA1D9E4C607156292E9CCB6 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9566E1549CB969F6F71B325 /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				5A8F25BF26D3C40A0029E186 /* WeatherData.swift */,
+				5A8F25E126D4F7490029E186 /* CurrentWeather.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				5A8F259A26D38E740029E186 /* TemperatureViewController.swift in Sources */,
 				5A8F25C026D3C40A0029E186 /* WeatherData.swift in Sources */,
 				5A8F25BE26D3C3350029E186 /* NetworkWeatherManager.swift in Sources */,
+				5A8F25E226D4F7490029E186 /* CurrentWeather.swift in Sources */,
 				5A8F25DF26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift in Sources */,
 				5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */,
 				5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */,

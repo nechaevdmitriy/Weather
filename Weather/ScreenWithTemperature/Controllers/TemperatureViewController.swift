@@ -16,13 +16,22 @@ class TemperatureViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         setupNavBar()
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: "Moscow")
+        
     }
     
     //MARK:- Private methods
     private func setupNavBar() {
         
-        title = "Tambov"
+        title = "City"
+        
+        self.networkWeatherManager.fetchCurrentWeather(forCity: "Moscow", index: 0, complitionHandler: { [unowned self] currentWeather in
+            
+            DispatchQueue.main.async {
+                self.title = currentWeather.cityName
+            }
+        })
+        
+        
         let appiranceNavigationBar = UINavigationBarAppearance()
         appiranceNavigationBar.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
         
@@ -61,7 +70,9 @@ class TemperatureViewController: UIViewController {
     
     @objc func searchCity() {
         self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) { city in
-            self.networkWeatherManager.fetchCurrentWeather(forCity: city)
+            self.networkWeatherManager.fetchCurrentWeather(forCity: city, index: 0) { currentWeather in
+                print(currentWeather.cityName)
+            }
         }
     }
 
@@ -81,7 +92,7 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentWeatherCollectionViewCell.id, for: indexPath) as! CurrentWeatherCollectionViewCell
             
-            cell.confugure(currentDayLabelText: "meow", currentTemperatureLabelText: "Meow", weatherDescriptionText: "Meow", weatherImage: #imageLiteral(resourceName: "sun"))
+            cell.confugure(city: "Moscow", index: indexPath.row)
             
             cell.layer.cornerRadius = 8
     
@@ -91,7 +102,7 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastDatesCollectionViewCell.id, for: indexPath) as! LastDatesCollectionViewCell
             
-            cell.confugure(dateLabel: "Day", currentDayLabel: "wtgrtw", minimumTemperatureValue: "rbtb", maximumTemperatureValue: "brtbrw")
+            cell.confugure(dateLabel: "24 august", currentDayLabel: "wtgrtw", minimumTemperatureValue: "rbtb", maximumTemperatureValue: "brtbrw")
             
             cell.layer.cornerRadius = 8
 
