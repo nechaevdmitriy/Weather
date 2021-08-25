@@ -26,32 +26,19 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
         return UINib(nibName: "LastDatesCollectionViewCell", bundle: nil)
     }
     
-    func confugure(dateLabel: String, currentDayLabel: String, minimumTemperatureValue: String, maximumTemperatureValue: String) {
-        self.dateLabel.text = dateLabel
-        
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: "Moscow", index: 0, complitionHandler: { [unowned self] CurrentWeather in
-            DispatchQueue.main.async {
-                self.minimumTemperatureValue.text = CurrentWeather.minimumTemperatureString
-                self.maximumTemperatureValue.text = CurrentWeather.maximumTemperatureString
-            }
-        })
-        
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         lastDatesCollectionView.register(WeatherByHoursCollectionViewCell.nib(), forCellWithReuseIdentifier: WeatherByHoursCollectionViewCell.id)
         lastDatesCollectionView.delegate = self
         lastDatesCollectionView.dataSource = self
         lastDatesCollectionView.showsHorizontalScrollIndicator = false
+        lastDatesCollectionView.backgroundColor = UIColor(named: "backgroundCellGray")
+        contentView.backgroundColor = UIColor(named: "backgroundCellGray")
+        
     }
 }
 
 extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         5
@@ -59,19 +46,22 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherByHoursCollectionViewCell.id, for: indexPath) as! WeatherByHoursCollectionViewCell
-        cell.confugure(hourLabel: dates[indexPath.row], temperatureLabel: "0")
+        cell.contentView.layer.cornerRadius = 8
+        cell.backgroundColor = .none
         
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: "Moscow", index: indexPath.row, complitionHandler: { currentWeather in
+        NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: "Moscow", indexPath: indexPath.row) { current in
             DispatchQueue.main.async {
-                cell.temperatureLabel.text = currentWeather.temperatureString
+                cell.temperatureLabel.text = current.temperatureString
+                cell.hourLabel.text = self.dates[indexPath.row]
+                cell.layer.cornerRadius = 8
             }
-        })
+        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 70, height: contentView.bounds.height)
+        return CGSize(width: 70, height: collectionView.bounds.height)
         }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

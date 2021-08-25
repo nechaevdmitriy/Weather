@@ -10,13 +10,13 @@ import UIKit
 class TemperatureViewController: UIViewController {
     
     let networkWeatherManager = NetworkWeatherManager.networkManager
+    let city = "Moscow"
     
     //MARK:- Override method
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         setupNavBar()
-        
     }
     
     //MARK:- Private methods
@@ -24,16 +24,14 @@ class TemperatureViewController: UIViewController {
         
         title = "City"
         
-        self.networkWeatherManager.fetchCurrentWeather(forCity: "Moscow", index: 0, complitionHandler: { [unowned self] currentWeather in
-            
+        networkWeatherManager.fetchCurrentWeather(forCity: city, indexPath: 0) { current in
             DispatchQueue.main.async {
-                self.title = currentWeather.cityName
+                self.title = current.cityName
             }
-        })
-        
+        }
         
         let appiranceNavigationBar = UINavigationBarAppearance()
-        appiranceNavigationBar.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        appiranceNavigationBar.backgroundColor = UIColor(named: "backgroundApp")
         
         navigationController?.navigationBar.standardAppearance = appiranceNavigationBar
         navigationController?.navigationBar.scrollEdgeAppearance = appiranceNavigationBar
@@ -46,17 +44,22 @@ class TemperatureViewController: UIViewController {
         
         
         
-        let searchAllertItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchCity))
-        let switchThemeItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: nil)
+        let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: #selector(showAlert))
+        
+        searchAllertItem.tintColor = UIColor(named: "lightGray")
+        
+        let switchThemeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "darkModeIcon"), style: .plain, target: self, action: #selector(switchDarkMode))
+        switchThemeItem.tintColor = UIColor(named: "lightGray")
         
         self.navigationItem.setRightBarButtonItems([searchAllertItem, switchThemeItem], animated: false)
+        
     }
     
     private func setupCollectionView() {
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        collectionView.backgroundColor = UIColor(named: "backgroundApp")
         
         view.addSubview(collectionView)
         
@@ -68,14 +71,27 @@ class TemperatureViewController: UIViewController {
         collectionView.dataSource = self
     }
     
-    @objc func searchCity() {
+    @objc func showAlert() {
         self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) { city in
-            self.networkWeatherManager.fetchCurrentWeather(forCity: city, index: 0) { currentWeather in
+            self.networkWeatherManager.fetchCurrentWeather(forCity: city, indexPath: 0) { currentWeather in
                 print(currentWeather.cityName)
             }
         }
     }
-
+    
+    @objc func switchDarkMode() {
+        if #available(iOS 13, *) {
+            
+            let appDelegate = UIApplication.shared.windows.first
+            
+            if appDelegate?.overrideUserInterfaceStyle == .dark {
+                appDelegate?.overrideUserInterfaceStyle = .light
+            return
+            }
+            appDelegate?.overrideUserInterfaceStyle = .dark
+            return
+        }
+    }
 }
 
 
@@ -92,7 +108,7 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentWeatherCollectionViewCell.id, for: indexPath) as! CurrentWeatherCollectionViewCell
             
-            cell.confugure(city: "Moscow", index: indexPath.row)
+            cell.confugure(city: city, indexPath: indexPath.row)
             
             cell.layer.cornerRadius = 8
     
@@ -102,9 +118,15 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastDatesCollectionViewCell.id, for: indexPath) as! LastDatesCollectionViewCell
             
-            cell.confugure(dateLabel: "24 august", currentDayLabel: "wtgrtw", minimumTemperatureValue: "rbtb", maximumTemperatureValue: "brtbrw")
-            
             cell.layer.cornerRadius = 8
+            NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: city, indexPath: indexPath.row) { current in
+                
+                DispatchQueue.main.async {
+                    cell.minimumTemperatureValue.text = current.minimumTemperatureString
+                    cell.maximumTemperatureValue.text = current.maximumTemperatureString
+                    cell.currentDayLabel.text = current.currentDay
+                }
+            }
 
             return cell
         }
@@ -139,9 +161,12 @@ extension TemperatureViewController {
             let textField = ac.textFields?.first
             guard let cityName = textField?.text else { return }
             if cityName != "" {
-//                self.networkWeatherManager.fetchCurrentWeather(forCity: cityName)
-                let city = cityName.split(separator: " ").joined(separator: "%20")
-                completionHandler(city)
+                self.networkWeatherManager.fetchCurrentWeather(forCity: cityName, indexPath: 0) { current in
+                    DispatchQueue.main.async {
+                        self.title = current.cityName
+                        self.view.reloadInputViews()
+                    }
+                }
             }
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

@@ -1,7 +1,6 @@
 //
 //  CurrentWeatherCollectionViewCell.swift
 //  Weather
-//
 //  Created by Дмитрий  on 23.08.2021.
 
 import UIKit
@@ -21,13 +20,12 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
         return UINib(nibName: "CurrentWeatherCollectionViewCell", bundle: nil)
     }
     
-    func confugure(city: String, index: Int) {
-        
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: city, index: index) { [unowned self] currentWeather in
-            
+    func confugure(city: String, indexPath: Int) {
+        NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: city, indexPath: indexPath) { [weak self] currentWeather in
             DispatchQueue.main.async {
-                self.weatherDescription.text = currentWeather.temperatureDescription
-                self.currentTemperatureLabel.text = currentWeather.temperatureString
+                self?.weatherDescription.text = currentWeather.temperatureDescription
+                self?.currentTemperatureLabel.text = currentWeather.temperatureString
+                self?.currentDayLabel.text = currentWeather.cityName
             }
         }
     }

@@ -16,16 +16,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="343" height="280"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImageLight" translatesAutoresizingMaskIntoConstraints="NO" id="5vh-Rf-yi2">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="280"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KG9-Np-Ps9">
                         <rect key="frame" x="20" y="20" width="303" height="17"/>
                         <fontDescription key="fontDescription" name="MalayalamSangamMN" family="Malayalam Sangam MN" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="iyX-ze-PEG">
-                        <rect key="frame" x="131.5" y="65" width="80" height="80"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Thunder" translatesAutoresizingMaskIntoConstraints="NO" id="iyX-ze-PEG">
+                        <rect key="frame" x="111.5" y="65" width="120" height="80"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="Q9f-Xz-Zvu"/>
+                            <constraint firstAttribute="width" constant="120" id="Q9f-Xz-Zvu"/>
                             <constraint firstAttribute="height" constant="80" id="buG-Sf-qcT"/>
                         </constraints>
                     </imageView>
@@ -36,25 +39,28 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7d-lB-VzN">
-                        <rect key="frame" x="20" y="223" width="303" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <rect key="frame" x="20" y="223" width="303" height="0.0"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="0.0"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" red="0.3529411764705882" green="0.67843137254901964" blue="1" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="X7d-lB-VzN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="5jS-vS-R7d"/>
                 <constraint firstItem="aaJ-YE-8LL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="EJE-7d-v5N"/>
                 <constraint firstAttribute="trailing" secondItem="aaJ-YE-8LL" secondAttribute="trailing" constant="20" id="F0W-Qc-hAf"/>
+                <constraint firstItem="5vh-Rf-yi2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="FM7-VW-2gV"/>
                 <constraint firstItem="KG9-Np-Ps9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="HXe-DK-S15"/>
                 <constraint firstAttribute="trailing" secondItem="X7d-lB-VzN" secondAttribute="trailing" constant="20" id="JaR-ss-173"/>
                 <constraint firstItem="aaJ-YE-8LL" firstAttribute="top" secondItem="iyX-ze-PEG" secondAttribute="bottom" constant="20" id="KDN-cb-klI"/>
+                <constraint firstAttribute="bottom" secondItem="5vh-Rf-yi2" secondAttribute="bottom" id="W41-ke-HZU"/>
                 <constraint firstAttribute="trailing" secondItem="KG9-Np-Ps9" secondAttribute="trailing" constant="20" id="XFw-s5-3AF"/>
                 <constraint firstItem="KG9-Np-Ps9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="ais-tP-ubM"/>
                 <constraint firstItem="iyX-ze-PEG" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="c1G-sW-krV"/>
+                <constraint firstItem="5vh-Rf-yi2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kIH-46-uqi"/>
+                <constraint firstAttribute="trailing" secondItem="5vh-Rf-yi2" secondAttribute="trailing" id="l7b-Wb-FJT"/>
                 <constraint firstItem="iyX-ze-PEG" firstAttribute="top" secondItem="KG9-Np-Ps9" secondAttribute="bottom" constant="28" id="szc-hS-oar"/>
                 <constraint firstItem="X7d-lB-VzN" firstAttribute="top" secondItem="aaJ-YE-8LL" secondAttribute="bottom" constant="2" id="vt9-Qi-yJk"/>
             </constraints>
@@ -64,10 +70,11 @@
                 <outlet property="weatherDescription" destination="X7d-lB-VzN" id="H3g-Ya-dWW"/>
                 <outlet property="weatherImage" destination="iyX-ze-PEG" id="eOr-nS-5hS"/>
             </connections>
-            <point key="canvasLocation" x="18.840579710144929" y="96.428571428571431"/>
+            <point key="canvasLocation" x="18.115942028985508" y="96.428571428571431"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="sun" width="253" height="254"/>
+        <image name="Thunder" width="120" height="120"/>
+        <image name="backgroundImageLight" width="343" height="280"/>
     </resources>
 </document>

@@ -19,13 +19,10 @@ class WeatherByHoursCollectionViewCell: UICollectionViewCell {
         return UINib(nibName: "WeatherByHoursCollectionViewCell", bundle: nil)
     }
     
-    func confugure(hourLabel: String, temperatureLabel: String) {
-        self.hourLabel.text = hourLabel
-        self.temperatureLabel.text = temperatureLabel
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        contentView.backgroundColor = UIColor(named: "darkBackgroundCellGray")
+        contentView.layer.cornerRadius = 8
     }
 
 }

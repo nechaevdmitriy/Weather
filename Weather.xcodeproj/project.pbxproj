@@ -18,10 +18,16 @@
 		5A8F25C426D3CE490029E186 /* CurrentWeatherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25C226D3CE490029E186 /* CurrentWeatherCollectionViewCell.xib */; };
 		5A8F25C926D3E18D0029E186 /* LastDatesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F25C726D3E18D0029E186 /* LastDatesCollectionViewCell.swift */; };
 		5A8F25CA26D3E18D0029E186 /* LastDatesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25C826D3E18D0029E186 /* LastDatesCollectionViewCell.xib */; };
-		5A8F25D026D3EA560029E186 /* Manrope-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25CC26D3E7970029E186 /* Manrope-VariableFont_wght.ttf */; };
 		5A8F25DF26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F25DD26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift */; };
 		5A8F25E026D4E0560029E186 /* WeatherByHoursCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25DE26D4E0560029E186 /* WeatherByHoursCollectionViewCell.xib */; };
 		5A8F25E226D4F7490029E186 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F25E126D4F7490029E186 /* CurrentWeather.swift */; };
+		5A8F25F126D63BB80029E186 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25EA26D63BB80029E186 /* Manrope-Bold.ttf */; };
+		5A8F25F226D63BB80029E186 /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25EB26D63BB80029E186 /* Manrope-ExtraBold.ttf */; };
+		5A8F25F326D63BB80029E186 /* Manrope-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25EC26D63BB80029E186 /* Manrope-ExtraLight.ttf */; };
+		5A8F25F426D63BB80029E186 /* Manrope-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25ED26D63BB80029E186 /* Manrope-Medium.ttf */; };
+		5A8F25F526D63BB80029E186 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25EE26D63BB80029E186 /* Manrope-Regular.ttf */; };
+		5A8F25F626D63BB80029E186 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25EF26D63BB80029E186 /* Manrope-Light.ttf */; };
+		5A8F25F726D63BB80029E186 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25F026D63BB80029E186 /* Manrope-SemiBold.ttf */; };
 		B7D1AAAF07A6AE0C7FFAAC8D /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA1D9E4C607156292E9CCB6 /* Pods_Weather.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,10 +46,16 @@
 		5A8F25C226D3CE490029E186 /* CurrentWeatherCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCollectionViewCell.xib; sourceTree = "<group>"; };
 		5A8F25C726D3E18D0029E186 /* LastDatesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastDatesCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A8F25C826D3E18D0029E186 /* LastDatesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LastDatesCollectionViewCell.xib; sourceTree = "<group>"; };
-		5A8F25CC26D3E7970029E186 /* Manrope-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		5A8F25DD26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherByHoursCollectionViewCell.swift; sourceTree = "<group>"; };
 		5A8F25DE26D4E0560029E186 /* WeatherByHoursCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherByHoursCollectionViewCell.xib; sourceTree = "<group>"; };
 		5A8F25E126D4F7490029E186 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		5A8F25EA26D63BB80029E186 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
+		5A8F25EB26D63BB80029E186 /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
+		5A8F25EC26D63BB80029E186 /* Manrope-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraLight.ttf"; sourceTree = "<group>"; };
+		5A8F25ED26D63BB80029E186 /* Manrope-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Medium.ttf"; sourceTree = "<group>"; };
+		5A8F25EE26D63BB80029E186 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
+		5A8F25EF26D63BB80029E186 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
+		5A8F25F026D63BB80029E186 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 		9EA1D9E4C607156292E9CCB6 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9566E1549CB969F6F71B325 /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,7 +179,13 @@
 		5A8F25CB26D3E77C0029E186 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				5A8F25CC26D3E7970029E186 /* Manrope-VariableFont_wght.ttf */,
+				5A8F25EA26D63BB80029E186 /* Manrope-Bold.ttf */,
+				5A8F25EB26D63BB80029E186 /* Manrope-ExtraBold.ttf */,
+				5A8F25EC26D63BB80029E186 /* Manrope-ExtraLight.ttf */,
+				5A8F25EF26D63BB80029E186 /* Manrope-Light.ttf */,
+				5A8F25ED26D63BB80029E186 /* Manrope-Medium.ttf */,
+				5A8F25EE26D63BB80029E186 /* Manrope-Regular.ttf */,
+				5A8F25F026D63BB80029E186 /* Manrope-SemiBold.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -257,12 +275,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A8F25F126D63BB80029E186 /* Manrope-Bold.ttf in Resources */,
+				5A8F25F326D63BB80029E186 /* Manrope-ExtraLight.ttf in Resources */,
+				5A8F25F526D63BB80029E186 /* Manrope-Regular.ttf in Resources */,
+				5A8F25F426D63BB80029E186 /* Manrope-Medium.ttf in Resources */,
+				5A8F25F626D63BB80029E186 /* Manrope-Light.ttf in Resources */,
+				5A8F25C426D3CE490029E186 /* CurrentWeatherCollectionViewCell.xib in Resources */,
+				5A8F25F726D63BB80029E186 /* Manrope-SemiBold.ttf in Resources */,
+				5A8F25F226D63BB80029E186 /* Manrope-ExtraBold.ttf in Resources */,
 				5A8F25CA26D3E18D0029E186 /* LastDatesCollectionViewCell.xib in Resources */,
-				5A8F25D026D3EA560029E186 /* Manrope-VariableFont_wght.ttf in Resources */,
 				5A8F25A226D38E750029E186 /* LaunchScreen.storyboard in Resources */,
 				5A8F259F26D38E750029E186 /* Assets.xcassets in Resources */,
 				5A8F25E026D4E0560029E186 /* WeatherByHoursCollectionViewCell.xib in Resources */,
-				5A8F25C426D3CE490029E186 /* CurrentWeatherCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
