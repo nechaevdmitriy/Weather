@@ -42,7 +42,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eQK-Cj-Gn6">
-                        <rect key="frame" x="20" y="65" width="300" height="125"/>
+                        <rect key="frame" x="20" y="67" width="300" height="123"/>
                         <color key="tintColor" red="0.95294117647058818" green="0.96078431372549022" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pXO-0f-3Qe">
                             <size key="itemSize" width="128" height="128"/>
@@ -52,14 +52,14 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIK-Ma-YCA">
-                        <rect key="frame" x="20" y="48" width="300" height="1"/>
+                        <rect key="frame" x="20" y="50" width="300" height="1"/>
                         <color key="backgroundColor" name="darkBackgroundCellGray"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="eJY-Gg-DZF"/>
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="toc-e7-uHP">
-                        <rect key="frame" x="290" y="12" width="30" height="24"/>
+                        <rect key="frame" x="290" y="14" width="30" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="82e-OK-Xp9"/>
                             <constraint firstAttribute="height" constant="24" id="AVI-qd-oki"/>
@@ -83,10 +83,10 @@
                 <constraint firstAttribute="trailing" secondItem="toc-e7-uHP" secondAttribute="trailing" constant="20" id="Zm1-U6-ima"/>
                 <constraint firstAttribute="trailing" secondItem="dIK-Ma-YCA" secondAttribute="trailing" constant="20" id="Zro-Qz-E1G"/>
                 <constraint firstItem="iYQ-na-ZaZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="ldb-0I-j0U"/>
+                <constraint firstItem="toc-e7-uHP" firstAttribute="centerY" secondItem="iYQ-na-ZaZ" secondAttribute="centerY" id="opA-9u-3QH"/>
                 <constraint firstItem="WRN-xZ-w6F" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="pjS-13-dXT"/>
                 <constraint firstItem="V5M-Sz-BVs" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="qIx-XC-CUT"/>
                 <constraint firstItem="dIK-Ma-YCA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="qdt-4B-EuM"/>
-                <constraint firstItem="toc-e7-uHP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="vy5-nX-Biz"/>
                 <constraint firstItem="eQK-Cj-Gn6" firstAttribute="top" secondItem="dIK-Ma-YCA" secondAttribute="bottom" constant="16" id="z8T-7W-EtF"/>
             </constraints>
             <size key="customSize" width="292" height="158"/>

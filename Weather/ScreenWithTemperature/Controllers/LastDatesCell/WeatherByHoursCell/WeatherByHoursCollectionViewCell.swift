@@ -23,6 +23,8 @@ class WeatherByHoursCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        hourLabel.font = UIFont(name: "Manrope-Medium", size: 16)
+        temperatureLabel.font = UIFont(name: "Manrope-ExtraBold", size: 16)
         contentView.backgroundColor = UIColor(named: "darkBackgroundCellGray")
         contentView.layer.cornerRadius = 8
     }

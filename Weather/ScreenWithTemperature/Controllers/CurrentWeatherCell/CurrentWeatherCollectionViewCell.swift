@@ -24,6 +24,17 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
         NetworkWeatherManager.networkManager.fetchCurrentWeather() { [weak self] currentWeather in
             
             DispatchQueue.main.async {
+                
+                switch currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription {
+                
+                case "дождь", "пасмурно", "небольшой дождь":
+                    self?.weatherImage.image = #imageLiteral(resourceName: "Rain")
+                case "гроза":
+                    self?.weatherImage.image = #imageLiteral(resourceName: "Thunder")
+                default:
+                    self?.weatherImage.image = #imageLiteral(resourceName: "sun")
+                }
+                
                 self?.weatherDescription.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription
                 self?.currentTemperatureLabel.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.temp.description
                 
@@ -37,6 +48,10 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        currentDayLabel.font = UIFont(name: "Manrope-SemiBold", size: 14)
+        currentTemperatureLabel.font = UIFont(name: "Manrope-ExtraBold", size: 48)
+        weatherDescription.font = UIFont(name: "Manrope-SemiBold", size: 14)
     }
 
 }

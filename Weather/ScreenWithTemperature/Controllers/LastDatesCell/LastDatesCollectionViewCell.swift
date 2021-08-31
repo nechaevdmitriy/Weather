@@ -23,7 +23,6 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lastDatesCollectionView: UICollectionView!
     @IBOutlet weak var weatherImage: UIImageView!
     
-    
     static let id = "LastDatesCollectionViewCell"
     
     static func nib() -> UINib {
@@ -32,6 +31,11 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        dateLabel.font = UIFont(name: "Manrope-Medium", size: 16)
+        currentDayLabel.font = UIFont(name: "Manrope-Medium", size: 16)
+        minimumTemperatureValue.font = UIFont(name: "Manrope-ExtraBold", size: 16)
+        maximumTemperatureValue.font = UIFont(name: "Manrope-ExtraBold", size: 16)
         
         lastDatesCollectionView.register(WeatherByHoursCollectionViewCell.nib(), forCellWithReuseIdentifier: WeatherByHoursCollectionViewCell.id)
         
