@@ -108,6 +108,7 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentWeatherCollectionViewCell.id, for: indexPath) as! CurrentWeatherCollectionViewCell
             
+            cell.confugure(city: "Moscow", indexPath: 0)
             cell.layer.cornerRadius = 8
     
             return cell

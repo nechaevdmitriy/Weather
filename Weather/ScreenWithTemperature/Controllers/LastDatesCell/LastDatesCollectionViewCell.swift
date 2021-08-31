@@ -51,8 +51,9 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
         cell.backgroundColor = .none
         
         NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: "Moscow", indexPath: indexPath.row) { current in
+            
             DispatchQueue.main.async {
-                //cell.temperatureLabel.text = current.temperatureString
+//                cell.temperatureLabel.text = current.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.dtTxt
                 cell.hourLabel.text = self.dates[indexPath.row]
                 cell.layer.cornerRadius = 8
             }
