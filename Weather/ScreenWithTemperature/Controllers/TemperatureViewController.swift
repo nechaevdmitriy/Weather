@@ -24,9 +24,9 @@ class TemperatureViewController: UIViewController {
         
         title = "City"
         
-        networkWeatherManager.fetchCurrentWeather(forCity: city, indexPath: 0) { current in
+        networkWeatherManager.fetchCurrentWeather() { current in
             DispatchQueue.main.async {
-                //self.title = current.cityName
+                self.title = current.city
             }
         }
         
@@ -73,7 +73,7 @@ class TemperatureViewController: UIViewController {
     
     @objc func showAlert() {
         self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) { city in
-            self.networkWeatherManager.fetchCurrentWeather(forCity: city, indexPath: 0) { currentWeather in
+            self.networkWeatherManager.fetchCurrentWeather() { currentWeather in
                 
             }
         }
@@ -117,8 +117,9 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastDatesCollectionViewCell.id, for: indexPath) as! LastDatesCollectionViewCell
             
+            cell.numberOfParentSection = indexPath.row
             cell.layer.cornerRadius = 8
-            NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: city, indexPath: indexPath.row) { current in
+            NetworkWeatherManager.networkManager.fetchCurrentWeather() { current in
                 
 //                DispatchQueue.main.async {
 //                    cell.minimumTemperatureValue.text = current.minimumTemperatureString
@@ -160,9 +161,9 @@ extension TemperatureViewController {
             let textField = ac.textFields?.first
             guard let cityName = textField?.text else { return }
             if cityName != "" {
-                self.networkWeatherManager.fetchCurrentWeather(forCity: cityName, indexPath: 0) { current in
+                self.networkWeatherManager.fetchCurrentWeather() { current in
                     DispatchQueue.main.async {
-//                        self.title = current.cityName
+                        self.title = current.city
                         self.view.reloadInputViews()
                     }
                 }

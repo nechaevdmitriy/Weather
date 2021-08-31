@@ -11,7 +11,9 @@ class NetworkWeatherManager {
     
     static var networkManager = NetworkWeatherManager()
     
-    func fetchCurrentWeather(forCity city: String, indexPath: Int, complitionHandler: @escaping (CurrentWeather) -> Void) {
+    let city = "Moscow"
+    
+    func fetchCurrentWeather(complitionHandler: @escaping (CurrentWeather) -> Void) {
         
         let urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&apikey=21a8d636ae57d56ec6fb2ebb46d3e0b4&cnt=40&units=metric&lang=ru"
         

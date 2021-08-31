@@ -9,6 +9,8 @@ import UIKit
 
 class LastDatesCollectionViewCell: UICollectionViewCell {
     
+    var numberOfParentSection = Int()
+    
     let dates = ["12:00", "15:00", "18:00", "21:00", "00:00"]
 
     static let collectionCell = LastDatesCollectionViewCell()
@@ -28,6 +30,7 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         lastDatesCollectionView.register(WeatherByHoursCollectionViewCell.nib(), forCellWithReuseIdentifier: WeatherByHoursCollectionViewCell.id)
         
         lastDatesCollectionView.delegate = self
@@ -50,11 +53,14 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
         cell.contentView.layer.cornerRadius = 8
         cell.backgroundColor = .none
         
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: "Moscow", indexPath: indexPath.row) { current in
+        WeatherByHoursCollectionViewCell.indexOfParentSection = indexPath.row
+        
+        NetworkWeatherManager.networkManager.fetchCurrentWeather() { current in
             
             DispatchQueue.main.async {
-//                cell.temperatureLabel.text = current.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.dtTxt
-                cell.hourLabel.text = self.dates[indexPath.row]
+                
+                cell.temperatureLabel.text = current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row)?.main.temp.description
+                cell.hourLabel.text = current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row)?.dtTxt.description.split(separator: " ").first?.description
                 cell.layer.cornerRadius = 8
             }
         }
@@ -65,10 +71,4 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 70, height: collectionView.bounds.height)
         }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-//    }
-    
-    
 }

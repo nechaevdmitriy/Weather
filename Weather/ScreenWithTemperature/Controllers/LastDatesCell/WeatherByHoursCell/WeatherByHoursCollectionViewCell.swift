@@ -13,6 +13,8 @@ class WeatherByHoursCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     
+    static var indexOfParentSection = Int()
+    
     static let id = "WeatherByHoursCollectionViewCell"
     
     static func nib() -> UINib {
