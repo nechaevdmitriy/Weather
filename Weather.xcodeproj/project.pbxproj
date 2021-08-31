@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A23818F26DE4E1100F31ACB /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23818E26DE4E1100F31ACB /* DateHelper.swift */; };
 		5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259526D38E740029E186 /* AppDelegate.swift */; };
 		5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259726D38E740029E186 /* SceneDelegate.swift */; };
 		5A8F259A26D38E740029E186 /* TemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259926D38E740029E186 /* TemperatureViewController.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		3D1448E094EC2BA0EB815C88 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
+		5A23818E26DE4E1100F31ACB /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		5A8F259226D38E740029E186 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8F259526D38E740029E186 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A8F259726D38E740029E186 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				5A8F259926D38E740029E186 /* TemperatureViewController.swift */,
+				5A23818E26DE4E1100F31ACB /* DateHelper.swift */,
 				5A8F25C526D3E12E0029E186 /* CurrentWeatherCell */,
 				5A8F25C626D3E1490029E186 /* LastDatesCell */,
 			);
@@ -344,6 +347,7 @@
 				5A8F25C026D3C40A0029E186 /* WeatherData.swift in Sources */,
 				5A8F25BE26D3C3350029E186 /* NetworkWeatherManager.swift in Sources */,
 				5A8F25E226D4F7490029E186 /* CurrentWeather.swift in Sources */,
+				5A23818F26DE4E1100F31ACB /* DateHelper.swift in Sources */,
 				5A8F25DF26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift in Sources */,
 				5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */,
 				5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */,

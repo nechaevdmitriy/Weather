@@ -22,7 +22,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sun" translatesAutoresizingMaskIntoConstraints="NO" id="Dww-i7-8J7">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="Dww-i7-8J7">
                         <rect key="frame" x="17.5" y="64" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="aBJ-3Z-rBh"/>
@@ -58,6 +58,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Sun" width="120" height="120"/>
+        <image name="sun" width="120" height="120"/>
     </resources>
 </document>

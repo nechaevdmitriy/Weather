@@ -20,13 +20,17 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
         return UINib(nibName: "CurrentWeatherCollectionViewCell", bundle: nil)
     }
     
-    func confugure(city: String, indexPath: Int) {
+    func confugure() {
         NetworkWeatherManager.networkManager.fetchCurrentWeather() { [weak self] currentWeather in
             
             DispatchQueue.main.async {
-//                self?.weatherDescription.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription
-//                self?.currentTemperatureLabel.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.temp.description
-//                self?.currentDayLabel.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description
+                self?.weatherDescription.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription
+                self?.currentTemperatureLabel.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.temp.description
+                
+                let day = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description.capitalized
+                
+                let convertedValue = HelperDate.changeDateFormat(dateString: day ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM, EEE")
+                self?.currentDayLabel.text = "Сегодня," + " " + convertedValue
             }
         }
     }

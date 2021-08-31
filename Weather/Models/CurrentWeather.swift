@@ -18,8 +18,6 @@ struct CurrentWeather {
         let formatter = DateFormatter()
         let calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
-        
-        
         let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date)
         let stringSelectedDay = selectedDay?.description.split(separator: " ").first
         let infoAboutCurrentDay = listByDays[stringSelectedDay]?[indexOfHour]

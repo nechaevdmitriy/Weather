@@ -59,8 +59,12 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
             
             DispatchQueue.main.async {
                 
-                cell.temperatureLabel.text = current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row)?.main.temp.description
-                cell.hourLabel.text = current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row)?.dtTxt.description.split(separator: " ").first?.description
+                cell.temperatureLabel.text = Int(current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.main.temp ?? 0).description + "℃"
+                
+                let hours = current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.dtTxt.description.split(separator: " ").last?.description.split(separator: ":").first?.description
+                
+                cell.hourLabel.text = (hours ?? " ") + ":" + "00"
+                
                 cell.layer.cornerRadius = 8
             }
         }

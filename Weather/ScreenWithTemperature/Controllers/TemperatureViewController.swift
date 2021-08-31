@@ -108,7 +108,7 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentWeatherCollectionViewCell.id, for: indexPath) as! CurrentWeatherCollectionViewCell
             
-            cell.confugure(city: "Moscow", indexPath: 0)
+            cell.confugure()
             cell.layer.cornerRadius = 8
     
             return cell
@@ -121,11 +121,19 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             cell.layer.cornerRadius = 8
             NetworkWeatherManager.networkManager.fetchCurrentWeather() { current in
                 
-//                DispatchQueue.main.async {
+                DispatchQueue.main.async {
 //                    cell.minimumTemperatureValue.text = current.minimumTemperatureString
 //                    cell.maximumTemperatureValue.text = current.maximumTemperatureString
-//                    cell.currentDayLabel.text = current.currentDay
-//                }
+                    let date = current.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description
+                    
+                    let convertDatefromDay = HelperDate.changeDateFormat(dateString: date ?? "", fromFormat: "yyyy-MM-dd", toFormat: "EEE")
+                    
+                    let convertDatefromMonth = HelperDate.changeDateFormat(dateString: date ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM")
+                    
+                    cell.currentDayLabel.text = convertDatefromDay
+                    cell.dateLabel.text = convertDatefromMonth
+                    
+                }
             }
 
             return cell
