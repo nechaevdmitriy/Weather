@@ -12,14 +12,12 @@ class TemperatureViewController: UIViewController {
     let networkWeatherManager = NetworkWeatherManager.networkManager
     let city = "Moscow"
     
-    //MARK:- Override method
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         setupNavBar()
     }
     
-    //MARK:- Private methods
     private func setupNavBar() {
         
         title = "City"
@@ -124,6 +122,32 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
                 DispatchQueue.main.async {
 //                    cell.minimumTemperatureValue.text = current.minimumTemperatureString
 //                    cell.maximumTemperatureValue.text = current.maximumTemperatureString
+                    
+                    var weatherdescriptions = [String]()
+                    var temperatureValue = [Int]()
+                    
+                    for i in 2...6 {
+                        weatherdescriptions.append(current.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.weather[0].weatherDescription ?? "")
+                        
+                        temperatureValue.append(Int(current.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.main.temp ?? 0))
+                    }
+                    
+                    let oftenValueWeather = weatherdescriptions.reduce(String()) { $0 == $1 ? $0 : $1}
+                    let maxValue = temperatureValue.max()
+                    let minValue = temperatureValue.min()
+                    
+                    cell.maximumTemperatureValue.text = "\(maxValue ?? 0)"
+                    cell.minimumTemperatureValue.text = "\(minValue ?? 0)"
+                    
+                    switch oftenValueWeather {
+                    case "дождь", "пасмурно", "небольшой дождь":
+                        cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
+                    case "гроза":
+                        cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
+                    default:
+                        cell.weatherImage.image = #imageLiteral(resourceName: "sun")
+                    }
+                    
                     let date = current.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description
                     
                     let convertDatefromDay = HelperDate.changeDateFormat(dateString: date ?? "", fromFormat: "yyyy-MM-dd", toFormat: "EEE")
@@ -171,8 +195,8 @@ extension TemperatureViewController {
             if cityName != "" {
                 self.networkWeatherManager.fetchCurrentWeather() { current in
                     DispatchQueue.main.async {
-                        self.title = current.city
-                        self.view.reloadInputViews()
+                        self.networkWeatherManager.city = cityName
+                        self.viewDidLoad()
                     }
                 }
             }

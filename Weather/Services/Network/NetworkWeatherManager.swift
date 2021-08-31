@@ -11,7 +11,7 @@ class NetworkWeatherManager {
     
     static var networkManager = NetworkWeatherManager()
     
-    let city = "Moscow"
+    var city = "Moscow"
     
     func fetchCurrentWeather(complitionHandler: @escaping (CurrentWeather) -> Void) {
         

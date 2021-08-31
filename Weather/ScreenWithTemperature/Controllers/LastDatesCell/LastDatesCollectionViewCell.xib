@@ -96,6 +96,7 @@
                 <outlet property="lastDatesCollectionView" destination="eQK-Cj-Gn6" id="SNw-YR-Ghe"/>
                 <outlet property="maximumTemperatureValue" destination="iYQ-na-ZaZ" id="hj2-eN-rYi"/>
                 <outlet property="minimumTemperatureValue" destination="e5w-36-jf3" id="sQ8-4y-VEy"/>
+                <outlet property="weatherImage" destination="toc-e7-uHP" id="kVU-3y-JWz"/>
             </connections>
             <point key="canvasLocation" x="194.20289855072465" y="127.90178571428571"/>
         </collectionViewCell>

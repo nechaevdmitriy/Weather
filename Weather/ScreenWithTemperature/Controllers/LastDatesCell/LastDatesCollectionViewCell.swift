@@ -12,7 +12,7 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     var numberOfParentSection = Int()
     
     let dates = ["12:00", "15:00", "18:00", "21:00", "00:00"]
-
+    
     static let collectionCell = LastDatesCollectionViewCell()
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -21,6 +21,8 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var maximumTemperatureValue: UILabel!
     
     @IBOutlet weak var lastDatesCollectionView: UICollectionView!
+    @IBOutlet weak var weatherImage: UIImageView!
+    
     
     static let id = "LastDatesCollectionViewCell"
     
@@ -59,7 +61,18 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
             
             DispatchQueue.main.async {
                 
+                switch current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.weather[0].weatherDescription {
+                
+                case "дождь", "пасмурно", "небольшой дождь":
+                    cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
+                case "гроза":
+                    cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
+                default:
+                    cell.weatherImage.image = #imageLiteral(resourceName: "sun")
+                }
+                
                 cell.temperatureLabel.text = Int(current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.main.temp ?? 0).description + "℃"
+                
                 
                 let hours = current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.dtTxt.description.split(separator: " ").last?.description.split(separator: ":").first?.description
                 
@@ -74,5 +87,5 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 70, height: collectionView.bounds.height)
-        }
+    }
 }
