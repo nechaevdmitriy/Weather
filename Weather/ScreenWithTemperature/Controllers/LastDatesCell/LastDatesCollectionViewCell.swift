@@ -29,6 +29,7 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         lastDatesCollectionView.register(WeatherByHoursCollectionViewCell.nib(), forCellWithReuseIdentifier: WeatherByHoursCollectionViewCell.id)
+        
         lastDatesCollectionView.delegate = self
         lastDatesCollectionView.dataSource = self
         lastDatesCollectionView.showsHorizontalScrollIndicator = false
@@ -51,7 +52,7 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
         
         NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: "Moscow", indexPath: indexPath.row) { current in
             DispatchQueue.main.async {
-                cell.temperatureLabel.text = current.temperatureString
+                //cell.temperatureLabel.text = current.temperatureString
                 cell.hourLabel.text = self.dates[indexPath.row]
                 cell.layer.cornerRadius = 8
             }

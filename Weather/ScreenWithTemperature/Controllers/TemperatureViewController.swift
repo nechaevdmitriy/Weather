@@ -26,7 +26,7 @@ class TemperatureViewController: UIViewController {
         
         networkWeatherManager.fetchCurrentWeather(forCity: city, indexPath: 0) { current in
             DispatchQueue.main.async {
-                self.title = current.cityName
+                //self.title = current.cityName
             }
         }
         
@@ -74,7 +74,7 @@ class TemperatureViewController: UIViewController {
     @objc func showAlert() {
         self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) { city in
             self.networkWeatherManager.fetchCurrentWeather(forCity: city, indexPath: 0) { currentWeather in
-                print(currentWeather.cityName)
+                
             }
         }
     }
@@ -108,8 +108,6 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentWeatherCollectionViewCell.id, for: indexPath) as! CurrentWeatherCollectionViewCell
             
-            cell.confugure(city: city, indexPath: indexPath.row)
-            
             cell.layer.cornerRadius = 8
     
             return cell
@@ -121,11 +119,11 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             cell.layer.cornerRadius = 8
             NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: city, indexPath: indexPath.row) { current in
                 
-                DispatchQueue.main.async {
-                    cell.minimumTemperatureValue.text = current.minimumTemperatureString
-                    cell.maximumTemperatureValue.text = current.maximumTemperatureString
-                    cell.currentDayLabel.text = current.currentDay
-                }
+//                DispatchQueue.main.async {
+//                    cell.minimumTemperatureValue.text = current.minimumTemperatureString
+//                    cell.maximumTemperatureValue.text = current.maximumTemperatureString
+//                    cell.currentDayLabel.text = current.currentDay
+//                }
             }
 
             return cell
@@ -163,7 +161,7 @@ extension TemperatureViewController {
             if cityName != "" {
                 self.networkWeatherManager.fetchCurrentWeather(forCity: cityName, indexPath: 0) { current in
                     DispatchQueue.main.async {
-                        self.title = current.cityName
+//                        self.title = current.cityName
                         self.view.reloadInputViews()
                     }
                 }

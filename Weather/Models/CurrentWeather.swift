@@ -8,27 +8,15 @@
 import Foundation
 
 struct CurrentWeather {
+    var list = [List]()
+    var listByDays = Dictionary<Optional<Substring>, Array<Array<List>.Element>>()
     
-    let cityName: String
-    let temperature: Double
-    let temperatureDescription: String?
-    let minimumTemperature: Int
-    let maximumTempeature: Int
-    let currentDay: String
-    let feelsLike: String
-    
-    var temperatureString: String { "\(temperature)" }
-    var minimumTemperatureString: String { "\(minimumTemperature)" }
-    var maximumTemperatureString: String { "\(temperature.rounded())" }
-    
-    init?(currentWeatherData: CurrentWeatherData, indexPath: Int) {
+    func getData(indexOfDay: Int, indexOfHour: Int) {
         
-        cityName = currentWeatherData.city.name
-        temperature = currentWeatherData.list[indexPath].main.temp
-        feelsLike = "\(currentWeatherData.list[indexPath].main.feelsLike)"
-        temperatureDescription = ("\(currentWeatherData.list[indexPath].weather[0].weatherDescription.capitalized), ощущается как \(feelsLike)")
-        minimumTemperature = Int(currentWeatherData.list[indexPath].main.tempMin)
-        maximumTempeature = Int(currentWeatherData.list[indexPath].main.tempMin)
-        currentDay = currentWeatherData.list[indexPath].dtTxt
+    }
+
+    init?(currentWeatherData: CurrentWeatherData) {
+        list = currentWeatherData.list
+        listByDays = Dictionary(grouping: list, by: { $0.dtTxt.split(separator: " ").first })
     }
 }

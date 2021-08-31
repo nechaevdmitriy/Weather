@@ -22,11 +22,11 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
     
     func confugure(city: String, indexPath: Int) {
         NetworkWeatherManager.networkManager.fetchCurrentWeather(forCity: city, indexPath: indexPath) { [weak self] currentWeather in
-            DispatchQueue.main.async {
-                self?.weatherDescription.text = currentWeather.temperatureDescription
-                self?.currentTemperatureLabel.text = currentWeather.temperatureString
-                self?.currentDayLabel.text = currentWeather.cityName
-            }
+//            DispatchQueue.main.async {
+//                self?.weatherDescription.text = currentWeather.temperatureDescription
+//                self?.currentTemperatureLabel.text = currentWeather.temperatureString
+//                self?.currentDayLabel.text = currentWeather.cityName
+//            }
         }
     }
     
