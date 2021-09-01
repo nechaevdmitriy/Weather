@@ -7,10 +7,13 @@
 
 import UIKit
 
+protocol TemperatureViewProtocol: AnyObject {
+    func succes()
+}
+
 class TemperatureViewController: UIViewController {
     
-    let networkWeatherManager = NetworkWeatherManager.networkManager
-    let city = "Moscow"
+    var presentor: TemperaturePresentorProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +24,7 @@ class TemperatureViewController: UIViewController {
     private func setupNavBar() {
         
         title = "City"
-        
-        networkWeatherManager.fetchCurrentWeather() { current in
-            DispatchQueue.main.async {
-                self.title = current.city
-            }
-        }
+        title = presentor.city
         
         let appiranceNavigationBar = UINavigationBarAppearance()
         appiranceNavigationBar.backgroundColor = UIColor(named: "backgroundApp")
@@ -71,7 +69,7 @@ class TemperatureViewController: UIViewController {
     
     @objc func showAlert() {
         self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) { city in
-            self.networkWeatherManager.fetchCurrentWeather() { currentWeather in
+            NetworkWeatherManager.networkManager.fetchCurrentWeather() { currentWeather in
                 
             }
         }
@@ -84,7 +82,7 @@ class TemperatureViewController: UIViewController {
             
             if appDelegate?.overrideUserInterfaceStyle == .dark {
                 appDelegate?.overrideUserInterfaceStyle = .light
-            return
+                return
             }
             appDelegate?.overrideUserInterfaceStyle = .dark
             return
@@ -92,8 +90,12 @@ class TemperatureViewController: UIViewController {
     }
 }
 
+extension TemperatureViewController: TemperatureViewProtocol {
+    func succes() {
+        self.reloadInputViews()
+    }
+}
 
-//MARK: - Extensions
 extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -108,7 +110,7 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             cell.confugure()
             cell.layer.cornerRadius = 8
-    
+            
             return cell
             
         } else {
@@ -117,19 +119,15 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
             
             cell.numberOfParentSection = indexPath.row
             cell.layer.cornerRadius = 8
-            NetworkWeatherManager.networkManager.fetchCurrentWeather() { current in
                 
                 DispatchQueue.main.async {
-//                    cell.minimumTemperatureValue.text = current.minimumTemperatureString
-//                    cell.maximumTemperatureValue.text = current.maximumTemperatureString
-                    
+            
                     var weatherdescriptions = [String]()
                     var temperatureValue = [Int]()
                     
                     for i in 2...6 {
-                        weatherdescriptions.append(current.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.weather[0].weatherDescription ?? "")
-                        
-                        temperatureValue.append(Int(current.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.main.temp ?? 0))
+                        weatherdescriptions.append(self.presentor.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.weather[0].weatherDescription ?? " ")
+                        temperatureValue.append(Int(self.presentor.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.main.temp ?? 0))
                     }
                     
                     let oftenValueWeather = weatherdescriptions.reduce(String()) { $0 == $1 ? $0 : $1}
@@ -140,7 +138,8 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
                     cell.minimumTemperatureValue.text = "\(minValue ?? 0)"
                     
                     switch oftenValueWeather {
-                    case "дождь", "пасмурно", "небольшой дождь":
+                    
+                    case "дождь", "небольшой дождь":
                         cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
                     case "гроза":
                         cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
@@ -148,7 +147,7 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
                         cell.weatherImage.image = #imageLiteral(resourceName: "sun")
                     }
                     
-                    let date = current.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description
+                    let date = self.presentor.getDatabyDayAndHour(indexOfDay: indexPath.row, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description
                     
                     let convertDatefromDay = HelperDate.changeDateFormat(dateString: date ?? "", fromFormat: "yyyy-MM-dd", toFormat: "EEE")
                     
@@ -158,8 +157,8 @@ extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewD
                     cell.dateLabel.text = convertDatefromMonth
                     
                 }
-            }
-
+            
+            
             return cell
         }
         
@@ -189,13 +188,14 @@ extension TemperatureViewController {
         ac.addTextField { tf in
             tf.placeholder = "Tambov"
         }
+        
         let search = UIAlertAction(title: "Search", style: .default) { action in
             let textField = ac.textFields?.first
             guard let cityName = textField?.text else { return }
             if cityName != "" {
-                self.networkWeatherManager.fetchCurrentWeather() { current in
+                NetworkWeatherManager.networkManager.fetchCurrentWeather() { current in
                     DispatchQueue.main.async {
-                        self.networkWeatherManager.city = cityName
+                        NetworkWeatherManager.networkManager.city = cityName
                         self.viewDidLoad()
                     }
                 }

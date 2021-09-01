@@ -36,7 +36,8 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
                 }
                 
                 self?.weatherDescription.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription
-                self?.currentTemperatureLabel.text = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.temp.description
+                
+                self?.currentTemperatureLabel.text = Int(currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.temp ?? 0).description + "℃"
                 
                 let day = currentWeather.getDatabyDayAndHour(indexOfDay: 0, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description.capitalized
                 

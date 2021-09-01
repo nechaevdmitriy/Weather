@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A23818F26DE4E1100F31ACB /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23818E26DE4E1100F31ACB /* DateHelper.swift */; };
+		5A23819226DE6F9100F31ACB /* TemperaturePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23819126DE6F9100F31ACB /* TemperaturePresentor.swift */; };
+		5A2381A126DF7B5800F31ACB /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2381A026DF7B5800F31ACB /* ModuleBuilder.swift */; };
 		5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259526D38E740029E186 /* AppDelegate.swift */; };
 		5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259726D38E740029E186 /* SceneDelegate.swift */; };
 		5A8F259A26D38E740029E186 /* TemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259926D38E740029E186 /* TemperatureViewController.swift */; };
@@ -35,6 +37,8 @@
 /* Begin PBXFileReference section */
 		3D1448E094EC2BA0EB815C88 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 		5A23818E26DE4E1100F31ACB /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		5A23819126DE6F9100F31ACB /* TemperaturePresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperaturePresentor.swift; sourceTree = "<group>"; };
+		5A2381A026DF7B5800F31ACB /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		5A8F259226D38E740029E186 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8F259526D38E740029E186 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A8F259726D38E740029E186 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +95,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5A23819026DE6F7700F31ACB /* Presentor */ = {
+			isa = PBXGroup;
+			children = (
+				5A23819126DE6F9100F31ACB /* TemperaturePresentor.swift */,
+			);
+			path = Presentor;
+			sourceTree = "<group>";
+		};
+		5A23819F26DF7B4700F31ACB /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				5A2381A026DF7B5800F31ACB /* ModuleBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 		5A8F258926D38E740029E186 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +143,7 @@
 		5A8F25A926D3902B0029E186 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5A23818E26DE4E1100F31ACB /* DateHelper.swift */,
 				5A8F25CB26D3E77C0029E186 /* Font */,
 				5A8F25A326D38E750029E186 /* Info.plist */,
 				5A8F259526D38E740029E186 /* AppDelegate.swift */,
@@ -137,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				5A8F259926D38E740029E186 /* TemperatureViewController.swift */,
-				5A23818E26DE4E1100F31ACB /* DateHelper.swift */,
 				5A8F25C526D3E12E0029E186 /* CurrentWeatherCell */,
 				5A8F25C626D3E1490029E186 /* LastDatesCell */,
 			);
@@ -147,6 +167,8 @@
 		5A8F25AB26D391C10029E186 /* ScreenWithTemperature */ = {
 			isa = PBXGroup;
 			children = (
+				5A23819F26DF7B4700F31ACB /* Builder */,
+				5A23819026DE6F7700F31ACB /* Presentor */,
 				5A8F25AA26D3909B0029E186 /* Controllers */,
 			);
 			path = ScreenWithTemperature;
@@ -342,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A23819226DE6F9100F31ACB /* TemperaturePresentor.swift in Sources */,
 				5A8F25C926D3E18D0029E186 /* LastDatesCollectionViewCell.swift in Sources */,
 				5A8F259A26D38E740029E186 /* TemperatureViewController.swift in Sources */,
 				5A8F25C026D3C40A0029E186 /* WeatherData.swift in Sources */,
@@ -352,6 +375,7 @@
 				5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */,
 				5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */,
 				5A8F25C326D3CE490029E186 /* CurrentWeatherCollectionViewCell.swift in Sources */,
+				5A2381A126DF7B5800F31ACB /* ModuleBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

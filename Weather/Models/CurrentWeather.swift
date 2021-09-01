@@ -11,8 +11,7 @@ struct CurrentWeather {
     var city = String()
     var list = [List]()
     var listByDays = Dictionary<Optional<Substring>, Array<Array<List>.Element>>()
-    
-    
+
     func getDatabyDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<List>.Element? {
         let date = Date()
         let formatter = DateFormatter()
@@ -23,7 +22,7 @@ struct CurrentWeather {
         let infoAboutCurrentDay = listByDays[stringSelectedDay]?[indexOfHour]
         return infoAboutCurrentDay
     }
-
+    
     init?(currentWeatherData: CurrentWeatherData) {
         city = currentWeatherData.city.name
         list = currentWeatherData.list
