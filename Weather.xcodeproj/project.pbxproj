@@ -95,12 +95,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5A23819026DE6F7700F31ACB /* Presentor */ = {
+		5A23819026DE6F7700F31ACB /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				5A23819126DE6F9100F31ACB /* TemperaturePresentor.swift */,
 			);
-			path = Presentor;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		5A23819F26DF7B4700F31ACB /* Builder */ = {
@@ -168,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				5A23819F26DF7B4700F31ACB /* Builder */,
-				5A23819026DE6F7700F31ACB /* Presentor */,
+				5A23819026DE6F7700F31ACB /* Presenter */,
 				5A8F25AA26D3909B0029E186 /* Controllers */,
 			);
 			path = ScreenWithTemperature;

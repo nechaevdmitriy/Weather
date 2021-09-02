@@ -15,8 +15,8 @@ class ModuleBuilder: Builder {
     static func createModule() -> UIViewController {
         let view = TemperatureViewController()
         let networkService = NetworkWeatherManager.networkManager
-        let presentor = temperaturePresentor(view: view, networkService: networkService)
-        view.presentor = presentor
+        let presentor = TemperaturePresenter(view: view, networkService: networkService)
+        view.presenter = presentor
         return view
     }
 }

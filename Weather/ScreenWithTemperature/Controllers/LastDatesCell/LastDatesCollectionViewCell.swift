@@ -21,6 +21,8 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var lastDatesCollectionView: UICollectionView!
     @IBOutlet weak var weatherImage: UIImageView!
     
+    var presenter: TemperaturePresenterProtocol!
+    
     static let id = "LastDatesCollectionViewCell"
     
     static func nib() -> UINib {
@@ -29,7 +31,11 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         
+        let presenterData = TemperaturePresenter(view: self, networkService: NetworkWeatherManager.networkManager)
+        
+        presenter = presenterData
         dateLabel.font = UIFont(name: "Manrope-Medium", size: 16)
         currentDayLabel.font = UIFont(name: "Manrope-Medium", size: 16)
         minimumTemperatureValue.font = UIFont(name: "Manrope-ExtraBold", size: 16)
@@ -42,7 +48,6 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
         lastDatesCollectionView.showsHorizontalScrollIndicator = false
         lastDatesCollectionView.backgroundColor = UIColor(named: "backgroundCellGray")
         contentView.backgroundColor = UIColor(named: "backgroundCellGray")
-        
     }
 }
 
@@ -57,37 +62,33 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
         cell.contentView.layer.cornerRadius = 8
         cell.backgroundColor = .none
         
-        WeatherByHoursCollectionViewCell.indexOfParentSection = indexPath.row
+        switch self.presenter.getDataByDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.weather[0].weatherDescription {
         
-        NetworkWeatherManager.networkManager.fetchCurrentWeather() { current in
-            
-            DispatchQueue.main.async {
-                
-                switch current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.weather[0].weatherDescription {
-                
-                case "дождь", "пасмурно", "небольшой дождь":
-                    cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
-                case "гроза":
-                    cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
-                default:
-                    cell.weatherImage.image = #imageLiteral(resourceName: "sun")
-                }
-                
-                cell.temperatureLabel.text = Int(current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.main.temp ?? 0).description + "℃"
-                
-                
-                let hours = current.getDatabyDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.dtTxt.description.split(separator: " ").last?.description.split(separator: ":").first?.description
-                
-                cell.hourLabel.text = (hours ?? " ") + ":" + "00"
-                
-                cell.layer.cornerRadius = 8
-            }
+        case "дождь", "пасмурно", "небольшой дождь":
+            cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
+        case "гроза":
+            cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
+        default:
+            cell.weatherImage.image = #imageLiteral(resourceName: "sun")
         }
+        
+        cell.temperatureLabel.text = Int(self.presenter.getDataByDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.main.temp ?? 0).description + "℃"
+        
+        let hours = self.presenter.getDataByDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 3)?.dtTxt.description.split(separator: " ").last?.description.split(separator: ":").first?.description
+        
+        cell.hourLabel.text = (hours ?? " ") + ":" + "00"
+        cell.layer.cornerRadius = 8
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 70, height: collectionView.bounds.height)
+    }
+}
+
+extension LastDatesCollectionViewCell: TemperatureViewProtocol {
+    func succes() {
+        lastDatesCollectionView.reloadData()
     }
 }
