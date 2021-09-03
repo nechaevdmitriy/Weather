@@ -15,7 +15,6 @@ protocol TemperaturePresenterProtocol: AnyObject {
 }
 
 class TemperaturePresenter: TemperaturePresenterProtocol {
-
     var city: String?
     var currentWeather: CurrentWeatherData?
     var listByDays: Dictionary<Optional<Substring>, Array<Array<List>.Element>>?

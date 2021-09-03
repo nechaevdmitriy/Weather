@@ -22,7 +22,10 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.reloadInputViews()
+        setupFonts()
+    }
+    
+    private func setupFonts() {
         currentDayLabel.font = UIFont(name: "Manrope-SemiBold", size: 14)
         currentTemperatureLabel.font = UIFont(name: "Manrope-ExtraBold", size: 48)
         weatherDescription.font = UIFont(name: "Manrope-SemiBold", size: 14)

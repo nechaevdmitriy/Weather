@@ -17,12 +17,11 @@ class TemperatureViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
         setupNavBar()
+        setupView()
     }
     
     private func setupNavBar() {
-        
         title = "City"
         title = presenter.city
         
@@ -51,20 +50,18 @@ class TemperatureViewController: UIViewController {
         self.navigationItem.setLeftBarButtonItems([getLocation], animated: false)
     }
     
-    private func setupCollectionView() {
-        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+    private func setupView() {
+        let temperaturecollectionview = TemperatureScreenView()
+        temperaturecollectionview.translatesAutoresizingMaskIntoConstraints = false
+        temperaturecollectionview.presenter = presenter
+        view.addSubview(temperaturecollectionview)
         
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = UIColor(named: "backgroundApp")
-        
-        collectionView.register(LastDatesCollectionViewCell.nib(), forCellWithReuseIdentifier: LastDatesCollectionViewCell.id)
-        
-        collectionView.register(CurrentWeatherCollectionViewCell.nib(), forCellWithReuseIdentifier: CurrentWeatherCollectionViewCell.id)
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        view.addSubview(collectionView)
+        NSLayoutConstraint.activate([
+            temperaturecollectionview.topAnchor.constraint(equalTo: view.topAnchor),
+            temperaturecollectionview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            temperaturecollectionview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            temperaturecollectionview.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
     @objc func showAlert() {
@@ -91,134 +88,7 @@ class TemperatureViewController: UIViewController {
 
 extension TemperatureViewController: TemperatureViewProtocol {
     func succes() {
-            self.viewDidLoad()
-    }
-}
-
-extension TemperatureViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.row == 0 {
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentWeatherCollectionViewCell.id, for: indexPath) as! CurrentWeatherCollectionViewCell
-            
-            switch presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription {
-            
-            case "дождь", "пасмурно", "небольшой дождь":
-                cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
-            case "гроза":
-                cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
-            default:
-                cell.weatherImage.image = #imageLiteral(resourceName: "sun")
-            }
-            
-            cell.weatherDescription.text = presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription
-            
-            cell.currentTemperatureLabel.text = Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.temp ?? 0).description + "℃"
-            
-            let day = self.presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description.capitalized
-            
-            let convertedValue = HelperDate.changeDateFormat(dateString: day ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM, EEE")
-            
-            cell.currentDayLabel.text = "Сегодня," + " " + convertedValue
-            cell.layer.cornerRadius = 8
-            
-            return cell
-            
-        } else {
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastDatesCollectionViewCell.id, for: indexPath) as! LastDatesCollectionViewCell
-            
-            cell.numberOfParentSection = indexPath.row
-            cell.layer.cornerRadius = 8
-            
-            var weatherdescriptions = [String]()
-            var temperatureValue = [Int]()
-            
-            for i in 2...6 {
-                weatherdescriptions.append(self.presenter.getDataByDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.weather[0].weatherDescription ?? " ")
-                
-                temperatureValue.append(Int(self.presenter.getDataByDayAndHour(indexOfDay: indexPath.row, indexOfHour: i)?.main.temp ?? 0))
-                
-            }
-            
-            let oftenValueWeather = weatherdescriptions.reduce(String()) { $0 == $1 ? $0 : $1}
-            let maxValue = temperatureValue.max()
-            let minValue = temperatureValue.min()
-            
-            cell.maximumTemperatureValue.text = "\(maxValue ?? 0)"
-            cell.minimumTemperatureValue.text = "\(minValue ?? 0)"
-            
-            switch oftenValueWeather {
-            
-            case "дождь", "небольшой дождь":
-                cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
-            case "гроза":
-                cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
-            default:
-                cell.weatherImage.image = #imageLiteral(resourceName: "sun")
-            }
-            
-            let date = self.presenter.getDataByDayAndHour(indexOfDay: indexPath.row, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description
-            
-            let convertDatefromDay = HelperDate.changeDateFormat(dateString: date ?? "", fromFormat: "yyyy-MM-dd", toFormat: "EEE")
-            
-            let convertDatefromMonth = HelperDate.changeDateFormat(dateString: date ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM")
-            
-            DispatchQueue.main.async {
-                cell.currentDayLabel.text = convertDatefromDay
-                cell.dateLabel.text = convertDatefromMonth
-            }
-            return cell
-        }
-        
-    }
-}
-
-extension TemperatureViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if indexPath.row == 0 {
-            return CGSize(width: view.frame.width - 32, height: 280)
-            
-        } else {
-            return CGSize(width: view.frame.width - 32, height: 206)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
-    }
-}
-
-extension TemperatureViewController {
-    func presentSearchAlertController(withTitle title: String?, message: String?, style: UIAlertController.Style, completionHandler: @escaping (String) -> Void) {
-        let ac = UIAlertController(title: title, message: message, preferredStyle: style)
-        ac.addTextField { tf in
-            tf.placeholder = "Tambov"
-        }
-        let search = UIAlertAction(title: "Search", style: .default) { action in
-            let textField = ac.textFields?.first
-            guard let cityName = textField?.text else { return }
-            if cityName != "" {
-                
-                DispatchQueue.main.async {
-                    
-                    self.presenter.city = cityName
-                    self.viewDidLoad()
-                }
-                
-            }
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        ac.addAction(search)
-        ac.addAction(cancel)
-        present(ac, animated: true, completion: nil)
+        self.viewDidLoad()
     }
 }
 

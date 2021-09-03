@@ -10,6 +10,8 @@
 		5A23818F26DE4E1100F31ACB /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23818E26DE4E1100F31ACB /* DateHelper.swift */; };
 		5A23819226DE6F9100F31ACB /* TemperaturePresentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23819126DE6F9100F31ACB /* TemperaturePresentor.swift */; };
 		5A2381A126DF7B5800F31ACB /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2381A026DF7B5800F31ACB /* ModuleBuilder.swift */; };
+		5A2381A626E1F71100F31ACB /* TemperatureScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2381A526E1F71100F31ACB /* TemperatureScreenView.swift */; };
+		5A2381A826E205A700F31ACB /* AllertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2381A726E205A700F31ACB /* AllertController.swift */; };
 		5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259526D38E740029E186 /* AppDelegate.swift */; };
 		5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259726D38E740029E186 /* SceneDelegate.swift */; };
 		5A8F259A26D38E740029E186 /* TemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259926D38E740029E186 /* TemperatureViewController.swift */; };
@@ -39,6 +41,8 @@
 		5A23818E26DE4E1100F31ACB /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		5A23819126DE6F9100F31ACB /* TemperaturePresentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperaturePresentor.swift; sourceTree = "<group>"; };
 		5A2381A026DF7B5800F31ACB /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		5A2381A526E1F71100F31ACB /* TemperatureScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureScreenView.swift; sourceTree = "<group>"; };
+		5A2381A726E205A700F31ACB /* AllertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllertController.swift; sourceTree = "<group>"; };
 		5A8F259226D38E740029E186 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8F259526D38E740029E186 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A8F259726D38E740029E186 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,15 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		5A2381A426E1F6E600F31ACB /* TemperatureScreenView */ = {
+			isa = PBXGroup;
+			children = (
+				5A2381A526E1F71100F31ACB /* TemperatureScreenView.swift */,
+				5A2381A726E205A700F31ACB /* AllertController.swift */,
+			);
+			path = TemperatureScreenView;
+			sourceTree = "<group>";
+		};
 		5A8F258926D38E740029E186 = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				5A8F259926D38E740029E186 /* TemperatureViewController.swift */,
+				5A2381A426E1F6E600F31ACB /* TemperatureScreenView */,
 				5A8F25C526D3E12E0029E186 /* CurrentWeatherCell */,
 				5A8F25C626D3E1490029E186 /* LastDatesCell */,
 			);
@@ -371,10 +385,12 @@
 				5A8F25BE26D3C3350029E186 /* NetworkWeatherManager.swift in Sources */,
 				5A8F25E226D4F7490029E186 /* CurrentWeather.swift in Sources */,
 				5A23818F26DE4E1100F31ACB /* DateHelper.swift in Sources */,
+				5A2381A826E205A700F31ACB /* AllertController.swift in Sources */,
 				5A8F25DF26D4E0560029E186 /* WeatherByHoursCollectionViewCell.swift in Sources */,
 				5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */,
 				5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */,
 				5A8F25C326D3CE490029E186 /* CurrentWeatherCollectionViewCell.swift in Sources */,
+				5A2381A626E1F71100F31ACB /* TemperatureScreenView.swift in Sources */,
 				5A2381A126DF7B5800F31ACB /* ModuleBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

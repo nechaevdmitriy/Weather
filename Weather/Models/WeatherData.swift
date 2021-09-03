@@ -12,7 +12,6 @@ struct CurrentWeatherData: Codable {
     let city: City
 }
 
-// MARK: - City
 struct City: Codable {
     let id: Int
     let name: String

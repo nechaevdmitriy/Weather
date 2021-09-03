@@ -72,7 +72,7 @@ extension LastDatesCollectionViewCell: UICollectionViewDelegate, UICollectionVie
             cell.weatherImage.image = #imageLiteral(resourceName: "sun")
         }
         
-        cell.temperatureLabel.text = Int(self.presenter.getDataByDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 2)?.main.temp ?? 0).description + "℃"
+        cell.temperatureLabel.text = Int(self.presenter.getDataByDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 3)?.main.temp ?? 0).description + "℃"
         
         let hours = self.presenter.getDataByDayAndHour(indexOfDay: self.numberOfParentSection, indexOfHour: indexPath.row + 3)?.dtTxt.description.split(separator: " ").last?.description.split(separator: ":").first?.description
         
