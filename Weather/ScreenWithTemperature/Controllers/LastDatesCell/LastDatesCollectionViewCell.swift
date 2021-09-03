@@ -11,8 +11,6 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     
     var numberOfParentSection = Int()
     
-    static let collectionCell = LastDatesCollectionViewCell()
-    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var currentDayLabel: UILabel!
     @IBOutlet weak var minimumTemperatureValue: UILabel!
@@ -32,8 +30,7 @@ class LastDatesCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        
-        let presenterData = TemperaturePresenter(view: self, networkService: NetworkWeatherManager.networkManager)
+        let presenterData = TemperaturePresenter(view: self, networkService: NetworkWeatherManager.networkManager, requesType: .city(city: NetworkWeatherManager.networkManager.city))
         
         presenter = presenterData
         dateLabel.font = UIFont(name: "Manrope-Medium", size: 16)

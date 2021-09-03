@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol TemperatureViewProtocol: AnyObject {
     func succes()
@@ -14,11 +15,19 @@ protocol TemperatureViewProtocol: AnyObject {
 class TemperatureViewController: UIViewController {
     
     var presenter: TemperaturePresenterProtocol!
+    let locationManager = CLLocationManager()
+        
+    
+    var latitude = CLLocationDegrees()
+    var longitude = CLLocationDegrees()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavBar()
-        setupView()
+        DispatchQueue.main.async {
+            super.viewDidLoad()
+            self.setupLocationManager()
+            self.setupNavBar()
+            self.setupView()
+        }
     }
     
     private func setupNavBar() {
@@ -27,15 +36,9 @@ class TemperatureViewController: UIViewController {
         
         let appiranceNavigationBar = UINavigationBarAppearance()
         appiranceNavigationBar.backgroundColor = UIColor(named: "backgroundApp")
+        appiranceNavigationBar.shadowColor = .none
         
         navigationController?.navigationBar.standardAppearance = appiranceNavigationBar
-        navigationController?.navigationBar.scrollEdgeAppearance = appiranceNavigationBar
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        
-        navigationController?.navigationBar.barTintColor = UIColor.red
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
         
         let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: #selector(showAlert))
         searchAllertItem.tintColor = UIColor(named: "lightGray")
@@ -54,22 +57,56 @@ class TemperatureViewController: UIViewController {
         let temperaturecollectionview = TemperatureScreenView()
         temperaturecollectionview.translatesAutoresizingMaskIntoConstraints = false
         temperaturecollectionview.presenter = presenter
-        view.addSubview(temperaturecollectionview)
-        
-        NSLayoutConstraint.activate([
-            temperaturecollectionview.topAnchor.constraint(equalTo: view.topAnchor),
-            temperaturecollectionview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            temperaturecollectionview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            temperaturecollectionview.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-    
-    @objc func showAlert() {
-        self.presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert) { city in
+        DispatchQueue.main.async {
+            self.view.addSubview(temperaturecollectionview)
+        }
+        DispatchQueue.main.async {
+            NSLayoutConstraint.activate([
+                temperaturecollectionview.topAnchor.constraint(equalTo: self.view.topAnchor),
+                temperaturecollectionview.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                temperaturecollectionview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                temperaturecollectionview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            ])
         }
     }
     
-    @objc func getLocation() {}
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    @objc func showAlert() {
+        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
+        }
+    }
+    
+    @objc func getLocation() {
+        presentLocation { String in
+            LastDatesCollectionViewCell().presenter = self.presenter
+        }
+    }
+    
+    func presentLocation(completionHandler: @escaping (String) -> Void) {
+        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .coordinates(latitude: latitude, longitude: longitude)) { result in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    
+                    self.presenter.getLists(requesType: .coordinates(latitude: self.latitude, longitude: self.longitude))
+                    self.presenter.currentWeather = data
+                    self.title = self.presenter.city
+                    self.viewDidLoad()
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        viewDidLoad()
+    }
     
     @objc func switchDarkMode() {
         if #available(iOS 13, *) {
@@ -89,6 +126,21 @@ class TemperatureViewController: UIViewController {
 extension TemperatureViewController: TemperatureViewProtocol {
     func succes() {
         self.viewDidLoad()
+    }
+}
+
+extension TemperatureViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {return}
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            longitude = location.coordinate.longitude
+            latitude = location.coordinate.latitude
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
 }
 

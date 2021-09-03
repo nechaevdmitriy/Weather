@@ -14,7 +14,7 @@ enum HTTPRequetType {
 }
 
 protocol NetworkServiceProtocol {
-    func fetchCurrentWeather(complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
+    func fetchCurrentWeather(forReqquesType requesType: HTTPRequetType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
 }
 
 class NetworkWeatherManager: NetworkServiceProtocol {
@@ -22,10 +22,21 @@ class NetworkWeatherManager: NetworkServiceProtocol {
     static var networkManager = NetworkWeatherManager()
     
     var city = "Moscow"
+    var latitude = ""
+    var longitude = ""
     
-    func fetchCurrentWeather(complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
-        let urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(city)&apikey=21a8d636ae57d56ec6fb2ebb46d3e0b4&cnt=40&units=metric&lang=ru"
-
+    func fetchCurrentWeather(forReqquesType requesType: HTTPRequetType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
+        
+        var urlString = " "
+        
+        switch requesType {
+        case .city(city: let city):
+            urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(city.encodeUrl)&apikey=21a8d636ae57d56ec6fb2ebb46d3e0b4&cnt=40&units=metric&lang=ru"
+        case .coordinates(latitude: let latitude, longitude: let longitude):
+            urlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=21a8d636ae57d56ec6fb2ebb46d3e0b4&cnt=40&units=metric&lang=ru"
+            print(urlString)
+        }
+        
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
@@ -42,6 +53,17 @@ class NetworkWeatherManager: NetworkServiceProtocol {
                 complitionHandler(.failure(error))
             }
         }.resume()
+    }
+}
+
+extension String{
+    var encodeUrl : String
+    {
+        return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+    }
+    var decodeUrl : String
+    {
+        return self.removingPercentEncoding!
     }
 }
 

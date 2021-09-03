@@ -14,6 +14,5 @@ struct CurrentWeather {
     init?(currentWeatherData: CurrentWeatherData) {
         city = currentWeatherData.city.name
         list = currentWeatherData.list
-        
     }
 }

@@ -17,13 +17,13 @@ extension TemperatureViewController {
             let textField = ac.textFields?.first
             guard let cityName = textField?.text else { return }
             if cityName != "" {
-                
                 NetworkWeatherManager.networkManager.city = cityName
-                self.presenter.getLists()
+                self.presenter.getLists(requesType: .city(city: cityName))
                 self.presenter.city = cityName
                 self.viewDidLoad()
             }
         }
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         ac.addAction(search)
         ac.addAction(cancel)
