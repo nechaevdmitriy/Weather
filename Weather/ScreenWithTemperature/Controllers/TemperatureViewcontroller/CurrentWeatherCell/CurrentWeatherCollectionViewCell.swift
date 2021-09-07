@@ -6,19 +6,17 @@
 import UIKit
 
 class CurrentWeatherCollectionViewCell: UICollectionViewCell {
-
-    static let collectionCell = CurrentWeatherCollectionViewCell()
-    
-    @IBOutlet weak var currentDayLabel: UILabel!
-    @IBOutlet weak var currentTemperatureLabel: UILabel!
-    @IBOutlet weak var weatherDescription: UILabel!
-    @IBOutlet weak var weatherImage: UIImageView!
     
     static let id = "CurrentWeatherCollectionViewCell"
     
     static func nib() -> UINib {
         return UINib(nibName: "CurrentWeatherCollectionViewCell", bundle: nil)
     }
+    
+    @IBOutlet weak var currentDayLabel: UILabel!
+    @IBOutlet weak var currentTemperatureLabel: UILabel!
+    @IBOutlet weak var weatherDescription: UILabel!
+    @IBOutlet weak var weatherImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

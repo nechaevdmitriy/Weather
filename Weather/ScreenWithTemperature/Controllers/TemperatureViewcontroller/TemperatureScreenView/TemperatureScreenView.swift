@@ -73,7 +73,7 @@ extension TemperatureScreenView: UICollectionViewDelegate, UICollectionViewDataS
             let convertedValue = HelperDate.changeDateFormat(dateString: day ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM, EEE")
             
             cell.currentDayLabel.text = "Сегодня," + " " + convertedValue
-            cell.layer.cornerRadius = 8
+            cell.layer.cornerRadius = 16
             
             return cell
             
@@ -83,7 +83,7 @@ extension TemperatureScreenView: UICollectionViewDelegate, UICollectionViewDataS
             
             cell.numberOfParentSection = indexPath.row
             cell.presenter = self.presenter
-            cell.layer.cornerRadius = 8
+            cell.layer.cornerRadius = 16
             
             var weatherdescriptions = [String]()
             var temperatureValue = [Int]()

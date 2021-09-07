@@ -24,7 +24,6 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
     var list = [List]()
     
     func getLists(requesType: HTTPRequetType) {
-        
         switch requesType {
         case .city(city: let city):
             networkService.fetchCurrentWeather(forReqquesType: .city(city: city)) { [weak self] CurrentWeather in

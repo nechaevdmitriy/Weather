@@ -14,18 +14,19 @@ protocol TemperatureViewProtocol: AnyObject {
 
 class TemperatureViewController: UIViewController {
     
-    var presenter: TemperaturePresenterProtocol!
     let locationManager = CLLocationManager()
-        
-    
+    var presenter: TemperaturePresenterProtocol!
     var latitude = CLLocationDegrees()
     var longitude = CLLocationDegrees()
+    let tapRecognizer = UITapGestureRecognizer()
     
     override func viewDidLoad() {
+        setupNavBar()
+        tapRecognizer.addTarget(self, action: #selector(tap))
+        view.addGestureRecognizer(tapRecognizer)
         DispatchQueue.main.async {
             super.viewDidLoad()
             self.setupLocationManager()
-            self.setupNavBar()
             self.setupView()
         }
     }
@@ -78,8 +79,10 @@ class TemperatureViewController: UIViewController {
     }
     
     @objc func showAlert() {
-        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
-        }
+//                AlertView.instance.parentView.isHidden = false
+//                view.addSubview(AlertView.instance.parentView)
+//        //        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
+//        //        }
     }
     
     @objc func getLocation() {
@@ -87,6 +90,13 @@ class TemperatureViewController: UIViewController {
             LastDatesCollectionViewCell().presenter = self.presenter
         }
     }
+    
+    @objc func tap() {
+        let newVC = DetailsWeatherViewController()
+        newVC.presenter = presenter
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+
     
     func presentLocation(completionHandler: @escaping (String) -> Void) {
         NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .coordinates(latitude: latitude, longitude: longitude)) { result in
@@ -143,4 +153,3 @@ extension TemperatureViewController: CLLocationManagerDelegate {
         print(error.localizedDescription)
     }
 }
-
