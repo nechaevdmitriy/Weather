@@ -14,6 +14,7 @@ class CustomMarkerView: MarkerView {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var minimumTemperatureValue: UILabel!
     @IBOutlet weak var maximumTemperatureValue: UILabel!
+    @IBOutlet weak var tooltipBody: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,11 +29,15 @@ class CustomMarkerView: MarkerView {
         Bundle.main.loadNibNamed("ChartPopupView", owner: self, options: nil)
         addSubview(markerview)
         
+        tooltipBody.image = tooltipBody.image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        
+        tooltipBody.tintColor = UIColor(named: "backgroundApp")
+        
         minimumTemperatureValue.font = UIFont(name: "Manrope-ExtraBold", size: 16)
         maximumTemperatureValue.font = UIFont(name: "Manrope-ExtraBold", size: 16)
         
         self.frame = CGRect (x: 0, y: 0, width: 76, height: 76)
-        self.offset = CGPoint(x: -(self.frame.width/2), y: -self.frame.height)
+        self.offset = CGPoint(x: -(self.frame.width/2), y: -self.frame.height - 16)
         markerview.frame = CGRect (x: 0, y: 0, width: 76, height: 76)
         
         markerview.layer.cornerRadius = 8

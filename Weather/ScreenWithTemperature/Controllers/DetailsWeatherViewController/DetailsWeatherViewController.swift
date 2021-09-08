@@ -55,13 +55,11 @@ class DetailsWeatherViewController: UIViewController {
         let switchThemeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "darkModeIcon"), style: .plain, target: self, action: #selector(switchDarkMode))
         switchThemeItem.tintColor = UIColor(named: "lightGray")
         
-        let backButtonItem = #imageLiteral(resourceName: "Vector")
-        navigationController?.navigationBar.backIndicatorImage = backButtonItem
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButtonItem
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
+        navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "Vector")
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "Vector")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         self.navigationItem.setRightBarButtonItems([searchAllertItem, switchThemeItem], animated: false)
-        
     }
     
     private func setUpConstraints() {
@@ -137,10 +135,14 @@ extension DetailsWeatherViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 20, left: 0, bottom: 40, right: 0)
+        UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tap")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 60
     }
 }

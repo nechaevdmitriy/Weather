@@ -17,7 +17,7 @@ class ChartCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Private properties
-    private let dates = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
+    private let dates = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"]
     private let chart = LineChartView()
     private var customMarkerView = CustomMarkerView()
     private var entries = [ChartDataEntry]()
@@ -80,6 +80,9 @@ class ChartCollectionViewCell: UICollectionViewCell {
         chart.dragYEnabled = false
         chart.pinchZoomEnabled = false
         chart.data = data
+        chart.dragEnabled = false
+        chart.scaleXEnabled = false
+        chart.scaleYEnabled = false
         
         set.accessibilityElementsHidden = false
         set.colors = [#colorLiteral(red: 0, green: 0.6453513503, blue: 1, alpha: 1)]
@@ -95,10 +98,10 @@ class ChartCollectionViewCell: UICollectionViewCell {
         customMarkerView.chartView = chart
         chart.marker = customMarkerView
         
-        for i in 0..<presenter.countOfElementsInCurrentDay {
-            hoursLabels.first?.isHidden = true
-            gradientImages.first?.isHidden = true
-            hoursLabels[i + 1].text = dates[i + 4]
+        for i in 0...presenter.countOfElementsInCurrentDay  {
+            hoursLabels[4 - i].isHidden = true
+            gradientImages[4 - i].isHidden = true
+            hoursLabels[i].text = dates[8 - presenter.countOfElementsInCurrentDay + i]
         }
         
         contentView.addSubview(chart)
@@ -106,7 +109,6 @@ class ChartCollectionViewCell: UICollectionViewCell {
         
         configureImages()
     }
-    
 }
 
 //MARK: - Extensions
@@ -116,13 +118,13 @@ extension ChartCollectionViewCell: ChartViewDelegate {
         let currentWeather = weatherDescriptions[Int(entry.x + 1), default: "not found"]
         
         if entry.x >= 0 && Int(entry.x) < presenter.countOfElementsInCurrentDay - 1 {
-            gradientImages[Int(entry.x + 1)].alpha = 1
-            gradientImages[Int(entry.x)].alpha = 0
-            gradientImages[Int(entry.x + 2)].alpha = 0
+            gradientImages[Int(entry.x)].alpha = 1
+            //gradientImages[Int(entry.x)].alpha = 0
+            gradientImages[Int(entry.x + 1)].alpha = 0
             
         } else if Int(entry.x) == presenter.countOfElementsInCurrentDay - 1 {
-            gradientImages[Int(entry.x + 1)].alpha = 1
-            gradientImages[Int(entry.x)].alpha = 0
+            gradientImages[Int(entry.x)].alpha = 1
+            gradientImages[Int(entry.x - 1)].alpha = 0
         }
         
         customMarkerView.maximumTemperatureValue.text = Int(entry.y).description

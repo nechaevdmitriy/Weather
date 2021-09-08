@@ -19,6 +19,7 @@ class TemperatureViewController: UIViewController {
     var latitude = CLLocationDegrees()
     var longitude = CLLocationDegrees()
     let tapRecognizer = UITapGestureRecognizer()
+    let bezier = UIBezierPath()
     
     override func viewDidLoad() {
         setupNavBar()
@@ -58,9 +59,11 @@ class TemperatureViewController: UIViewController {
         let temperaturecollectionview = TemperatureScreenView()
         temperaturecollectionview.translatesAutoresizingMaskIntoConstraints = false
         temperaturecollectionview.presenter = presenter
+        
         DispatchQueue.main.async {
             self.view.addSubview(temperaturecollectionview)
         }
+        
         DispatchQueue.main.async {
             NSLayoutConstraint.activate([
                 temperaturecollectionview.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -79,10 +82,10 @@ class TemperatureViewController: UIViewController {
     }
     
     @objc func showAlert() {
-//                AlertView.instance.parentView.isHidden = false
-//                view.addSubview(AlertView.instance.parentView)
-//        //        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
-//        //        }
+        //                AlertView.instance.parentView.isHidden = false
+        //                view.addSubview(AlertView.instance.parentView)
+        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
+        }
     }
     
     @objc func getLocation() {
@@ -96,7 +99,7 @@ class TemperatureViewController: UIViewController {
         newVC.presenter = presenter
         navigationController?.pushViewController(newVC, animated: true)
     }
-
+    
     
     func presentLocation(completionHandler: @escaping (String) -> Void) {
         NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .coordinates(latitude: latitude, longitude: longitude)) { result in

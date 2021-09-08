@@ -344,8 +344,8 @@
 			isa = PBXGroup;
 			children = (
 				5AD7EE9026E75E2900F38EDC /* ChartPopupView.swift */,
-				5AD7EE9226E78B3000F38EDC /* CircleMarker.swift */,
 				5AD7EE8E26E75DED00F38EDC /* ChartPopupView.xib */,
+				5AD7EE9226E78B3000F38EDC /* CircleMarker.swift */,
 			);
 			path = ChartInfoView;
 			sourceTree = "<group>";
