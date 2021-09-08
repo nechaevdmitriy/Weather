@@ -56,5 +56,4 @@ class DetailsWeatherCollectionViewCell: UICollectionViewCell {
         precipitationLabel.font = UIFont(name: "Manrope-Medium", size: 14)
         precipitationDescription.font = UIFont(name: "Manrope-ExtraBold", size: 32)
     }
-
 }

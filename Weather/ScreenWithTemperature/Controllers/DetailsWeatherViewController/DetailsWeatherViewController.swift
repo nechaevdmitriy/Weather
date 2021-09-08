@@ -9,7 +9,8 @@ import UIKit
 
 class DetailsWeatherViewController: UIViewController {
     
-    var collectionView: UICollectionView = {
+    //MARK: - Properties
+    private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -18,6 +19,7 @@ class DetailsWeatherViewController: UIViewController {
     
     var presenter: TemperaturePresenterProtocol!
     
+    //MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
@@ -30,8 +32,22 @@ class DetailsWeatherViewController: UIViewController {
         setUpNavBar()
     }
     
+    //MARK: - Private funcs
+    @objc private func switchDarkMode() {
+        if #available(iOS 13, *) {
+            let appDelegate = UIApplication.shared.windows.first
+            
+            if appDelegate?.overrideUserInterfaceStyle == .dark {
+                appDelegate?.overrideUserInterfaceStyle = .light
+                return
+            }
+            
+            appDelegate?.overrideUserInterfaceStyle = .dark
+            return
+        }
+    }
+    
     private func setUpNavBar() {
-        
         let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: nil)
         searchAllertItem.tintColor = UIColor(named: "lightGray")
         title = presenter.city
@@ -61,22 +77,10 @@ class DetailsWeatherViewController: UIViewController {
         ])
     }
     
-    @objc func switchDarkMode() {
-        if #available(iOS 13, *) {
-            
-            let appDelegate = UIApplication.shared.windows.first
-            
-            if appDelegate?.overrideUserInterfaceStyle == .dark {
-                appDelegate?.overrideUserInterfaceStyle = .light
-                return
-            }
-            appDelegate?.overrideUserInterfaceStyle = .dark
-            return
-        }
-    }
 }
 
-extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+//MARK: - Extensions
+extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         2
@@ -119,15 +123,19 @@ extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionVi
             return cell
         }
     }
+}
+
+//MARK: - Extensions
+extension DetailsWeatherViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
             return CGSize(width: view.bounds.width - 32, height: 390)
-            
         } else {
             return CGSize(width: view.bounds.width - 48, height: view.bounds.height / 3 )
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 20, left: 0, bottom: 40, right: 0)
     }

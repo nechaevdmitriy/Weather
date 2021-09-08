@@ -13,12 +13,15 @@ protocol TemperaturePresenterProtocol: AnyObject {
     var currentWeather: CurrentWeatherData? { get set }
     var city: String? { get set }
     func getDataByDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<List>.Element?
+    var countOfElementsInCurrentDay: Int {get set}
 }
 
 class TemperaturePresenter: TemperaturePresenterProtocol {
     var city: String?
     var currentWeather: CurrentWeatherData?
     var listByDays: Dictionary<Optional<Substring>, Array<Array<List>.Element>>?
+    var countOfElementsInCurrentDay = Int()
+    
     weak var view: TemperatureViewProtocol?
     let networkService: NetworkServiceProtocol
     var list = [List]()
@@ -63,12 +66,16 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
     }
 
     func getDataByDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<List>.Element? {
+        
         let date = Date()
         let formatter = DateFormatter()
         let calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
         let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date)
         let stringSelectedDay = selectedDay?.description.split(separator: " ").first
+        
+        countOfElementsInCurrentDay = listByDays?[stringSelectedDay]?.count ?? 0
+        
         let infoAboutCurrentDay = listByDays?[stringSelectedDay]?[indexOfHour]
         return infoAboutCurrentDay
     }

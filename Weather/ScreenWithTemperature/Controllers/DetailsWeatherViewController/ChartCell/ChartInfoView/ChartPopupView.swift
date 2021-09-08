@@ -36,7 +36,7 @@ class CustomMarkerView: MarkerView {
         markerview.frame = CGRect (x: 0, y: 0, width: 76, height: 76)
         
         markerview.layer.cornerRadius = 8
-        markerview.layer.shadowColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        markerview.layer.shadowColor = #colorLiteral(red: 0.2147611678, green: 0.3623840135, blue: 0.5950577101, alpha: 0.8430515315)
         markerview.layer.shadowOpacity = 0.16
         markerview.layer.shadowOffset = .zero
         markerview.layer.shadowRadius = 10
