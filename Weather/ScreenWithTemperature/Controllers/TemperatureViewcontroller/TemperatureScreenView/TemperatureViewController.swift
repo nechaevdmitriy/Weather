@@ -84,8 +84,11 @@ class TemperatureViewController: UIViewController {
     @objc func showAlert() {
         //                AlertView.instance.parentView.isHidden = false
         //                view.addSubview(AlertView.instance.parentView)
-        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
-        }
+//        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
+//        }
+        let newVC = SavedCityesViewController()
+        newVC.presenter = presenter
+        navigationController?.pushViewController(newVC, animated: false)
     }
     
     @objc func getLocation() {

@@ -45,15 +45,18 @@ class ChartCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Private funcs
     private func updateData() {
-        for i in 0...presenter.countOfElementsInCurrentDay - 1 {
+        
+        for i in 0..<presenter.countOfElementsInCurrentDay {
             guard presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i) != nil else {
                 return
             }
+            
             currentValues.append(Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i)?.main.temp ?? 0))
             feelsLike.append(Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i)?.main.feelsLike ?? 0))
             weatherDescriptions.append(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i)?.weather[0].weatherDescription ?? "Not Found")
             entries.append(ChartDataEntry(x: Double(i), y: Double(currentValues[i] ?? 0)))
         }
+        entries.append(ChartDataEntry(x: Double(presenter.countOfElementsInCurrentDay - 1), y: 50))
     }
     
     private func configureImages() {
@@ -98,9 +101,14 @@ class ChartCollectionViewCell: UICollectionViewCell {
         customMarkerView.chartView = chart
         chart.marker = customMarkerView
         
-        for i in 0...presenter.countOfElementsInCurrentDay  {
-            hoursLabels[4 - i].isHidden = true
-            gradientImages[4 - i].isHidden = true
+        for i in 0..<5 {
+            hoursLabels[i].isHidden = true
+            gradientImages[i].isHidden = true
+        }
+        
+        for i in 0..<presenter.countOfElementsInCurrentDay  {
+            hoursLabels[i].isHidden = false
+            gradientImages[i].isHidden = false
             hoursLabels[i].text = dates[8 - presenter.countOfElementsInCurrentDay + i]
         }
         
@@ -117,18 +125,14 @@ extension ChartCollectionViewCell: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         let currentWeather = weatherDescriptions[Int(entry.x + 1), default: "not found"]
         
-        if entry.x >= 0 && Int(entry.x) < presenter.countOfElementsInCurrentDay - 1 {
-            gradientImages[Int(entry.x)].alpha = 1
-            //gradientImages[Int(entry.x)].alpha = 0
-            gradientImages[Int(entry.x + 1)].alpha = 0
-            
-        } else if Int(entry.x) == presenter.countOfElementsInCurrentDay - 1 {
-            gradientImages[Int(entry.x)].alpha = 1
-            gradientImages[Int(entry.x - 1)].alpha = 0
+        for i in 0..<5 {
+            gradientImages[i].alpha = 0
         }
         
+        gradientImages[Int(entry.x)].alpha = 1
+        
         customMarkerView.maximumTemperatureValue.text = Int(entry.y).description
-        customMarkerView.minimumTemperatureValue.text = feelsLike[Int(entry.x + 1), default: 0]?.description
+        customMarkerView.minimumTemperatureValue.text = feelsLike[Int(entry.x), default: 0]?.description
         
         switch currentWeather {
         case "дождь", "небольшой дождь":

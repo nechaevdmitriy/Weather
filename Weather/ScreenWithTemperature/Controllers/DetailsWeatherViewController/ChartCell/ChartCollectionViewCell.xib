@@ -51,7 +51,7 @@
                             </imageView>
                         </subviews>
                     </stackView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientImage" translatesAutoresizingMaskIntoConstraints="NO" id="aKA-Na-WRq">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradientImage" translatesAutoresizingMaskIntoConstraints="NO" id="aKA-Na-WRq">
                         <rect key="frame" x="0.0" y="0.0" width="107" height="199"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="aRJ-Ug-AWn">
@@ -125,7 +125,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" name="backgroundCellGray"/>
+            <color key="backgroundColor" name="darkBackgroundCellGray"/>
             <constraints>
                 <constraint firstItem="aRJ-Ug-AWn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="4v5-n7-hKW"/>
                 <constraint firstAttribute="trailing" secondItem="Id5-ug-Pc2" secondAttribute="trailing" constant="18" id="Ac4-Ib-S28"/>
@@ -162,8 +162,8 @@
         <image name="Rectangle 208" width="43" height="100"/>
         <image name="Vector 218" width="326" height="2"/>
         <image name="gradientImage" width="107" height="159"/>
-        <namedColor name="backgroundCellGray">
-            <color red="0.95300000905990601" green="0.96100002527236938" blue="0.97299998998641968" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="darkBackgroundCellGray">
+            <color red="0.9179999828338623" green="0.92500001192092896" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
