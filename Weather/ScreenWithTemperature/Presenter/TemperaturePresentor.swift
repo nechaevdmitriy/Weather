@@ -81,7 +81,6 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
     }
     
     required init(view: TemperatureViewProtocol, networkService: NetworkServiceProtocol, requesType: HTTPRequetType) {
-        
         self.view = view
         self.networkService = networkService
         

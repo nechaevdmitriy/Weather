@@ -42,7 +42,7 @@ class TemperatureViewController: UIViewController {
         
         navigationController?.navigationBar.standardAppearance = appiranceNavigationBar
         
-        let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: #selector(showAlert))
+        let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: #selector(presentCityesList))
         searchAllertItem.tintColor = UIColor(named: "lightGray")
         
         let switchThemeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "darkModeIcon"), style: .plain, target: self, action: #selector(switchDarkMode))
@@ -81,11 +81,7 @@ class TemperatureViewController: UIViewController {
         locationManager.startUpdatingLocation()
     }
     
-    @objc func showAlert() {
-        //                AlertView.instance.parentView.isHidden = false
-        //                view.addSubview(AlertView.instance.parentView)
-//        self.presentSearchAlertController(withTitle: "Введите название города", message: nil, style: .alert) { city in
-//        }
+    @objc func presentCityesList() {
         let newVC = SavedCityesViewController()
         newVC.presenter = presenter
         navigationController?.pushViewController(newVC, animated: false)

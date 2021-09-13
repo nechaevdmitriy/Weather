@@ -62,12 +62,10 @@ class SavedCityesViewController: UIViewController {
     @objc private func switchDarkMode() {
         if #available(iOS 13, *) {
             let appDelegate = UIApplication.shared.windows.first
-            
             if appDelegate?.overrideUserInterfaceStyle == .dark {
                 appDelegate?.overrideUserInterfaceStyle = .light
                 return
             }
-            
             appDelegate?.overrideUserInterfaceStyle = .dark
             return
         }

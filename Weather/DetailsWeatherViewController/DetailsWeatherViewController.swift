@@ -47,8 +47,14 @@ class DetailsWeatherViewController: UIViewController {
         }
     }
     
+    @objc func presentCityesList() {
+        let newVC = SavedCityesViewController()
+        newVC.presenter = presenter
+        navigationController?.pushViewController(newVC, animated: false)
+    }
+    
     private func setUpNavBar() {
-        let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: nil)
+        let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: #selector(presentCityesList))
         searchAllertItem.tintColor = UIColor(named: "lightGray")
         title = presenter.city
         
