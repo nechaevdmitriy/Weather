@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import RealmSwift
+
+protocol CityesAllertActionDelegate {
+    func addCity(city: String)
+}
 
 class SavedCityesViewController: UIViewController {
 
-    var cityes = ["Москва", "Санкт-Петербург", "Лондон", "Париж", "Женева", "Осло", "Марсель", "Будапешт"]
-    
     var presenter: TemperaturePresenterProtocol!
+    let realm = try! Realm()
+    var cityes: Results<Cityes>!
+    
+    var isOpenFlag = false
     
     @IBOutlet weak var cityesCollectionView: UICollectionView!
     @IBOutlet weak var gradientImage: UIImageView!
@@ -24,13 +31,23 @@ class SavedCityesViewController: UIViewController {
         cityesCollectionView.dataSource = self
         cityesCollectionView.register(CityesCollectionViewCell.nib(), forCellWithReuseIdentifier: CityesCollectionViewCell.id)
         setUpUI()
+        cityesCollectionView.showsVerticalScrollIndicator = false
+        cityes = realm.objects(Cityes.self)
     }
     
     @IBAction func addCityButtonPressed(_ sender: UIButton) {
+        AlertView.instance.delegate = self
+        
         AlertView.instance.parentView.isHidden = false
+        
         view.addSubview(AlertView.instance.parentView)
     }
     
+    @IBAction func locationButtonPressed(_ sender: Any) {
+        let newVC = MapViewController()
+        newVC.presenter = presenter
+        navigationController?.pushViewController(newVC, animated: false)
+    }
     
     private func setUpUI() {
         title = "Мои города"
@@ -63,18 +80,24 @@ extension SavedCityesViewController: UICollectionViewDelegate, UICollectionViewD
         cityes.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.getLists(requesType: .city(city: cityes[indexPath.row].city))
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityesCollectionViewCell.id, for: indexPath) as! CityesCollectionViewCell
-        cell.cityLabel.text = cityes[indexPath.row]
+        let item = cityes[indexPath.row]
+        cell.cityLabel.text = item.city
         cell.layer.cornerRadius = 16
         
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: cityes[indexPath.row])) { CurrentWeather in
+        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: item.city)) { CurrentWeather in
             switch CurrentWeather {
             
             case .success(let data):
                 DispatchQueue.main.async {
-                    cell.temperatureLabel.text = data.list[0].main.temp.description
-                    cell.feelsLikeLabel.text = data.list[0].main.feelsLike.description
+                    cell.temperatureLabel.text = Int(data.list[0].main.temp).description
+                    cell.feelsLikeLabel.text = Int(data.list[0].main.feelsLike).description
                     
                     switch data.list[0].weather[0].weatherDescription {
                     case "дождь", "небольшой дождь":
@@ -102,6 +125,19 @@ extension SavedCityesViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        UIEdgeInsets(top: 20, left: 0, bottom: 60, right: 0)
+    }
+}
+
+extension SavedCityesViewController: CityesAllertActionDelegate {
+    func addCity(city: String) {
+        
+        let selectedCity = Cityes()
+        selectedCity.city = city
+        
+        try! realm.write({
+            realm.add(selectedCity)
+        })
+        cityesCollectionView.reloadData()
     }
 }

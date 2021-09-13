@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AlertView: UIView {
     
@@ -18,6 +19,10 @@ class AlertView: UIView {
     @IBOutlet weak var cityesCollectionView: UICollectionView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    
+    let recomendedCityes = ["Тамбов", "Омск", "Саратов", "Петрозаводск", "Краков"]
+    var delegate: CityesAllertActionDelegate!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,10 +38,10 @@ class AlertView: UIView {
     @IBAction func cancelButtonPressed(_ sender: Any) {
         parentView.isHidden = true
     }
+    
     @IBAction func acceptButtonPressed(_ sender: Any) {
-        if cityesTextField.text != "" {
+            delegate.addCity(city: cityesTextField.text ?? "")
             parentView.isHidden = true
-        }
     }
     
     private func configureUI() {
@@ -69,12 +74,16 @@ extension AlertView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlertCitiesCollectionViewCell.id, for: indexPath) as! AlertCitiesCollectionViewCell
         cell.backgroundColor = UIColor(named: "darkBackgroundCellGray")
-        cell.layer.cornerRadius = 4
-        cell.contentView.layer.cornerRadius = 4
+        cell.cityesLabel.text = recomendedCityes[indexPath.row]
+        
         return cell
     }
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         return CGSize(width: 64, height: 24)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        cityesTextField.text = recomendedCityes[indexPath.row]
     }
 }

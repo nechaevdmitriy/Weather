@@ -12,19 +12,19 @@ protocol TemperaturePresenterProtocol: AnyObject {
     func getLists(requesType: HTTPRequetType)
     var currentWeather: CurrentWeatherData? { get set }
     var city: String? { get set }
-    func getDataByDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<List>.Element?
+    func getDataByDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<WeatherList>.Element?
     var countOfElementsInCurrentDay: Int {get set}
 }
 
 class TemperaturePresenter: TemperaturePresenterProtocol {
     var city: String?
     var currentWeather: CurrentWeatherData?
-    var listByDays: Dictionary<Optional<Substring>, Array<Array<List>.Element>>?
+    var listByDays: Dictionary<Optional<Substring>, Array<Array<WeatherList>.Element>>?
     var countOfElementsInCurrentDay = Int()
     
     weak var view: TemperatureViewProtocol?
     let networkService: NetworkServiceProtocol
-    var list = [List]()
+    var list = [WeatherList]()
     
     func getLists(requesType: HTTPRequetType) {
         switch requesType {
@@ -38,7 +38,7 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
                         self?.currentWeather = currentWeather
                         self?.city = currentWeather.city.name
                         self?.list = currentWeather.list
-                        self?.listByDays = Dictionary(grouping: self?.list ?? [List](), by: { $0.dtTxt.split(separator: " ").first })
+                        self?.listByDays = Dictionary(grouping: self?.list ?? [WeatherList](), by: { $0.dtTxt.split(separator: " ").first })
                         self?.view?.succes()
                     case .failure(let error):
                         print(error)
@@ -55,7 +55,7 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
                         self?.currentWeather = currentWeather
                         self?.city = currentWeather.city.name
                         self?.list = currentWeather.list
-                        self?.listByDays = Dictionary(grouping: self?.list ?? [List](), by: { $0.dtTxt.split(separator: " ").first })
+                        self?.listByDays = Dictionary(grouping: self?.list ?? [WeatherList](), by: { $0.dtTxt.split(separator: " ").first })
                         self?.view?.succes()
                     case .failure(let error):
                         print(error)
@@ -65,7 +65,7 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
         }
     }
 
-    func getDataByDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<List>.Element? {
+    func getDataByDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<WeatherList>.Element? {
         
         let date = Date()
         let formatter = DateFormatter()

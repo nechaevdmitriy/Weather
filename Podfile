@@ -9,5 +9,7 @@ target 'Weather' do
   pod 'Alamofire' 
   pod 'SnapKit'
   pod 'Charts'
+  pod 'Realm'
+  pod 'RealmSwift'
 
 end

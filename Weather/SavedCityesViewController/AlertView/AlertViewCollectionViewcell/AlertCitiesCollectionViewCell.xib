@@ -33,6 +33,11 @@
                 <constraint firstAttribute="bottom" secondItem="vqS-TY-ykt" secondAttribute="bottom" constant="4" id="NGH-eV-uI3"/>
                 <constraint firstAttribute="trailing" secondItem="vqS-TY-ykt" secondAttribute="trailing" constant="4" id="grs-gM-dkA"/>
             </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <integer key="value" value="8"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="cityesLabel" destination="vqS-TY-ykt" id="UYb-AJ-G5U"/>
             </connections>

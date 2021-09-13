@@ -9,7 +9,7 @@ import Foundation
 
 struct CurrentWeather {
     var city = String()
-    var list = [List]()
+    var list = [WeatherList]()
 
     init?(currentWeatherData: CurrentWeatherData) {
         city = currentWeatherData.city.name
