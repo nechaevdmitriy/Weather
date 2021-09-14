@@ -36,11 +36,15 @@ class TemperatureViewController: UIViewController {
         title = "City"
         title = presenter.city
         
-        let appiranceNavigationBar = UINavigationBarAppearance()
-        appiranceNavigationBar.backgroundColor = UIColor(named: "backgroundApp")
-        appiranceNavigationBar.shadowColor = .none
-        
-        navigationController?.navigationBar.standardAppearance = appiranceNavigationBar
+        if #available(iOS 13.0, *) {
+            let appiranceNavigationBar = UINavigationBarAppearance()
+            appiranceNavigationBar.backgroundColor = UIColor(named: "backgroundApp")
+            appiranceNavigationBar.shadowColor = .none
+            
+            navigationController?.navigationBar.standardAppearance = appiranceNavigationBar
+        } else {
+            // Fallback on earlier versions
+        }
         
         let searchAllertItem = UIBarButtonItem(image: #imageLiteral(resourceName: "searchIcon"), style: .plain, target: self, action: #selector(presentCityesList))
         searchAllertItem.tintColor = UIColor(named: "lightGray")
@@ -106,7 +110,6 @@ class TemperatureViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    
                     self.presenter.getLists(requesType: .coordinates(latitude: self.latitude, longitude: self.longitude))
                     self.presenter.currentWeather = data
                     self.title = self.presenter.city

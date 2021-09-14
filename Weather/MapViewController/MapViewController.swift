@@ -20,7 +20,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getLocation()
-        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationController?.navigationBar.barTintColor = .none
         mapView.delegate = self
     }
     
@@ -34,7 +34,11 @@ class MapViewController: UIViewController {
     private func getLocation() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        if #available(iOS 14.0, *) {
+            locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        } else {
+            // Fallback on earlier versions
+        }
         locationManager.startUpdatingLocation()
     }
     
