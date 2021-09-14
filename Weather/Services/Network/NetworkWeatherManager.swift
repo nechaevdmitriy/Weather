@@ -8,13 +8,13 @@
 import Foundation
 import CoreLocation
 
-enum HTTPRequetType {
+enum HTTPRequestType {
     case city(city: String)
     case coordinates(latitude: CLLocationDegrees, longitude: CLLocationDegrees)
 }
 
 protocol NetworkServiceProtocol {
-    func fetchCurrentWeather(forReqquesType requesType: HTTPRequetType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
+    func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
 }
 
 class NetworkWeatherManager: NetworkServiceProtocol {
@@ -25,7 +25,7 @@ class NetworkWeatherManager: NetworkServiceProtocol {
     var latitude = ""
     var longitude = ""
     
-    func fetchCurrentWeather(forReqquesType requesType: HTTPRequetType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
+    func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
         
         var urlString = " "
         

@@ -17,7 +17,8 @@ class DetailsWeatherViewController: UIViewController {
         return cv
     }()
     
-    var presenter: TemperaturePresenterProtocol!
+    var presenter: DetailsWeatherViewPresenter!
+    var list: WeatherList?
     
     //MARK: - Override methods
     override func viewDidLoad() {
@@ -49,7 +50,6 @@ class DetailsWeatherViewController: UIViewController {
     
     @objc func presentCityesList() {
         let newVC = SavedCityesViewController()
-        newVC.presenter = presenter
         navigationController?.pushViewController(newVC, animated: false)
     }
     
@@ -95,7 +95,8 @@ extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionVi
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsWeatherCollectionViewCell.id, for: indexPath) as! DetailsWeatherCollectionViewCell
             cell.layer.cornerRadius = 16
             cell.backgroundColor = .none
-            switch presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.weather[0].weatherDescription {
+            
+            switch presenter.showWeather()?.list[0].weather[0].weatherDescription {
             
             case "дождь", "пасмурно", "небольшой дождь":
                 cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
@@ -105,18 +106,18 @@ extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionVi
                 cell.weatherImage.image = #imageLiteral(resourceName: "sun")
             }
             
-            cell.currentTemperatureLabel.text = Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.temp ?? 0).description + "℃"
+            cell.currentTemperatureLabel.text = Int(list?.main.temp ?? 0).description + "℃"
             
-            let day = self.presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.dtTxt.split(separator: " ").first?.description.capitalized
+            let day = presenter.showWeather()?.list[0].dtTxt.split(separator: " ").first?.description.capitalized
             
             let convertedValue = HelperDate.changeDateFormat(dateString: day ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM, EEE")
             
             cell.currentDayLabel.text = "Сегодня," + " " + convertedValue
-            cell.windDescription.text = Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.wind.speed ?? 0).description
+            cell.windDescription.text = Int(presenter.showWeather()?.list[0].wind.speed ?? 0).description
             
-            cell.humidityDescription.text = Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.main.humidity ?? 0).description
+            cell.humidityDescription.text = Int(presenter.showWeather()?.list[0].main.humidity ?? 0).description
             
-            cell.precipitationDescription.text = Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: 0)?.pop ?? 0).description
+            cell.precipitationDescription.text = Int(presenter.showWeather()?.list[0].pop ?? 0).description
             
             return cell
             
@@ -150,5 +151,11 @@ extension DetailsWeatherViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 60
+    }
+}
+
+extension DetailsWeatherViewController: DetailsWeatherViewProtocol {
+    func getWeather(list: WeatherList) {
+        self.list = list
     }
 }

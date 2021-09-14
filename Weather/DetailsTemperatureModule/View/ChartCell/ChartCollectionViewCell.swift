@@ -30,7 +30,7 @@ class ChartCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gradientImage: UIImageView!
     @IBOutlet var hoursLabels: [UILabel]!
     @IBOutlet var gradientImages: [UIImageView]!
-    var presenter: TemperaturePresenterProtocol!
+    var presenter: DetailsWeatherViewPresenter!
     
     //MARK: - Override methods
     override func awakeFromNib() {
@@ -47,13 +47,13 @@ class ChartCollectionViewCell: UICollectionViewCell {
     private func updateData() {
         
         for i in 0..<presenter.countOfElementsInCurrentDay {
-            guard presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i) != nil else {
+            guard presenter.showWeather()?.list[i] != nil else {
                 return
             }
             
-            currentValues.append(Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i)?.main.temp ?? 0))
-            feelsLike.append(Int(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i)?.main.feelsLike ?? 0))
-            weatherDescriptions.append(presenter.getDataByDayAndHour(indexOfDay: 0, indexOfHour: i)?.weather[0].weatherDescription ?? "Not Found")
+            currentValues.append(Int(presenter.showWeather()?.list[i].main.temp ?? 0))
+            feelsLike.append(Int(presenter.showWeather()?.list[i].main.feelsLike ?? 0))
+            weatherDescriptions.append(presenter.showWeather()?.list[i].weather[0].weatherDescription ?? "Not Found")
             entries.append(ChartDataEntry(x: Double(i), y: Double(currentValues[i] ?? 0)))
         }
         entries.append(ChartDataEntry(x: Double(presenter.countOfElementsInCurrentDay - 1), y: 50))

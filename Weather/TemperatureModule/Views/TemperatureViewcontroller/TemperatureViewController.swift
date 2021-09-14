@@ -98,8 +98,7 @@ class TemperatureViewController: UIViewController {
     }
     
     @objc func tap() {
-        let newVC = DetailsWeatherViewController()
-        newVC.presenter = presenter
+        let newVC = ModuleBuilder.createDetailsTemperatureModule()
         navigationController?.pushViewController(newVC, animated: true)
     }
     

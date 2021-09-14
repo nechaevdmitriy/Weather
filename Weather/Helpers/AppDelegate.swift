@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         }else{
             window = UIWindow()
-            let mainVC = ModuleBuilder.createModule()
+            let mainVC = ModuleBuilder.createTemperatureModule()
             window?.rootViewController = UINavigationController(rootViewController: mainVC)
             window?.makeKeyAndVisible()
         }

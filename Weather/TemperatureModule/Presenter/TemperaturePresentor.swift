@@ -5,11 +5,10 @@
 //  Created by Дмитрий on 31.08.2021.
 
 import Foundation
-import CoreLocation
 
 protocol TemperaturePresenterProtocol: AnyObject {
-    init(view: TemperatureViewProtocol, networkService: NetworkServiceProtocol, requesType: HTTPRequetType)
-    func getLists(requesType: HTTPRequetType)
+    init(view: TemperatureViewProtocol, networkService: NetworkServiceProtocol, requesType: HTTPRequestType)
+    func getLists(requesType: HTTPRequestType)
     var currentWeather: CurrentWeatherData? { get set }
     var city: String? { get set }
     func getDataByDayAndHour(indexOfDay: Int, indexOfHour: Int) -> Array<WeatherList>.Element?
@@ -26,7 +25,7 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
     let networkService: NetworkServiceProtocol
     var list = [WeatherList]()
     
-    func getLists(requesType: HTTPRequetType) {
+    func getLists(requesType: HTTPRequestType) {
         switch requesType {
         case .city(city: let city):
             networkService.fetchCurrentWeather(forReqquesType: .city(city: city)) { [weak self] CurrentWeather in
@@ -80,7 +79,7 @@ class TemperaturePresenter: TemperaturePresenterProtocol {
         return infoAboutCurrentDay
     }
     
-    required init(view: TemperatureViewProtocol, networkService: NetworkServiceProtocol, requesType: HTTPRequetType) {
+    required init(view: TemperatureViewProtocol, networkService: NetworkServiceProtocol, requesType: HTTPRequestType) {
         self.view = view
         self.networkService = networkService
         

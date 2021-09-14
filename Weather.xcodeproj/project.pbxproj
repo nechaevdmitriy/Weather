@@ -46,6 +46,7 @@
 		5A8F25F526D63BB80029E186 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25EE26D63BB80029E186 /* Manrope-Regular.ttf */; };
 		5A8F25F626D63BB80029E186 /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25EF26D63BB80029E186 /* Manrope-Light.ttf */; };
 		5A8F25F726D63BB80029E186 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A8F25F026D63BB80029E186 /* Manrope-SemiBold.ttf */; };
+		5AB4981E26F0A4F800728DD9 /* DetailsWeatherPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB4981D26F0A4F800728DD9 /* DetailsWeatherPresenter.swift */; };
 		5AD7EE6E26E6189000F38EDC /* AlertCitiesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD7EE6C26E6189000F38EDC /* AlertCitiesCollectionViewCell.swift */; };
 		5AD7EE6F26E6189000F38EDC /* AlertCitiesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AD7EE6D26E6189000F38EDC /* AlertCitiesCollectionViewCell.xib */; };
 		5AD7EE7F26E620BA00F38EDC /* DetailsWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD7EE7E26E620BA00F38EDC /* DetailsWeatherViewController.swift */; };
@@ -100,6 +101,7 @@
 		5A8F25EE26D63BB80029E186 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
 		5A8F25EF26D63BB80029E186 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		5A8F25F026D63BB80029E186 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
+		5AB4981D26F0A4F800728DD9 /* DetailsWeatherPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWeatherPresenter.swift; sourceTree = "<group>"; };
 		5AD7EE6C26E6189000F38EDC /* AlertCitiesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCitiesCollectionViewCell.swift; sourceTree = "<group>"; };
 		5AD7EE6D26E6189000F38EDC /* AlertCitiesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertCitiesCollectionViewCell.xib; sourceTree = "<group>"; };
 		5AD7EE7E26E620BA00F38EDC /* DetailsWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWeatherViewController.swift; sourceTree = "<group>"; };
@@ -151,18 +153,17 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		5A23819F26DF7B4700F31ACB /* Builder */ = {
+		5A23819F26DF7B4700F31ACB /* ModuleBuilder */ = {
 			isa = PBXGroup;
 			children = (
 				5A2381A026DF7B5800F31ACB /* ModuleBuilder.swift */,
 			);
-			path = Builder;
+			path = ModuleBuilder;
 			sourceTree = "<group>";
 		};
 		5A2381A426E1F6E600F31ACB /* TemperatureScreenView */ = {
 			isa = PBXGroup;
 			children = (
-				5A8F259926D38E740029E186 /* TemperatureViewController.swift */,
 				5A2381A526E1F71100F31ACB /* TemperatureScreenView.swift */,
 				5A2381A726E205A700F31ACB /* AllertControllerforTemperatureViewController.swift */,
 				5A2381AD26E265C400F31ACB /* SearchAlertView.swift */,
@@ -239,9 +240,10 @@
 			isa = PBXGroup;
 			children = (
 				5A8F25BC26D3C3150029E186 /* Services */,
+				5A23819F26DF7B4700F31ACB /* ModuleBuilder */,
 				5A8F25D226D3EF610029E186 /* Models */,
-				5A8F25AB26D391C10029E186 /* ScreenWithTemperature */,
-				5AD7EE7D26E6207C00F38EDC /* DetailsWeatherViewController */,
+				5A8F25AB26D391C10029E186 /* TemperatureModule */,
+				5AD7EE7D26E6207C00F38EDC /* DetailsTemperatureModule */,
 				5A53865926EA03B500A71E46 /* SavedCityesViewController */,
 				5A53866926EB3AD300A71E46 /* MapViewController */,
 				5A8F25A926D3902B0029E186 /* Helpers */,
@@ -271,14 +273,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		5A8F25AB26D391C10029E186 /* ScreenWithTemperature */ = {
+		5A8F25AB26D391C10029E186 /* TemperatureModule */ = {
 			isa = PBXGroup;
 			children = (
-				5A23819F26DF7B4700F31ACB /* Builder */,
 				5A23819026DE6F7700F31ACB /* Presenter */,
 				5A8F25AA26D3909B0029E186 /* Views */,
 			);
-			path = ScreenWithTemperature;
+			path = TemperatureModule;
 			sourceTree = "<group>";
 		};
 		5A8F25BC26D3C3150029E186 /* Services */ = {
@@ -349,6 +350,24 @@
 			path = WeatherByHoursCell;
 			sourceTree = "<group>";
 		};
+		5AB4981C26F0A4D200728DD9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5AB4981D26F0A4F800728DD9 /* DetailsWeatherPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		5AB4981F26F0ADF300728DD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5AD7EE7E26E620BA00F38EDC /* DetailsWeatherViewController.swift */,
+				5AD7EE8426E64AF500F38EDC /* DetailsWeatherCell */,
+				5AD7EE8626E64B1900F38EDC /* ChartCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5AD7EE6326E5FDA700F38EDC /* AlertViewCollectionViewcell */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +390,7 @@
 		5AD7EE7126E61DDC00F38EDC /* TemperatureViewcontroller */ = {
 			isa = PBXGroup;
 			children = (
+				5A8F259926D38E740029E186 /* TemperatureViewController.swift */,
 				5A2381A426E1F6E600F31ACB /* TemperatureScreenView */,
 				5A8F25C526D3E12E0029E186 /* CurrentWeatherCell */,
 				5A8F25C626D3E1490029E186 /* LastDatesCell */,
@@ -378,14 +398,13 @@
 			path = TemperatureViewcontroller;
 			sourceTree = "<group>";
 		};
-		5AD7EE7D26E6207C00F38EDC /* DetailsWeatherViewController */ = {
+		5AD7EE7D26E6207C00F38EDC /* DetailsTemperatureModule */ = {
 			isa = PBXGroup;
 			children = (
-				5AD7EE7E26E620BA00F38EDC /* DetailsWeatherViewController.swift */,
-				5AD7EE8426E64AF500F38EDC /* DetailsWeatherCell */,
-				5AD7EE8626E64B1900F38EDC /* ChartCell */,
+				5AB4981F26F0ADF300728DD9 /* View */,
+				5AB4981C26F0A4D200728DD9 /* Presenter */,
 			);
-			path = DetailsWeatherViewController;
+			path = DetailsTemperatureModule;
 			sourceTree = "<group>";
 		};
 		5AD7EE8426E64AF500F38EDC /* DetailsWeatherCell */ = {
@@ -560,6 +579,7 @@
 				5A53866526EA4A7300A71E46 /* CityesList.swift in Sources */,
 				5A8F25E226D4F7490029E186 /* CurrentWeather.swift in Sources */,
 				5A53866126EA06FE00A71E46 /* CityesCollectionViewCell.swift in Sources */,
+				5AB4981E26F0A4F800728DD9 /* DetailsWeatherPresenter.swift in Sources */,
 				5A2381AE26E265C400F31ACB /* SearchAlertView.swift in Sources */,
 				5AD7EE8226E629E300F38EDC /* DetailsWeatherCollectionViewCell.swift in Sources */,
 				5AD7EE6E26E6189000F38EDC /* AlertCitiesCollectionViewCell.swift in Sources */,
