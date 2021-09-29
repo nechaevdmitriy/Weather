@@ -13,7 +13,7 @@ class MapViewController: UIViewController {
 
     lazy var locations = [CLLocation]()
     let locationManager = CLLocationManager()
-    var presenter: TemperaturePresenterProtocol!
+    var presenter: TemperatureViewPresenterProtocol?
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -99,7 +99,6 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        presenter.getLists(requesType: .city(city: (view.annotation?.title ?? "Moscow") ?? "Moscow"))
         navigationController?.popToRootViewController(animated: true)
     }
 }

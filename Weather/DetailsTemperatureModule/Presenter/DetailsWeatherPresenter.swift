@@ -7,36 +7,31 @@
 
 import Foundation
 
-protocol DetailsWeatherViewProtocol {
-    func getWeather(list: WeatherList)
-}
-
-protocol DetailsWeatherViewPresenter {
-    var countOfElementsInCurrentDay: Int { get set }
-    var city: String? { get set }
-    init(view: DetailsWeatherViewProtocol, weather: CurrentWeatherData?)
-    func showWeather () -> CurrentWeatherData?
-}
-
-class DetailsWeatherPresenter: DetailsWeatherViewPresenter {
-    var countOfElementsInCurrentDay: Int
-    var city: String?
-    let view: DetailsWeatherViewProtocol
-    let weather: CurrentWeatherData?
+class DetailsWeatherPresenter {
     
-    required init(view: DetailsWeatherViewProtocol, weather: CurrentWeatherData?) {
-        self.view = view
-        self.weather = weather
-        self.city = weather?.city.name
-        self.countOfElementsInCurrentDay = weather?.list.count ?? 0
-    }
+    var countOfElementsInCurrentDay: Int?
+    var city: String?
+    var view = DetailsWeatherViewController()
+    var weather: CurrentWeatherData?
     
     func showWeather() -> CurrentWeatherData? {
-        let currentWeather = weather
+        var currentWeather = weather
+        
+        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: NetworkWeatherManager.networkManager.city)) { result in
+            switch result {
+            case .success(let succes):
+                currentWeather = succes
+            case .failure(let error):
+                print(error)
+            }
+            self.view.collectionView.reloadData()
+        }
         return currentWeather
     }
     
-    
+    @objc func switchDarkMode() {
+        view.switchDarkMode()
+    }
 }
 
 

@@ -10,19 +10,20 @@ import UIKit
 class DetailsWeatherViewController: UIViewController {
     
     //MARK: - Properties
-    private var collectionView: UICollectionView = {
+        var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return cv
     }()
     
-    var presenter: DetailsWeatherViewPresenter!
+    var presenter = DetailsWeatherPresenter()
     var list: WeatherList?
     
     //MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(collectionView)
         view.backgroundColor = UIColor(named: "backgroundApp")
         collectionView.dataSource = self
@@ -34,7 +35,13 @@ class DetailsWeatherViewController: UIViewController {
     }
     
     //MARK: - Private funcs
-    @objc private func switchDarkMode() {
+    
+    @objc func presentCityesList() {
+        let newVC = SavedCityesViewController()
+        navigationController?.pushViewController(newVC, animated: false)
+    }
+    
+    func switchDarkMode() {
         if #available(iOS 13, *) {
             let appDelegate = UIApplication.shared.windows.first
             
@@ -45,12 +52,9 @@ class DetailsWeatherViewController: UIViewController {
             
             appDelegate?.overrideUserInterfaceStyle = .dark
             return
+        } else {
+            print("error")
         }
-    }
-    
-    @objc func presentCityesList() {
-        let newVC = SavedCityesViewController()
-        navigationController?.pushViewController(newVC, animated: false)
     }
     
     private func setUpNavBar() {
@@ -58,7 +62,8 @@ class DetailsWeatherViewController: UIViewController {
         searchAllertItem.tintColor = UIColor(named: "lightGray")
         title = presenter.city
         
-        let switchThemeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "darkModeIcon"), style: .plain, target: self, action: #selector(switchDarkMode))
+        let switchThemeItem = UIBarButtonItem(image: #imageLiteral(resourceName: "darkModeIcon"), style: .plain, target: self, action: #selector(presenter.switchDarkMode))
+        
         switchThemeItem.tintColor = UIColor(named: "lightGray")
         
         navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "Vector")
@@ -99,11 +104,17 @@ extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionVi
             switch presenter.showWeather()?.list[0].weather[0].weatherDescription {
             
             case "дождь", "пасмурно", "небольшой дождь":
-                cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
+                DispatchQueue.main.async {
+                    cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
+                }
             case "гроза":
-                cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
+                DispatchQueue.main.async {
+                    cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
+                }
             default:
-                cell.weatherImage.image = #imageLiteral(resourceName: "sun")
+                DispatchQueue.main.async {
+                    cell.weatherImage.image = #imageLiteral(resourceName: "sun")
+                }
             }
             
             cell.currentTemperatureLabel.text = Int(list?.main.temp ?? 0).description + "℃"
@@ -119,12 +130,14 @@ extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionVi
             
             cell.precipitationDescription.text = Int(presenter.showWeather()?.list[0].pop ?? 0).description
             
+            collectionView.reloadData()
             return cell
             
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChartCollectionViewCell.id, for: indexPath) as! ChartCollectionViewCell
             cell.layer.cornerRadius = 16
             cell.presenter = presenter
+            
             return cell
         }
     }
@@ -145,17 +158,7 @@ extension DetailsWeatherViewController: UICollectionViewDelegateFlowLayout {
         UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("tap")
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 60
-    }
-}
-
-extension DetailsWeatherViewController: DetailsWeatherViewProtocol {
-    func getWeather(list: WeatherList) {
-        self.list = list
     }
 }

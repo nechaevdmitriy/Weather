@@ -31,7 +31,6 @@ class AlertView: UIView {
         cityesCollectionView.delegate = self
         cityesCollectionView.dataSource = self
         cityesCollectionView.register(AlertCitiesCollectionViewCell.nib(), forCellWithReuseIdentifier: AlertCitiesCollectionViewCell.id)
-        
         cityesCollectionView.showsHorizontalScrollIndicator = false
     }
     
@@ -53,8 +52,6 @@ class AlertView: UIView {
         parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         parentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
-    
-    
     
     func showAlert(UIView: UIView) {
         self.insertSubview(parentView, aboveSubview: UIView)

@@ -14,7 +14,7 @@ protocol CityesAllertActionDelegate {
 
 class SavedCityesViewController: UIViewController {
 
-    var presenter: TemperaturePresenterProtocol!
+    var list: [WeatherList]!
     let realm = try! Realm()
     var cityes: Results<Cityes>!
     
@@ -45,7 +45,6 @@ class SavedCityesViewController: UIViewController {
     
     @IBAction func locationButtonPressed(_ sender: Any) {
         let newVC = MapViewController()
-        newVC.presenter = presenter
         navigationController?.pushViewController(newVC, animated: false)
     }
     
@@ -79,7 +78,6 @@ extension SavedCityesViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.getLists(requesType: .city(city: cityes[indexPath.row].city))
         navigationController?.popToRootViewController(animated: true)
     }
     
