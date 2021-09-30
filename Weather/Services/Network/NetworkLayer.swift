@@ -21,9 +21,7 @@ class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
     static var networkManager = NetworkWeatherManager()
     
-    var city = "London"
-    var latitude = ""
-    var longitude = ""
+    var city = "Тамбов"
     
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
         

@@ -12,11 +12,4 @@ struct CurrentWeather {
     var city: String
     var list: [WeatherList]
     var listByDays: [Substring : [WeatherList]]
-    
-    init(currentWeatherData: CurrentWeatherData) {
-        weatherData = currentWeatherData
-        city = currentWeatherData.city.name
-        list = currentWeatherData.list
-        listByDays = Dictionary(grouping: weatherData.list, by: { $0.dtTxt.split(separator: " ")[0]})
-    }
 }

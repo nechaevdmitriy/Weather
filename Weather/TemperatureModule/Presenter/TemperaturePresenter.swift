@@ -33,10 +33,10 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         let calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
         guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return [WeatherList]() }
-        assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) == nil)
+        assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) != nil)
         let stringSelectedDay = selectedDay.description.split(separator: " ")[0]
         guard let infoAboutCurrentDay = weatherData?.listByDays[stringSelectedDay] else { return [WeatherList]() }
-        assert((weatherData?.listByDays[stringSelectedDay]) == nil)
+        assert((weatherData?.listByDays[stringSelectedDay]) != nil)
         return infoAboutCurrentDay
     }
     
@@ -54,7 +54,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let weather):
-                    guard let currentWeather = CurrentWeather(currentWeatherData: weather) else { return }
+                    let currentWeather = weather.toCurrentWeather()
                     self.weatherData = currentWeather
                     self.getInfoAboutDays()
                     self.view?.succes()
