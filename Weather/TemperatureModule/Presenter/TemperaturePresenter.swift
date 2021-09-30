@@ -27,20 +27,22 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         showWeatherList()
     }
     
-    private func getDataByDay(indexOfDay: Int) -> [WeatherList]?{
+    private func getDataByDay(indexOfDay: Int) -> [WeatherList] {
         let date = Date()
         let formatter = DateFormatter()
         let calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
-        let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date)
-        let stringSelectedDay = selectedDay?.description.split(separator: " ").first
-        let infoAboutCurrentDay = weatherData?.listByDays[stringSelectedDay!]
+        guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return [WeatherList]() }
+        assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) == nil)
+        let stringSelectedDay = selectedDay.description.split(separator: " ")[0]
+        guard let infoAboutCurrentDay = weatherData?.listByDays[stringSelectedDay] else { return [WeatherList]() }
+        assert((weatherData?.listByDays[stringSelectedDay]) == nil)
         return infoAboutCurrentDay
     }
     
     private func getInfoAboutDays() {
         for i in 0...4{
-        guard let dataOfTheDay = getDataByDay(indexOfDay: i) else {return}
+        let dataOfTheDay = getDataByDay(indexOfDay: i)
                 let weatherOfTheDay = dataOfTheDay
                 weatherOfTheDays.append(weatherOfTheDay)
         }
