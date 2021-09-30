@@ -8,14 +8,15 @@
 import Foundation
 
 extension String {
-    static func changeDateFormat(dateString: String, fromFormat: String, toFormat: String) ->String {
+    
+    static func changeDateFormat(dateString: String, from inputFormat: String, to outputFormat: String) -> String {
         let inputDateFormatter = DateFormatter()
-        inputDateFormatter.dateFormat = fromFormat
+        inputDateFormatter.dateFormat = inputFormat
         let date = inputDateFormatter.date(from: dateString) ?? Date()
         
         let outputDateFormatter = DateFormatter()
         outputDateFormatter.locale = Locale(identifier: "ru_Ru")
-        outputDateFormatter.dateFormat = toFormat
+        outputDateFormatter.dateFormat = outputFormat
         return outputDateFormatter.string(from: date)
     }
 }

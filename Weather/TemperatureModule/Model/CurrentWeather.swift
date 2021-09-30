@@ -8,14 +8,15 @@
 import Foundation
 
 struct CurrentWeather {
-    var city = String()
+    var weatherData: CurrentWeatherData
+    var city: String
     var list: [WeatherList]
-    var listByDays: Dictionary<Optional<Substring>, Array<Array<WeatherList>.Element>>
-    
+    var listByDays: [Substring : [WeatherList]]
     
     init?(currentWeatherData: CurrentWeatherData) {
+        weatherData = currentWeatherData
         city = currentWeatherData.city.name
         list = currentWeatherData.list
-        listByDays = Dictionary(grouping: currentWeatherData.list, by: { $0.dtTxt.split(separator: " ").first })
+        listByDays = Dictionary(grouping: weatherData.list, by: { $0.dtTxt.split(separator: " ")[0]})
     }
 }

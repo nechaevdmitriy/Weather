@@ -13,11 +13,11 @@ enum HTTPRequestType {
     case coordinates(latitude: CLLocationDegrees, longitude: CLLocationDegrees)
 }
 
-protocol NetworkweatherServiceProtocol {
+protocol NetworkWeatherServiceProtocol {
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
 }
 
-class NetworkWeatherManager: NetworkweatherServiceProtocol {
+class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
     static var networkManager = NetworkWeatherManager()
     

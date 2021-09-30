@@ -9,7 +9,7 @@ import UIKit
 
 protocol TemperatureViewPresenterProtocol: AnyObject {
     var weatherData: CurrentWeather? { get }
-    var weatherOfTheDays: [[WeatherByDay]] { get set }
+    var weatherOfTheDays: [[WeatherList]] { get set }
 }
 
 final class TemperatureViewController: UIViewController {
@@ -40,6 +40,7 @@ final class TemperatureViewController: UIViewController {
 extension TemperatureViewController: TemperatureViewProtocol {
     func succes() {
         setUpNavBar()
+        collectionViewScreen.dataSource.weatherOfTheDays = presenter.weatherOfTheDays
         collectionViewScreen.collectionView?.reloadData()
     }
     
