@@ -12,6 +12,7 @@ extension String {
     static func changeDateFormat(dateString: String, from inputFormat: String, to outputFormat: String) -> String {
         let inputDateFormatter = DateFormatter()
         inputDateFormatter.dateFormat = inputFormat
+        assert(inputDateFormatter.date(from: dateString) == nil)
         let date = inputDateFormatter.date(from: dateString) ?? Date()
         
         let outputDateFormatter = DateFormatter()

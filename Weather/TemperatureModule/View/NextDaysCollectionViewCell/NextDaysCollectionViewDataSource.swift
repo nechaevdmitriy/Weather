@@ -9,7 +9,7 @@ import UIKit
 
 final class NextDaysCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var weatherOfTheDays: [[WeatherList]]?
+    var weatherOfTheDays = [[WeatherList]]()
     var indexOfFirstSection: Int!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -21,8 +21,8 @@ final class NextDaysCollectionViewDataSource: NSObject, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoursCollectionViewCell.id, for: indexPath) as! HoursCollectionViewCell
         
         DispatchQueue.main.async {
-            cell.hourLabel.text = self.weatherOfTheDays?[self.indexOfFirstSection][indexPath.row].dtTxt.split(separator: " ").last?.description
-            cell.temperatureLabel.text = self.weatherOfTheDays?[self.indexOfFirstSection][indexPath.row].main.temp.description
+            cell.hourLabel.text = self.weatherOfTheDays[self.indexOfFirstSection][indexPath.row].dtTxt.split(separator: " ").last?.description
+            cell.temperatureLabel.text = self.weatherOfTheDays[self.indexOfFirstSection][indexPath.row].main.temp.description
             cell.weatherImage.image = self.getImage(indexOfDay: self.indexOfFirstSection, indexOfHour: 2)
         }
         
@@ -33,7 +33,7 @@ final class NextDaysCollectionViewDataSource: NSObject, UICollectionViewDataSour
     }
     
     private func getImage(indexOfDay: Int, indexOfHour: Int) -> UIImage {
-        let icon = self.weatherOfTheDays?[indexOfDay][indexOfHour].weather[0].icon
+        let icon = self.weatherOfTheDays[indexOfDay][indexOfHour].weather[0].icon
         switch icon {
         case "09d", "09n", "10d", "10n":
             return #imageLiteral(resourceName: "Rain")
