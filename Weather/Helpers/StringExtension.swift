@@ -7,8 +7,7 @@
 
 import Foundation
 
-class HelperDate {
-    
+extension String {
     static func changeDateFormat(dateString: String, fromFormat: String, toFormat: String) ->String {
         let inputDateFormatter = DateFormatter()
         inputDateFormatter.dateFormat = fromFormat

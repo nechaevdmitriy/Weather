@@ -121,7 +121,7 @@ extension DetailsWeatherViewController: UICollectionViewDelegate, UICollectionVi
             
             let day = presenter.showWeather()?.list[0].dtTxt.split(separator: " ").first?.description.capitalized
             
-            let convertedValue = HelperDate.changeDateFormat(dateString: day ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM, EEE")
+            let convertedValue = String.changeDateFormat(dateString: day ?? "", fromFormat: "yyyy-MM-dd", toFormat: "d MMMM, EEE")
             
             cell.currentDayLabel.text = "Сегодня," + " " + convertedValue
             cell.windDescription.text = Int(presenter.showWeather()?.list[0].wind.speed ?? 0).description
