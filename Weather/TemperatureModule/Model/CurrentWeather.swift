@@ -13,7 +13,7 @@ struct CurrentWeather {
     var list: [WeatherList]
     var listByDays: [Substring : [WeatherList]]
     
-    init?(currentWeatherData: CurrentWeatherData) {
+    init(currentWeatherData: CurrentWeatherData) {
         weatherData = currentWeatherData
         city = currentWeatherData.city.name
         list = currentWeatherData.list
