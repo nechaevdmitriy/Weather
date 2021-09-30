@@ -8,11 +8,6 @@
 import Foundation
 import CoreLocation
 
-enum HTTPRequestType {
-    case city(city: String)
-    case coordinates(latitude: CLLocationDegrees, longitude: CLLocationDegrees)
-}
-
 protocol NetworkWeatherServiceProtocol {
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
 }
@@ -20,8 +15,6 @@ protocol NetworkWeatherServiceProtocol {
 class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
     static var networkManager = NetworkWeatherManager()
-    
-    var city = "Тамбов"
     
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
         
