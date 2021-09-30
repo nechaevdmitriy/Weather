@@ -8,12 +8,11 @@
 import UIKit
 
 protocol TemperatureViewPresenterProtocol: AnyObject {
-    var weatherData: CurrentWeather? { get }
-    var weatherOfTheDays: [[WeatherList]] { get set }
+    
 }
 
 final class TemperatureViewController: UIViewController {
-
+    
     var presenter: TemperatureViewPresenterProtocol!
     var collectionViewScreen: TemperatureScreenViewProtocol!
     
@@ -22,11 +21,13 @@ final class TemperatureViewController: UIViewController {
         view = collectionViewScreen
     }
     
-    private func setUpNavBar() {
-        title = presenter.weatherData?.city
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.extraBold(size: 18)!]
-        navigationController?.navigationBar.shadowImage = UIImage()
+    private func setUpNavBar(title: String) {
+        assert(navigationController != nil, "Empty navigationController")
+        guard let navController = navigationController else { return }
+        self.title = title
+        navController.navigationBar.barTintColor = .white
+        navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.extraBold(size: 18)!]
+        navController.navigationBar.shadowImage = UIImage()
     }
     
     private func showErrorAlert() {
@@ -38,10 +39,13 @@ final class TemperatureViewController: UIViewController {
 }
 
 extension TemperatureViewController: TemperatureViewProtocol {
-    func succes() {
-        setUpNavBar()
-        collectionViewScreen.dataSource.weatherOfTheDays = presenter.weatherOfTheDays
-        collectionViewScreen.collectionView?.reloadData()
+    func succes(weatherOfTheDays: [[WeatherList]]) {
+        collectionViewScreen.setupDataSource(weatherOfTheDays: weatherOfTheDays)
+        collectionViewScreen.reloadData()
+    }
+    
+    func setTitle(title: String) {
+        setUpNavBar(title: title)
     }
     
     func failure() {

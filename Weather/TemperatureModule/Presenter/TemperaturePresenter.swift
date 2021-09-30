@@ -8,18 +8,17 @@
 import Foundation
 
 protocol TemperatureViewProtocol: AnyObject {
-    var collectionViewScreen: TemperatureScreenViewProtocol! { get set }
-    func succes()
+    func succes(weatherOfTheDays: [[WeatherList]])
+    func setTitle(title: String)
     func failure()
 }
 
 final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     
-    weak var view: TemperatureViewProtocol?
-    let networkService: NetworkWeatherServiceProtocol
-    var weatherData: CurrentWeather?
-    
-    var weatherOfTheDays = [[WeatherList]]()
+    weak var view: TemperatureViewProtocol!
+    private let networkService: NetworkWeatherServiceProtocol
+    private var weatherData: CurrentWeather!
+    private var weatherOfTheDays = [[WeatherList]]()
     
     required init(view: TemperatureViewProtocol, networkLayer: NetworkWeatherServiceProtocol) {
         self.view = view
@@ -27,7 +26,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         showWeatherList()
     }
     
-    private func getDataByDay(indexOfDay: Int) -> [WeatherList] {
+    func getDataByDay(indexOfDay: Int) -> [WeatherList] {
         let date = Date()
         let formatter = DateFormatter()
         let calendar = Calendar.current
@@ -35,21 +34,24 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return [WeatherList]() }
         assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) != nil)
         let stringSelectedDay = selectedDay.description.split(separator: " ")[0]
-        guard let infoAboutCurrentDay = weatherData?.listByDays[stringSelectedDay] else { return [WeatherList]() }
-        assert((weatherData?.listByDays[stringSelectedDay]) != nil)
+        guard let infoAboutCurrentDay = weatherData.listByDays[stringSelectedDay] else { return [WeatherList]() }
+        assert((weatherData.listByDays[stringSelectedDay]) != nil)
         return infoAboutCurrentDay
     }
     
-    private func getInfoAboutDays() {
+    func getInfoAboutDays() {
         for i in 0...4{
-        let dataOfTheDay = getDataByDay(indexOfDay: i)
-                let weatherOfTheDay = dataOfTheDay
-                weatherOfTheDays.append(weatherOfTheDay)
+            let dataOfTheDay = getDataByDay(indexOfDay: i)
+            let weatherOfTheDay = dataOfTheDay
+            weatherOfTheDays.append(weatherOfTheDay)
         }
     }
+    func setTitle(title: String) {
+        
+    }
     
-    private func showWeatherList() {
-        networkService.fetchCurrentWeather(forReqquesType: .city(city: NetworkWeatherManager.networkManager.city)) { [weak self] result in
+    func showWeatherList() {
+        networkService.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -57,10 +59,11 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
                     let currentWeather = weather.toCurrentWeather()
                     self.weatherData = currentWeather
                     self.getInfoAboutDays()
-                    self.view?.succes()
+                    self.view.setTitle(title: weather.city.name)
+                    self.view.succes(weatherOfTheDays: self.weatherOfTheDays)
                 case .failure(let error):
                     print(error)
-                    self.view?.failure()
+                    self.view.failure()
                 }
             }
         }

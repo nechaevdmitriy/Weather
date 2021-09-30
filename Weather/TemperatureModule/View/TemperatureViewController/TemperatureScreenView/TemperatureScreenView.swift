@@ -8,15 +8,15 @@
 import UIKit
 
 protocol TemperatureScreenViewProtocol: UIView {
-    var collectionView: UICollectionView! { get }
-    var dataSource: TemperatureCollectionViewDataSource { get set }
+    func reloadData()
+    func setupDataSource(weatherOfTheDays: [[WeatherList]])
 }
 
-final class TemperatureScreenView: UIView, UICollectionViewDelegate, TemperatureScreenViewProtocol {
+final class TemperatureScreenView: UIView, UICollectionViewDelegate {
     
     private let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
-    var dataSource = TemperatureCollectionViewDataSource()
+    let dataSource = TemperatureCollectionViewDataSource()
     
     init() {
         super.init(frame: .zero)
@@ -28,12 +28,12 @@ final class TemperatureScreenView: UIView, UICollectionViewDelegate, Temperature
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
-        collectionView?.delegate = self
-        collectionView?.dataSource = dataSource
-        collectionView?.register(CurrentTemperatureCollectionViewCell.self, forCellWithReuseIdentifier: CurrentTemperatureCollectionViewCell.id)
+        collectionView.delegate = self
+        collectionView.dataSource = dataSource
+        collectionView.register(CurrentTemperatureCollectionViewCell.self, forCellWithReuseIdentifier: CurrentTemperatureCollectionViewCell.id)
         collectionView.register(NextDayCollectionViewCell.self, forCellWithReuseIdentifier: NextDayCollectionViewCell.id)
-        self.addSubview(collectionView ?? UICollectionView())
-        collectionView?.backgroundColor = UIColor(named: "background")
+        self.addSubview(collectionView)
+        collectionView.backgroundColor = UIColor(named: "background")
     }
     
     private func setUpConstraints() {
@@ -64,5 +64,15 @@ extension TemperatureScreenView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 16, left: 0, bottom: 20, right: 0)
+    }
+}
+
+extension TemperatureScreenView: TemperatureScreenViewProtocol {
+    func setupDataSource(weatherOfTheDays: [[WeatherList]]) {
+        dataSource.weatherOfTheDays = weatherOfTheDays
+    }
+    
+    func reloadData() {
+        collectionView.reloadData()
     }
 }

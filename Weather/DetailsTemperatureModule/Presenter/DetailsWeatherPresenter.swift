@@ -9,15 +9,15 @@ import Foundation
 
 class DetailsWeatherPresenter {
     
-    var countOfElementsInCurrentDay: Int?
-    var city: String?
+    var countOfElementsInCurrentDay = Int()
+    var city = String()
     var view = DetailsWeatherViewController()
     var weather: CurrentWeatherData?
     
     func showWeather() -> CurrentWeatherData? {
         var currentWeather = weather
         
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: NetworkWeatherManager.networkManager.city)) { result in
+        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { result in
             switch result {
             case .success(let succes):
                 currentWeather = succes
