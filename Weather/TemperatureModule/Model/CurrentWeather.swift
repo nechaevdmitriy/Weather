@@ -11,5 +11,5 @@ struct CurrentWeather {
     var weatherData: CurrentWeatherData
     var city: String
     var list: [WeatherList]
-    var listByDays: [Substring : [WeatherList]]
+    var listByDays: [String : [WeatherList]]
 }

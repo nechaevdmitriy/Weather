@@ -20,12 +20,6 @@ final class NextDaysCollectionViewDataSource: NSObject, UICollectionViewDataSour
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoursCollectionViewCell.id, for: indexPath) as! HoursCollectionViewCell
         
-        DispatchQueue.main.async {
-            cell.hourLabel.text = self.weatherOfTheDays[self.indexOfFirstSection][indexPath.row].dtTxt.split(separator: " ").last?.description
-            cell.temperatureLabel.text = self.weatherOfTheDays[self.indexOfFirstSection][indexPath.row].main.temp.description
-            cell.weatherImage.image = self.getImage(indexOfDay: self.indexOfFirstSection, indexOfHour: 2)
-        }
-        
         cell.contentView.backgroundColor = UIColor(named: "secondCell")
         cell.configure()
         cell.contentView.layer.cornerRadius = 16

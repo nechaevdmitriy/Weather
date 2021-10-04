@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TemperatureViewPresenterProtocol: AnyObject {
-    
+    func showWeatherList()
 }
 
 final class TemperatureViewController: UIViewController {
@@ -18,6 +18,7 @@ final class TemperatureViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.showWeatherList()
         view = collectionViewScreen
     }
     
@@ -39,8 +40,8 @@ final class TemperatureViewController: UIViewController {
 }
 
 extension TemperatureViewController: TemperatureViewProtocol {
-    func succes(weatherOfTheDays: [[WeatherList]]) {
-        collectionViewScreen.setupDataSource(weatherOfTheDays: weatherOfTheDays)
+    func succes(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays]) {
+        collectionViewScreen.setupDataSource(firstDay: firstDay, secondDays: secondDays)
         collectionViewScreen.reloadData()
     }
     

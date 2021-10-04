@@ -23,6 +23,7 @@ class NetworkWeatherManager: NetworkWeatherServiceProtocol {
         switch requesType {
         case .city(city: let city):
             urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(city.encodeUrl)&appid=6fbf251bda906b2794f2c3495a036ab3&cnt=40&units=metric&lang=ru"
+            print(urlString)
             
         case .coordinates(latitude: let latitude, longitude: let longitude):
             urlString = "https://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&appid=6fbf251bda906b2794f2c3495a036ab3&cnt=5&units=metric&lang=ru"

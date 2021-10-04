@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TemperatureViewProtocol: AnyObject {
-    func succes(weatherOfTheDays: [[WeatherList]])
+    func succes(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays])
     func setTitle(title: String)
     func failure()
 }
@@ -18,49 +18,85 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     weak var view: TemperatureViewProtocol!
     private let networkService: NetworkWeatherServiceProtocol
     private var weatherData: CurrentWeather!
-    private var weatherOfTheDays = [[WeatherList]]()
+    
+    private var weatherOfTheSecondDays = [ModelsOfTheSecondDays]()
+    
+    private var infoOfTheFirstDay = ModelOfTheFirstDay()
+    private var infoOfTheSecondDay = ModelsOfTheSecondDays()
+    private var infoOfTheThirdDay = ModelsOfTheSecondDays()
+    private var infoOfTheFourDay = ModelsOfTheSecondDays()
+    private var infoOfTheFiveDay = ModelsOfTheSecondDays()
+    
+    private let date = Date()
+    private let formatter = DateFormatter()
+    private let calendar = Calendar.current
     
     required init(view: TemperatureViewProtocol, networkLayer: NetworkWeatherServiceProtocol) {
         self.view = view
         self.networkService = networkLayer
-        showWeatherList()
+    }
+    
+    func getInfoBySecondDay() {
+        
+    }
+    
+    func getInfoByFirstDay() {
+        let info = getDataByDay(indexOfDay: 0)
+        infoOfTheFirstDay.todayDate = info[0].dtTxt.split(separator: " ")[0].description
+        infoOfTheFirstDay.currentTemp = info[0].main.temp.description
+        infoOfTheFirstDay.weatherDescription = info[0].weather[0].weatherDescription
+        infoOfTheFirstDay.weatherImage = info[0].weather[0].icon
+    }
+    
+    private func createModelOfSecondDay(numberOfDay: Int) -> ModelsOfTheSecondDays {
+        var dateOfDay = ModelsOfTheSecondDays()
+        let info = getDataByDay(indexOfDay: numberOfDay)
+        let stringSelectedDay = getDayString(indexOfDay: numberOfDay)
+        dateOfDay.date = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM")
+        dateOfDay.day = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "E")
+        dateOfDay.feelsLike = Int(info[numberOfDay].main.feelsLike).description
+        dateOfDay.weatherImage = info[numberOfDay].weather[0].icon
+        return dateOfDay
+    }
+    
+    private func setUpWeatherOfTheSecondDays() {
+        infoOfTheSecondDay = createModelOfSecondDay(numberOfDay: 1)
+        weatherOfTheSecondDays.append(infoOfTheSecondDay)
+        infoOfTheThirdDay = createModelOfSecondDay(numberOfDay: 2)
+        weatherOfTheSecondDays.append(infoOfTheThirdDay)
+        infoOfTheFourDay = createModelOfSecondDay(numberOfDay: 3)
+        weatherOfTheSecondDays.append(infoOfTheFourDay)
+        infoOfTheFiveDay = createModelOfSecondDay(numberOfDay: 4)
+        weatherOfTheSecondDays.append(infoOfTheFiveDay)
+    }
+    
+    private func getDayString(indexOfDay: Int) -> String {
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return "" }
+        assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) != nil, "Calendar not found")
+        guard let selectedDay = selectedDay.description.split(separator: " ").first?.description else { return ""}
+        let stringSelectedDay = selectedDay
+        return stringSelectedDay
     }
     
     func getDataByDay(indexOfDay: Int) -> [WeatherList] {
-        let date = Date()
-        let formatter = DateFormatter()
-        let calendar = Calendar.current
-        formatter.dateFormat = "yyyy-MM-dd"
-        guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return [WeatherList]() }
-        assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) != nil)
-        let stringSelectedDay = selectedDay.description.split(separator: " ")[0]
+        let stringSelectedDay = getDayString(indexOfDay: indexOfDay)
         guard let infoAboutCurrentDay = weatherData.listByDays[stringSelectedDay] else { return [WeatherList]() }
-        assert((weatherData.listByDays[stringSelectedDay]) != nil)
         return infoAboutCurrentDay
-    }
-    
-    func getInfoAboutDays() {
-        for i in 0...4{
-            let dataOfTheDay = getDataByDay(indexOfDay: i)
-            let weatherOfTheDay = dataOfTheDay
-            weatherOfTheDays.append(weatherOfTheDay)
-        }
-    }
-    func setTitle(title: String) {
-        
     }
     
     func showWeatherList() {
         networkService.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { [weak self] result in
             guard let self = self else { return }
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let weather):
-                    let currentWeather = weather.toCurrentWeather()
-                    self.weatherData = currentWeather
-                    self.getInfoAboutDays()
+                    self.weatherData = weather.toCurrentWeather()
                     self.view.setTitle(title: weather.city.name)
-                    self.view.succes(weatherOfTheDays: self.weatherOfTheDays)
+                    self.getInfoByFirstDay()
+                    self.setUpWeatherOfTheSecondDays()
+                    self.view.succes(firstDay: self.infoOfTheFirstDay, secondDays: self.weatherOfTheSecondDays)
                 case .failure(let error):
                     print(error)
                     self.view.failure()

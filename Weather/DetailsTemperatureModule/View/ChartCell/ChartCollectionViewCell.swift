@@ -17,7 +17,6 @@ class ChartCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Private properties
-    private let dates = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00", "00:00"]
     private let chart = LineChartView()
     private var customMarkerView = CustomMarkerView()
     private var entries = [ChartDataEntry]()
@@ -46,7 +45,7 @@ class ChartCollectionViewCell: UICollectionViewCell {
     //MARK: - Private funcs
     private func updateData() {
         
-        for i in 0..<(presenter.countOfElementsInCurrentDay ?? 0) {
+        for i in 0..<(presenter.countOfElementsInCurrentDay) {
             guard presenter.showWeather()?.list[i] != nil else {
                 return
             }
@@ -56,7 +55,7 @@ class ChartCollectionViewCell: UICollectionViewCell {
             weatherDescriptions.append(presenter.showWeather()?.list[i].weather[0].weatherDescription ?? "Not Found")
             entries.append(ChartDataEntry(x: Double(i), y: Double(currentValues[i] ?? 0)))
         }
-        entries.append(ChartDataEntry(x: Double((presenter.countOfElementsInCurrentDay) ?? 1 - 1), y: 50))
+        entries.append(ChartDataEntry(x: Double((presenter.countOfElementsInCurrentDay)), y: 50))
     }
     
     private func configureImages() {
@@ -106,10 +105,9 @@ class ChartCollectionViewCell: UICollectionViewCell {
             gradientImages[i].isHidden = true
         }
         
-        for i in 0..<(presenter.countOfElementsInCurrentDay ?? 0)  {
+        for i in 0..<(presenter.countOfElementsInCurrentDay)  {
             hoursLabels[i].isHidden = false
             gradientImages[i].isHidden = false
-            hoursLabels[i].text = dates[8 - (presenter.countOfElementsInCurrentDay ?? 0) + i]
         }
         
         contentView.addSubview(chart)

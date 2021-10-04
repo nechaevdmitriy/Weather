@@ -9,7 +9,7 @@ import UIKit
 
 protocol TemperatureScreenViewProtocol: UIView {
     func reloadData()
-    func setupDataSource(weatherOfTheDays: [[WeatherList]])
+    func setupDataSource(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays])
 }
 
 final class TemperatureScreenView: UIView, UICollectionViewDelegate {
@@ -38,7 +38,6 @@ final class TemperatureScreenView: UIView, UICollectionViewDelegate {
     
     private func setUpConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
@@ -68,8 +67,9 @@ extension TemperatureScreenView: UICollectionViewDelegateFlowLayout {
 }
 
 extension TemperatureScreenView: TemperatureScreenViewProtocol {
-    func setupDataSource(weatherOfTheDays: [[WeatherList]]) {
-        dataSource.weatherOfTheDays = weatherOfTheDays
+    func setupDataSource(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays]) {
+        dataSource.infoAboutFirstDay = firstDay
+        dataSource.infoAboutSecondDays = secondDays
     }
     
     func reloadData() {
