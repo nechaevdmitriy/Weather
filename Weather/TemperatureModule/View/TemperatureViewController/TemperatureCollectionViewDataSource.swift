@@ -14,7 +14,7 @@ final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard infoAboutFirstDay.currentTemp != "" else { return 0 }
-        return 5
+        return infoAboutSecondDays.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

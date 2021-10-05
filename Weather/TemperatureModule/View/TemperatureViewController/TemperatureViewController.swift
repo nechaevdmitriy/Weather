@@ -42,7 +42,6 @@ final class TemperatureViewController: UIViewController {
 extension TemperatureViewController: TemperatureViewProtocol {
     func succes(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays]) {
         collectionViewScreen.setupDataSource(firstDay: firstDay, secondDays: secondDays)
-        collectionViewScreen.reloadData()
     }
     
     func setTitle(title: String) {
