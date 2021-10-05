@@ -22,8 +22,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private var weatherOfTheSecondDays = [WeatherOfTheOtherDays]()
     private var infoOfTheFirstDay = WeatherOfTheFirstDay()
     
-    required init(view: TemperatureViewProtocol, networkLayer: NetworkWeatherServiceProtocol) {
-        self.view = view
+    required init(networkLayer: NetworkWeatherServiceProtocol) {
         self.networkService = networkLayer
     }
     
