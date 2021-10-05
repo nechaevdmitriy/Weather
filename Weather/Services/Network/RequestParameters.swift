@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 class RequestParameters {
-    static var city = "Тамбов"
+    static var city = "London"
     static var longitude = CLLocationDegrees()
     static var latitude = CLLocationDegrees()
 }
