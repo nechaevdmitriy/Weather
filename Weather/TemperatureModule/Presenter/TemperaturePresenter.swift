@@ -20,30 +20,18 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private var weatherData: CurrentWeather!
     
     private var weatherOfTheSecondDays = [ModelsOfTheSecondDays]()
-    
     private var infoOfTheFirstDay = ModelOfTheFirstDay()
-    private var infoOfTheSecondDay = ModelsOfTheSecondDays()
-    private var infoOfTheThirdDay = ModelsOfTheSecondDays()
-    private var infoOfTheFourDay = ModelsOfTheSecondDays()
-    private var infoOfTheFiveDay = ModelsOfTheSecondDays()
-    
-    private let date = Date()
-    private let formatter = DateFormatter()
-    private let calendar = Calendar.current
     
     required init(view: TemperatureViewProtocol, networkLayer: NetworkWeatherServiceProtocol) {
         self.view = view
         self.networkService = networkLayer
     }
     
-    func getInfoBySecondDay() {
-        
-    }
-    
     func getInfoByFirstDay() {
         let info = getDataByDay(indexOfDay: 0)
-        infoOfTheFirstDay.todayDate = info[0].dtTxt.split(separator: " ")[0].description
-        infoOfTheFirstDay.currentTemp = info[0].main.temp.description
+        let stringSelectedDay = getDayString(indexOfDay: 0)
+        infoOfTheFirstDay.todayDate = "Сегодня, " + String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM, E")
+        infoOfTheFirstDay.currentTemp = Int(info[0].main.temp).description + "°"
         infoOfTheFirstDay.weatherDescription = info[0].weather[0].weatherDescription
         infoOfTheFirstDay.weatherImage = info[0].weather[0].icon
     }
@@ -54,12 +42,18 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         let stringSelectedDay = getDayString(indexOfDay: numberOfDay)
         dateOfDay.date = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM")
         dateOfDay.day = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "E")
-        dateOfDay.feelsLike = Int(info[numberOfDay].main.feelsLike).description
+        dateOfDay.feelsLike = Int(info[numberOfDay].main.feelsLike).description + "°"
+        dateOfDay.temp = Int(info[numberOfDay].main.temp).description + "°"
         dateOfDay.weatherImage = info[numberOfDay].weather[0].icon
         return dateOfDay
     }
     
     private func setUpWeatherOfTheSecondDays() {
+        var infoOfTheSecondDay = ModelsOfTheSecondDays()
+        var infoOfTheThirdDay = ModelsOfTheSecondDays()
+        var infoOfTheFourDay = ModelsOfTheSecondDays()
+        var infoOfTheFiveDay = ModelsOfTheSecondDays()
+        
         infoOfTheSecondDay = createModelOfSecondDay(numberOfDay: 1)
         weatherOfTheSecondDays.append(infoOfTheSecondDay)
         infoOfTheThirdDay = createModelOfSecondDay(numberOfDay: 2)
@@ -71,6 +65,9 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     }
     
     private func getDayString(indexOfDay: Int) -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        let calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
         guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return "" }
         assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) != nil, "Calendar not found")
