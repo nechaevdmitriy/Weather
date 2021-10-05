@@ -10,8 +10,8 @@ import UIKit
 final class TemperatureScreenView: UIView, UICollectionViewDelegate {
     
     private let layout = UICollectionViewFlowLayout()
-    var collectionView: UICollectionView!
-    let dataSource = TemperatureCollectionViewDataSource()
+    private var collectionView: UICollectionView!
+    private let dataSource = TemperatureCollectionViewDataSource()
     
     init() {
         super.init(frame: .zero)
