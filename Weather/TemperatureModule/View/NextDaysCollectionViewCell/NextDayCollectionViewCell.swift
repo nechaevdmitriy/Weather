@@ -23,6 +23,7 @@ final class NextDayCollectionViewCell: UICollectionViewCell, UICollectionViewDel
     
     func configure() {
         configureCollectionView()
+        self.layer.cornerRadius = 16
         cunfigureLabels()
         configureImages()
         setUpConstraints()
@@ -31,7 +32,9 @@ final class NextDayCollectionViewCell: UICollectionViewCell, UICollectionViewDel
     func setUpData(model: ModelsOfTheSecondDays) {
         dateLabel.text = model.date
         dayLabel.text = model.day
+        weatherImage.image = UIImage(named: model.weatherImage) ?? #imageLiteral(resourceName: "01d")
         temperatureLabel.text = model.temp
+        feelsLikeLabel.text = model.feelsLike
         collectionView.reloadData()
     }
     
@@ -65,7 +68,6 @@ final class NextDayCollectionViewCell: UICollectionViewCell, UICollectionViewDel
     }
     
     private func cunfigureLabels() {
-        
         dateLabel.font = UIFont.medium(size: 16)
         dateLabel.textColor = UIColor(named: "darkText")
         dateLabel.text = "date"
@@ -101,7 +103,7 @@ final class NextDayCollectionViewCell: UICollectionViewCell, UICollectionViewDel
     }
     
     private func configureImages() {
-        weatherImage.image = #imageLiteral(resourceName: "Sun")
+        weatherImage.image = #imageLiteral(resourceName: "01d")
         self.addSubview(weatherImage)
         lineView.backgroundColor = UIColor(named: "secondCell")
         self.addSubview(lineView)

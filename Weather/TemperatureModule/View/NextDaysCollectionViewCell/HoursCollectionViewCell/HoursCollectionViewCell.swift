@@ -28,7 +28,7 @@ final class HoursCollectionViewCell: UICollectionViewCell {
         hourLabel.minimumScaleFactor = 0.5
         contentView.addSubview(hourLabel)
         hourLabel.textColor = UIColor(named: "grayText")
-        weatherImage.image = #imageLiteral(resourceName: "Sun")
+        weatherImage.image = #imageLiteral(resourceName: "01d")
         
         contentView.addSubview(weatherImage)
         
