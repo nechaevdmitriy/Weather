@@ -21,6 +21,21 @@ final class TemperatureViewController: UIViewController {
         presenter.showWeatherList()
         view = collectionViewScreen
     }
+}
+
+extension TemperatureViewController: TemperatureViewProtocol {
+    func succes(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays]) {
+        collectionViewScreen.setupDataSource(firstDay: firstDay, secondDays: secondDays)
+    }
+    
+    func setTitle(title: String) {
+        setUpNavBar(title: title)
+    }
+    
+    func failure() {
+        showErrorAlert()
+        print("Данные не пришли")
+    }
     
     private func setUpNavBar(title: String) {
         assert(navigationController != nil, "Empty navigationController")
@@ -36,20 +51,5 @@ final class TemperatureViewController: UIViewController {
         let alertAction = UIAlertAction(title: "Ок", style: .cancel, handler: nil)
         alertController.addAction(alertAction)
         present(alertController, animated: true, completion: nil)
-    }
-}
-
-extension TemperatureViewController: TemperatureViewProtocol {
-    func succes(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays]) {
-        collectionViewScreen.setupDataSource(firstDay: firstDay, secondDays: secondDays)
-    }
-    
-    func setTitle(title: String) {
-        setUpNavBar(title: title)
-    }
-    
-    func failure() {
-        showErrorAlert()
-        print("Данные не пришли")
     }
 }
