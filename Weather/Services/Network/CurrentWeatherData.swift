@@ -97,7 +97,6 @@ struct Wind: Codable {
 extension CurrentWeatherData {
     func toCurrentWeather() -> CurrentWeather {
         let listByDays = Dictionary(grouping: self.list, by: { $0.dtTxt.split(separator: " ")[0].description})
-        let currentWeather = CurrentWeather(weatherData: self, city: self.city.name, list: self.list, listByDays: listByDays)
-        return currentWeather
+        return CurrentWeather(weatherData: self, city: self.city.name, list: self.list, listByDays: listByDays)
     }
 }
