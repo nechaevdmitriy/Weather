@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol TemperatureScreenViewProtocol: UIView {
-    func setupDataSource(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays])
-}
-
 final class TemperatureScreenView: UIView, UICollectionViewDelegate {
     
     private let layout = UICollectionViewFlowLayout()

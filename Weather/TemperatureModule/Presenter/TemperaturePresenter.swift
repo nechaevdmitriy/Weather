@@ -19,20 +19,20 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private let networkService: NetworkWeatherServiceProtocol
     private var weatherData: CurrentWeather!
     
-    private var weatherOfTheSecondDays = [WeatherOfTheOtherDays]()
-    private var infoOfTheFirstDay = WeatherOfTheFirstDay()
+    private var weatherOfTheDays = [WeatherViewModel.self]
     
     required init(networkLayer: NetworkWeatherServiceProtocol) {
         self.networkService = networkLayer
     }
     
     func getInfoByFirstDay() {
+        var dateOfDay = WeatherOfTheFirstDay()
         let info = getDataByDay(indexOfDay: 0)
         let stringSelectedDay = getDayString(indexOfDay: 0)
-        infoOfTheFirstDay.todayDate = "Сегодня, " + String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM, E")
-        infoOfTheFirstDay.currentTemp = Int(info[0].main.temp).description + "°"
-        infoOfTheFirstDay.weatherDescription = info[0].weather[0].weatherDescription
-        infoOfTheFirstDay.weatherImage = info[0].weather[0].icon
+        dateOfDay.todayDate = "Сегодня, " + String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM, E")
+        dateOfDay.currentTemp = Int(info[0].main.temp).description + "°"
+        dateOfDay.weatherDescription = info[0].weather[0].weatherDescription
+        dateOfDay.weatherImage = info[0].weather[0].icon
     }
     
     private func createModelOfSecondDay(numberOfDay: Int) -> WeatherOfTheOtherDays {
@@ -54,13 +54,13 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         var infoOfTheFiveDay = WeatherOfTheOtherDays()
         
         infoOfTheSecondDay = createModelOfSecondDay(numberOfDay: 1)
-        weatherOfTheSecondDays.append(infoOfTheSecondDay)
+        weatherOfTheDays.append(<#T##newElement: WeatherViewModel.Type##WeatherViewModel.Type#>)
         infoOfTheThirdDay = createModelOfSecondDay(numberOfDay: 2)
-        weatherOfTheSecondDays.append(infoOfTheThirdDay)
+        weatherOfTheDays.append(infoOfTheThirdDay)
         infoOfTheFourDay = createModelOfSecondDay(numberOfDay: 3)
-        weatherOfTheSecondDays.append(infoOfTheFourDay)
+        weatherOfTheDays.append(infoOfTheFourDay)
         infoOfTheFiveDay = createModelOfSecondDay(numberOfDay: 4)
-        weatherOfTheSecondDays.append(infoOfTheFiveDay)
+        weatherOfTheDays.append(infoOfTheFiveDay)
     }
     
     private func getDayString(indexOfDay: Int) -> String {
