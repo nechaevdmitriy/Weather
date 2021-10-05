@@ -8,11 +8,11 @@
 import UIKit
 
 extension UIView {
-    func offAutoresizingMask<T: UIView>(element: T) {
-        element.translatesAutoresizingMaskIntoConstraints = false
+    func offAutoresizingMask(element: UIView) {
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func offAutoresizingMasks<T: UIView>(elements: [T]) {
+    func offAutoresizingMasks(elements: [UIView]) {
         for component in elements {
             component.translatesAutoresizingMaskIntoConstraints = false
         }
