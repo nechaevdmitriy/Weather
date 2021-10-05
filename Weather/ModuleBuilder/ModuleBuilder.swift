@@ -20,7 +20,6 @@ class ModuleBuilder: Builder {
         view.collectionViewScreen = screenView
         let networkService = NetworkWeatherManager.networkManager
         let presenter = TemperaturePresenter(view: view, networkLayer: networkService)
-        presenter.showWeatherList()
         view.presenter = presenter
         return view
     }
