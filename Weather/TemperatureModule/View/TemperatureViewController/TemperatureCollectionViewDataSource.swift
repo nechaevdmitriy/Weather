@@ -9,8 +9,8 @@ import UIKit
 
 final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var infoAboutFirstDay = ModelOfTheFirstDay()
-    var infoAboutSecondDays = [ModelsOfTheSecondDays]()
+    var infoAboutFirstDay = WeatherOfTheFirstDay()
+    var infoAboutSecondDays = [WeatherOfTheOtherDays]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard infoAboutFirstDay.currentTemp != "" else { return 0 }

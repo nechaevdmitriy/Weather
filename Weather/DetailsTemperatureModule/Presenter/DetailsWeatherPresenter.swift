@@ -9,8 +9,8 @@ import Foundation
 
 class DetailsWeatherPresenter {
     
-    var countOfElementsInCurrentDay = Int()
-    var city = String()
+    var countOfElementsInCurrentDay = 0
+    var city = ""
     var view = DetailsWeatherViewController()
     var weather: CurrentWeatherData?
     

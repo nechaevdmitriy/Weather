@@ -8,12 +8,12 @@
 import UIKit
 
 protocol CurrentTemperatureCellScreenProtocol: UIView {
-    func configure(model: ModelOfTheFirstDay)
+    func configure(model: WeatherOfTheFirstDay)
 }
 
 final class CurrentTemperatureCollectionViewCell: UICollectionViewCell {
     
-    var infoAboutFirstDay = ModelOfTheFirstDay()
+    var infoAboutFirstDay = WeatherOfTheFirstDay()
     
     static let id = "CurrentTemperatureCollectionViewCell"
     var view: CurrentTemperatureCellScreenProtocol!

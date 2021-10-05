@@ -29,7 +29,7 @@ final class NextDayCollectionViewCell: UICollectionViewCell, UICollectionViewDel
         setUpConstraints()
     }
     
-    func setUpData(model: ModelsOfTheSecondDays) {
+    func setUpData(model: WeatherOfTheOtherDays) {
         dateLabel.text = model.date
         dayLabel.text = model.day
         weatherImage.image = UIImage(named: model.weatherImage) ?? #imageLiteral(resourceName: "01d")
@@ -117,8 +117,6 @@ extension NextDayCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 72, left: 20, bottom: 16, right: 20)
     }
-    
-    
 }
 
 

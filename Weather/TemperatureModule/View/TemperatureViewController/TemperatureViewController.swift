@@ -40,7 +40,7 @@ final class TemperatureViewController: UIViewController {
 }
 
 extension TemperatureViewController: TemperatureViewProtocol {
-    func succes(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays]) {
+    func succes(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays]) {
         collectionViewScreen.setupDataSource(firstDay: firstDay, secondDays: secondDays)
         collectionViewScreen.reloadData()
     }

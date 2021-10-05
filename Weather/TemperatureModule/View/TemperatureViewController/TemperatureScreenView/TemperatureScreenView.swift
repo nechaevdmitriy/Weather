@@ -9,7 +9,7 @@ import UIKit
 
 protocol TemperatureScreenViewProtocol: UIView {
     func reloadData()
-    func setupDataSource(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays])
+    func setupDataSource(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays])
 }
 
 final class TemperatureScreenView: UIView, UICollectionViewDelegate {
@@ -67,7 +67,7 @@ extension TemperatureScreenView: UICollectionViewDelegateFlowLayout {
 }
 
 extension TemperatureScreenView: TemperatureScreenViewProtocol {
-    func setupDataSource(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays]) {
+    func setupDataSource(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays]) {
         dataSource.infoAboutFirstDay = firstDay
         dataSource.infoAboutSecondDays = secondDays
     }

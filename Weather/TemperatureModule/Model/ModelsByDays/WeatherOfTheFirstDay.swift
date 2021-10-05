@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ModelOfTheFirstDay {
+struct WeatherOfTheFirstDay {
     var todayDate: String
     var weatherImage: String
     var currentTemp: String

@@ -18,7 +18,7 @@ class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
         
-        var urlString = " "
+        var urlString = ""
         
         switch requesType {
         case .city(city: let city):

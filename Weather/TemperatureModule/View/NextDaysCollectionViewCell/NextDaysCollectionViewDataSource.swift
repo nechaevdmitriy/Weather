@@ -13,7 +13,7 @@ final class NextDaysCollectionViewDataSource: NSObject, UICollectionViewDataSour
     var indexOfFirstSection: Int!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        weatherOfTheDays.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

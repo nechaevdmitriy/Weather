@@ -15,7 +15,7 @@ final class CurrentTemperatureCellScreen: UIView {
     private var currentWeatherDescription = UILabel()
     private var backgroundImage = UIImageView()
     
-    var infoAboutFirstDay: ModelOfTheFirstDay!
+    var infoAboutFirstDay: WeatherOfTheFirstDay!
     
     private func setUpConstraints() {
         offAutoresizingMasks(elements: [currentDateLabel, weatherImage, currentTemperatureLabel, currentWeatherDescription, backgroundImage])
@@ -78,7 +78,7 @@ final class CurrentTemperatureCellScreen: UIView {
 }
 
 extension CurrentTemperatureCellScreen: CurrentTemperatureCellScreenProtocol {
-    func configure(model: ModelOfTheFirstDay) {
+    func configure(model: WeatherOfTheFirstDay) {
         self.infoAboutFirstDay = model
         addSubviews()
         setUpConstraints()

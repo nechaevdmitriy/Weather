@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TemperatureViewProtocol: AnyObject {
-    func succes(firstDay: ModelOfTheFirstDay, secondDays: [ModelsOfTheSecondDays])
+    func succes(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays])
     func setTitle(title: String)
     func failure()
 }
@@ -19,8 +19,8 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private let networkService: NetworkWeatherServiceProtocol
     private var weatherData: CurrentWeather!
     
-    private var weatherOfTheSecondDays = [ModelsOfTheSecondDays]()
-    private var infoOfTheFirstDay = ModelOfTheFirstDay()
+    private var weatherOfTheSecondDays = [WeatherOfTheOtherDays]()
+    private var infoOfTheFirstDay = WeatherOfTheFirstDay()
     
     required init(view: TemperatureViewProtocol, networkLayer: NetworkWeatherServiceProtocol) {
         self.view = view
@@ -36,8 +36,8 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         infoOfTheFirstDay.weatherImage = info[0].weather[0].icon
     }
     
-    private func createModelOfSecondDay(numberOfDay: Int) -> ModelsOfTheSecondDays {
-        var dateOfDay = ModelsOfTheSecondDays()
+    private func createModelOfSecondDay(numberOfDay: Int) -> WeatherOfTheOtherDays {
+        var dateOfDay = WeatherOfTheOtherDays()
         let info = getDataByDay(indexOfDay: numberOfDay)
         let stringSelectedDay = getDayString(indexOfDay: numberOfDay)
         dateOfDay.date = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM")
@@ -49,10 +49,10 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     }
     
     private func setUpWeatherOfTheSecondDays() {
-        var infoOfTheSecondDay = ModelsOfTheSecondDays()
-        var infoOfTheThirdDay = ModelsOfTheSecondDays()
-        var infoOfTheFourDay = ModelsOfTheSecondDays()
-        var infoOfTheFiveDay = ModelsOfTheSecondDays()
+        var infoOfTheSecondDay = WeatherOfTheOtherDays()
+        var infoOfTheThirdDay = WeatherOfTheOtherDays()
+        var infoOfTheFourDay = WeatherOfTheOtherDays()
+        var infoOfTheFiveDay = WeatherOfTheOtherDays()
         
         infoOfTheSecondDay = createModelOfSecondDay(numberOfDay: 1)
         weatherOfTheSecondDays.append(infoOfTheSecondDay)
