@@ -13,6 +13,7 @@ struct WeatherOfTheOtherDays {
     var temp: String
     var feelsLike: String
     var weatherImage: String
+    var weatherByHours = [WeatherByHours]()
     
     init() {
         date = ""

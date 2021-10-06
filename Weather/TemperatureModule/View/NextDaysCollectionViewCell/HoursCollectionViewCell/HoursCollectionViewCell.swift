@@ -20,6 +20,12 @@ final class HoursCollectionViewCell: UICollectionViewCell {
         setUpConstraints()
     }
     
+    func setUpData(model: WeatherByHours) {
+        hourLabel.text = model.hour
+        weatherImage.image = UIImage(named: model.weatherImage) ?? #imageLiteral(resourceName: "01d")
+        temperatureLabel.text = model.temp
+    }
+    
     private func setUpUI() {
         hourLabel.text = "hour"
         hourLabel.font = UIFont.medium(size: 16)

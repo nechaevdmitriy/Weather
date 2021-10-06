@@ -27,7 +27,6 @@ final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataS
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NextDayCollectionViewCell.id, for: indexPath) as! NextDayCollectionViewCell
-            cell.dataSource.indexOfFirstSection = indexPath.row
             cell.configure()
             guard let otherDay = days[indexPath.row] as? WeatherOfTheOtherDays else { return cell }
             cell.setUpData(model: otherDay)

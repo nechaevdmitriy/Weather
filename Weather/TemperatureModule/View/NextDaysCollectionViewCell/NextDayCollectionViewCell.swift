@@ -35,6 +35,7 @@ final class NextDayCollectionViewCell: UICollectionViewCell, UICollectionViewDel
         weatherImage.image = UIImage(named: model.weatherImage) ?? #imageLiteral(resourceName: "01d")
         temperatureLabel.text = model.temp
         feelsLikeLabel.text = model.feelsLike
+        dataSource.weatherByHours = model.weatherByHours
         collectionView.reloadData()
     }
     
