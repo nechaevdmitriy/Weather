@@ -9,7 +9,7 @@ import Foundation
 
 extension CurrentWeatherData {
     func toCurrentWeather() -> CurrentWeather {
-        let listByDays = Dictionary(grouping: self.list, by: { $0.dtTxt.split(separator: " ")[0].description})
+        let listByDays = Dictionary(grouping: self.list, by: { $0.dtTxt.split(separator: " ")[0].description })
         return CurrentWeather(weatherData: self, city: self.city.name, list: self.list, listByDays: listByDays)
     }
 }
