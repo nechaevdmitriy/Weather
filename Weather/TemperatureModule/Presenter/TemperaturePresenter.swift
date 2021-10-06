@@ -8,8 +8,7 @@
 import Foundation
 
 protocol TemperatureViewProtocol: AnyObject {
-    func succes(days: [Any])
-    func setTitle(title: String)
+    func succes(days: [Any], title: String)
     func failure()
 }
 
@@ -80,10 +79,9 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
                 switch result {
                 case .success(let weather):
                     self.weatherData = weather.toCurrentWeather()
-                    self.view.setTitle(title: weather.city.name)
                     self.getInfoByFirstDay()
                     self.setUpWeatherOfTheSecondDays()
-                    self.view.succes(days: self.weatherOfTheDays)
+                    self.view.succes(days: self.weatherOfTheDays, title: weather.city.name)
                 case .failure(let error):
                     print(error)
                     self.view.failure()

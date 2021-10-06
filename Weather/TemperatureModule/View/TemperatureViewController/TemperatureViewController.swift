@@ -28,11 +28,8 @@ final class TemperatureViewController: UIViewController {
 }
 
 extension TemperatureViewController: TemperatureViewProtocol {
-    func succes(days: [Any]) {
+    func succes(days: [Any], title: String) {
         collectionViewScreen.setupDataSource(days: days)
-    }
-    
-    func setTitle(title: String) {
         setUpNavBar(title: title)
     }
     
