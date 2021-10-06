@@ -19,7 +19,7 @@ final class TemperatureViewController: UIViewController {
     
     var presenter: TemperatureViewPresenterProtocol!
     var collectionViewScreen: TemperatureScreenViewProtocol!
-    
+    let errorAlert = ErrorAlert()
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.showWeatherList()
@@ -48,9 +48,6 @@ extension TemperatureViewController: TemperatureViewProtocol {
     }
     
     private func showErrorAlert() {
-        let alertController = UIAlertController(title: "Нет сети", message: "Проверьте подключение к интернету", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "Ок", style: .cancel, handler: nil)
-        alertController.addAction(alertAction)
-        present(alertController, animated: true, completion: nil)
+        errorAlert.show()
     }
 }
