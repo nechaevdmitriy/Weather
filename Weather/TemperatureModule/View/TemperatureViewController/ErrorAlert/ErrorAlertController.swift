@@ -13,6 +13,5 @@ class ErrorAlert: UIAlertController {
         message = "Проверьте подключение к интернету"
         let alertAction = UIAlertAction(title: "Ок", style: .cancel, handler: nil)
         self.addAction(alertAction)
-        present(self, animated: true, completion: nil)
     }
 }

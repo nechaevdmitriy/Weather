@@ -18,7 +18,6 @@ final class NextDaysCollectionViewDataSource: NSObject, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoursCollectionViewCell.id, for: indexPath) as! HoursCollectionViewCell
-        
         cell.contentView.backgroundColor = UIColor(named: "secondCell")
         cell.configure()
         cell.setUpData(model: weatherByHours[indexPath.row])
