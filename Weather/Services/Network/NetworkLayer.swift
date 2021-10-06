@@ -14,8 +14,6 @@ protocol NetworkWeatherServiceProtocol {
 
 class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
-    static var networkManager = NetworkWeatherManager()
-    
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
         
         var urlString = ""

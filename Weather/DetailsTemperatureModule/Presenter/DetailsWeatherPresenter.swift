@@ -13,11 +13,11 @@ class DetailsWeatherPresenter {
     var city = ""
     var view = DetailsWeatherViewController()
     var weather: CurrentWeatherData?
+    var networkManager: NetworkWeatherServiceProtocol!
     
     func showWeather() -> CurrentWeatherData? {
         var currentWeather = weather
-        
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { result in
+        networkManager.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { result in
             switch result {
             case .success(let succes):
                 currentWeather = succes

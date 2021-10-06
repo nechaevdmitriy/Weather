@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    static func changeDateFormat(dateString: String, from inputFormat: String, to outputFormat: String) -> String {
+    static func changeDateFormat(dateString: Self, from inputFormat: String, to outputFormat: String) -> String {
         let inputDateFormatter = DateFormatter()
         inputDateFormatter.dateFormat = inputFormat
         assert(inputDateFormatter.date(from: dateString) != nil)

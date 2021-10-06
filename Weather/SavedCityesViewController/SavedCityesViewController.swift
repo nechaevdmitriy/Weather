@@ -17,6 +17,7 @@ class SavedCityesViewController: UIViewController {
     var list: [WeatherList]!
     let realm = try! Realm()
     var cityes: Results<Cityes>!
+    var networkManager: NetworkWeatherServiceProtocol!
     
     var isOpenFlag = false
     
@@ -87,7 +88,7 @@ extension SavedCityesViewController: UICollectionViewDelegate, UICollectionViewD
         cell.cityLabel.text = item.city
         cell.layer.cornerRadius = 16
         
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: item.city)) { CurrentWeather in
+        networkManager.fetchCurrentWeather(forReqquesType: .city(city: item.city)) { CurrentWeather in
             switch CurrentWeather {
             
             case .success(let data):

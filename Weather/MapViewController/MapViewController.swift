@@ -14,6 +14,7 @@ class MapViewController: UIViewController {
     lazy var locations = [CLLocation]()
     let locationManager = CLLocationManager()
     var presenter: TemperatureViewPresenterProtocol?
+    var networkManager: NetworkWeatherServiceProtocol!
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -76,11 +77,11 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let anotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "MKPinAnnotationView")
-        anotationView.image = #imageLiteral(resourceName: "TooltipBody")
+        anotationView.image = #imageLiteral(resourceName: "09d")
         anotationView.image = anotationView.image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         anotationView.tintColor = (UIColor(named: "backgroundCellGray") ?? .white)
         
-        NetworkWeatherManager.networkManager.fetchCurrentWeather(forReqquesType: .city(city: (annotation.title ?? "Moscow") ?? "Moscow")) { result in
+        networkManager.fetchCurrentWeather(forReqquesType: .city(city: (annotation.title ?? "Moscow") ?? "Moscow")) { result in
             switch result {
             case .success(let weatherData):
                 DispatchQueue.main.async {
