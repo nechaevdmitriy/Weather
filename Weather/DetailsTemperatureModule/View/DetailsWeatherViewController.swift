@@ -34,6 +34,8 @@ class DetailsWeatherViewController: UIViewController {
         setUpNavBar()
     }
     
+    
+    
     //MARK: - Private funcs
     
     @objc func presentCityesList() {
@@ -153,6 +155,8 @@ extension DetailsWeatherViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: view.bounds.width - 48, height: view.bounds.height / 3 )
         }
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)

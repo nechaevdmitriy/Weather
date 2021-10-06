@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TemperatureViewProtocol: AnyObject {
-    func succes(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays])
+    func succes(days: [Any])
     func setTitle(title: String)
     func failure()
 }
@@ -19,7 +19,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private let networkService: NetworkWeatherServiceProtocol
     private var weatherData: CurrentWeather!
     
-    private var weatherOfTheDays = [WeatherViewModel.self]
+    private var weatherOfTheDays = [Any]()
     
     required init(networkLayer: NetworkWeatherServiceProtocol) {
         self.networkService = networkLayer
@@ -33,6 +33,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         dateOfDay.currentTemp = Int(info[0].main.temp).description + "°"
         dateOfDay.weatherDescription = info[0].weather[0].weatherDescription
         dateOfDay.weatherImage = info[0].weather[0].icon
+        weatherOfTheDays.insert(dateOfDay, at: 0)
     }
     
     private func createModelOfSecondDay(numberOfDay: Int) -> WeatherOfTheOtherDays {
@@ -54,13 +55,13 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         var infoOfTheFiveDay = WeatherOfTheOtherDays()
         
         infoOfTheSecondDay = createModelOfSecondDay(numberOfDay: 1)
-        weatherOfTheDays.append(<#T##newElement: WeatherViewModel.Type##WeatherViewModel.Type#>)
+        weatherOfTheDays.insert(infoOfTheSecondDay, at: 1)
         infoOfTheThirdDay = createModelOfSecondDay(numberOfDay: 2)
-        weatherOfTheDays.append(infoOfTheThirdDay)
+        weatherOfTheDays.insert(infoOfTheThirdDay, at: 2)
         infoOfTheFourDay = createModelOfSecondDay(numberOfDay: 3)
-        weatherOfTheDays.append(infoOfTheFourDay)
+        weatherOfTheDays.insert(infoOfTheFourDay, at: 3)
         infoOfTheFiveDay = createModelOfSecondDay(numberOfDay: 4)
-        weatherOfTheDays.append(infoOfTheFiveDay)
+        weatherOfTheDays.insert(infoOfTheFiveDay, at: 4)
     }
     
     private func getDayString(indexOfDay: Int) -> String {
@@ -92,7 +93,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
                     self.view.setTitle(title: weather.city.name)
                     self.getInfoByFirstDay()
                     self.setUpWeatherOfTheSecondDays()
-                    self.view.succes(firstDay: self.infoOfTheFirstDay, secondDays: self.weatherOfTheSecondDays)
+                    self.view.succes(days: self.weatherOfTheDays)
                 case .failure(let error):
                     print(error)
                     self.view.failure()

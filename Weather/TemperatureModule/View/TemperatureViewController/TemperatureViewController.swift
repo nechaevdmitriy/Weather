@@ -11,6 +11,10 @@ protocol TemperatureViewPresenterProtocol: AnyObject {
     func showWeatherList()
 }
 
+protocol TemperatureScreenViewProtocol: UIView {
+    func setupDataSource(days: [Any])
+}
+
 final class TemperatureViewController: UIViewController {
     
     var presenter: TemperatureViewPresenterProtocol!
@@ -24,8 +28,8 @@ final class TemperatureViewController: UIViewController {
 }
 
 extension TemperatureViewController: TemperatureViewProtocol {
-    func succes(firstDay: WeatherOfTheFirstDay, secondDays: [WeatherOfTheOtherDays]) {
-        collectionViewScreen.setupDataSource(firstDay: firstDay, secondDays: secondDays)
+    func succes(days: [Any]) {
+        collectionViewScreen.setupDataSource(days: days)
     }
     
     func setTitle(title: String) {

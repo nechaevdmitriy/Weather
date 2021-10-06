@@ -9,12 +9,10 @@ import UIKit
 
 final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var infoAboutFirstDay = WeatherOfTheFirstDay()
-    var infoAboutSecondDays = [WeatherOfTheOtherDays]()
+    var days = [Any]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard infoAboutFirstDay.currentTemp != "" else { return 0 }
-        return infoAboutSecondDays.count + 1
+        days.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -23,14 +21,16 @@ final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataS
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentTemperatureCollectionViewCell.id, for: indexPath) as! CurrentTemperatureCollectionViewCell
             cell.view = CurrentTemperatureCellScreen(frame: cell.contentView.bounds)
-            cell.infoAboutFirstDay = self.infoAboutFirstDay
+            guard let firstDay = days[0] as? WeatherOfTheFirstDay else { return cell }
+            cell.infoAboutFirstDay = firstDay
             cell.configure()
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NextDayCollectionViewCell.id, for: indexPath) as! NextDayCollectionViewCell
             cell.dataSource.indexOfFirstSection = indexPath.row
             cell.configure()
-            cell.setUpData(model: infoAboutSecondDays[indexPath.row])
+            guard let otherDay = days[indexPath.row] as? WeatherOfTheOtherDays else { return cell }
+            cell.setUpData(model: otherDay)
             cell.contentView.layer.cornerRadius = 16
             return cell
         }
