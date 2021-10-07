@@ -28,11 +28,9 @@ final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataS
             
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NextDayCollectionViewCell.id, for: indexPath) as! NextDayCollectionViewCell
-            cell.configure()
             guard let otherDay = days[indexPath.row] as? WeatherOfTheOtherDays else { return cell }
-            cell.setUpData(model: otherDay)
-            cell.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-            cell.contentView.layer.cornerRadius = 16
+
+            cell.configure(model: otherDay)
             return cell
         }
     }

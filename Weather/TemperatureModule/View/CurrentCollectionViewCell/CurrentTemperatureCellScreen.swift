@@ -76,7 +76,6 @@ final class CurrentTemperatureCellScreen: UIView {
         backgroundImage.image = #imageLiteral(resourceName: "Group 33510")
         weatherImage.image = UIImage(named: infoAboutFirstDay.weatherImage) ?? #imageLiteral(resourceName: "01d")
     }
-
 }
 
 extension CurrentTemperatureCellScreen: CurrentTemperatureCellScreenProtocol {
