@@ -18,6 +18,7 @@ final class CurrentTemperatureCellScreen: UIView {
     var infoAboutFirstDay: WeatherOfTheFirstDay!
     
     private func setUpConstraints() {
+        
         offAutoresizingMasks(elements: [currentDateLabel, weatherImage, currentTemperatureLabel, currentWeatherDescription, backgroundImage])
         
         NSLayoutConstraint.activate([
@@ -54,7 +55,8 @@ final class CurrentTemperatureCellScreen: UIView {
     }
 
     private func configureLabels() {
-        currentDateLabel.text = infoAboutFirstDay.todayDate
+        
+        currentDateLabel.text = infoAboutFirstDay.time
         currentDateLabel.textAlignment = .center
         currentDateLabel.font = UIFont.semiBold(size: 14)
         currentDateLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -64,7 +66,7 @@ final class CurrentTemperatureCellScreen: UIView {
         currentWeatherDescription.font = UIFont.semiBold(size: 14)
         currentWeatherDescription.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
-        currentTemperatureLabel.text = infoAboutFirstDay.currentTemp
+        currentTemperatureLabel.text = infoAboutFirstDay.temperature
         currentTemperatureLabel.textAlignment = .center
         currentTemperatureLabel.font = UIFont.extraBold(size: 48)
         currentTemperatureLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)

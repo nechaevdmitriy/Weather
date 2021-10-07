@@ -9,7 +9,7 @@ import UIKit
 
 final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var days = [Any]()
+    var days = [WeatherDataProtocol]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         days.count
@@ -25,11 +25,13 @@ final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataS
             cell.infoAboutFirstDay = firstDay
             cell.configure()
             return cell
+            
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NextDayCollectionViewCell.id, for: indexPath) as! NextDayCollectionViewCell
             cell.configure()
             guard let otherDay = days[indexPath.row] as? WeatherOfTheOtherDays else { return cell }
             cell.setUpData(model: otherDay)
+            cell.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
             cell.contentView.layer.cornerRadius = 16
             return cell
         }

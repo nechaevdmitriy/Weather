@@ -7,26 +7,33 @@
 
 import Foundation
 
-struct WeatherOfTheOtherDays {
-    var date: String
+protocol WeatherOfTheOtherDaysProtocol: WeatherDataProtocol {
+    var day: String { get }
+    var feelsLike: String { get }
+    var weatherByHours: [WeatherByHours] { get }
+}
+
+struct WeatherOfTheOtherDays: WeatherOfTheOtherDaysProtocol {
+    
+    var time: String
     var day: String
-    var temp: String
+    var temperature: String
     var feelsLike: String
     var weatherImage: String
     var weatherByHours = [WeatherByHours]()
     
     init() {
-        date = ""
+        time = ""
         day = ""
-        temp = ""
+        temperature = ""
         feelsLike = ""
         weatherImage = ""
     }
     
     init(date: String, day: String, temp: String, feelsLike: String, weatherImage: String) {
-        self.date = date
+        self.time = date
         self.day = day
-        self.temp = temp
+        self.temperature = temp
         self.feelsLike = feelsLike
         self.weatherImage = weatherImage
     }

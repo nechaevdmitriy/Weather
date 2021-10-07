@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TemperatureViewProtocol: AnyObject {
-    func succes(days: [Any], title: String)
+    func succes(days: [WeatherDataProtocol], title: String)
     func failure()
 }
 
@@ -17,7 +17,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     weak var view: TemperatureViewProtocol!
     private let networkService: NetworkWeatherServiceProtocol
     private var weatherData: CurrentWeather!
-    private var weatherOfTheDays = [Any]()
+    private var weatherOfTheDays = [WeatherDataProtocol]()
     
     required init(networkLayer: NetworkWeatherServiceProtocol) {
         self.networkService = networkLayer
@@ -27,8 +27,8 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         var dateOfDay = WeatherOfTheFirstDay()
         let info = getDataByDay(indexOfDay: 0)
         let stringSelectedDay = getDayString(indexOfDay: 0)
-        dateOfDay.todayDate = "Сегодня, " + String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM, E")
-        dateOfDay.currentTemp = Int(info[0].main.temp).description + "°"
+        dateOfDay.time = "Сегодня, " + String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM, E")
+        dateOfDay.temperature = Int(info[0].main.temp).description + "°"
         dateOfDay.weatherDescription = info[0].weather[0].weatherDescription
         dateOfDay.weatherImage = info[0].weather[0].icon
         weatherOfTheDays.insert(dateOfDay, at: 0)
@@ -38,10 +38,10 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         var dateOfDay = WeatherOfTheOtherDays()
         let info = getDataByDay(indexOfDay: numberOfDay)
         let stringSelectedDay = getDayString(indexOfDay: numberOfDay)
-        dateOfDay.date = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM,")
+        dateOfDay.time = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM,")
         dateOfDay.day = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "E")
         dateOfDay.feelsLike = Int(info[numberOfDay].main.feelsLike).description + "°"
-        dateOfDay.temp = Int(info[0].main.temp).description + "°"
+        dateOfDay.temperature = Int(info[0].main.temp).description + "°"
         dateOfDay.weatherImage = info[0].weather[0].icon
         dateOfDay.weatherByHours = getWeatherByHours(numberOfDay: numberOfDay)
         return dateOfDay

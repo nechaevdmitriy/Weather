@@ -12,7 +12,7 @@ protocol TemperatureViewPresenterProtocol: AnyObject {
 }
 
 protocol TemperatureScreenViewProtocol: UIView {
-    func setupDataSource(days: [Any])
+    func setupDataSource(days: [WeatherDataProtocol])
 }
 
 final class TemperatureViewController: UIViewController {
@@ -20,6 +20,7 @@ final class TemperatureViewController: UIViewController {
     var presenter: TemperatureViewPresenterProtocol!
     var collectionViewScreen: TemperatureScreenViewProtocol!
     let errorAlert = ErrorAlert()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.showWeatherList()
@@ -28,7 +29,7 @@ final class TemperatureViewController: UIViewController {
 }
 
 extension TemperatureViewController: TemperatureViewProtocol {
-    func succes(days: [Any], title: String) {
+    func succes(days: [WeatherDataProtocol], title: String) {
         collectionViewScreen.setupDataSource(days: days)
         setUpNavBar(title: title)
     }
@@ -49,5 +50,6 @@ extension TemperatureViewController: TemperatureViewProtocol {
     
     private func showErrorAlert() {
         errorAlert.show()
+        present(errorAlert, animated: true, completion: nil)
     }
 }

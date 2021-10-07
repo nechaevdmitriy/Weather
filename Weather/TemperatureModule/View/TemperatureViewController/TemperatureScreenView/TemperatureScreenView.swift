@@ -62,7 +62,7 @@ extension TemperatureScreenView: UICollectionViewDelegateFlowLayout {
 }
 
 extension TemperatureScreenView: TemperatureScreenViewProtocol {
-    func setupDataSource(days: [Any]) {
+    func setupDataSource(days: [WeatherDataProtocol]) {
         dataSource.days = days
         collectionView.reloadData()
     }

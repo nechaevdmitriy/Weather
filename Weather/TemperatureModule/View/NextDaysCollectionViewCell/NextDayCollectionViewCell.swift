@@ -30,10 +30,10 @@ final class NextDayCollectionViewCell: UICollectionViewCell, UICollectionViewDel
     }
     
     func setUpData(model: WeatherOfTheOtherDays) {
-        dateLabel.text = model.date
+        dateLabel.text = model.time
         dayLabel.text = model.day
         weatherImage.image = UIImage(named: model.weatherImage) ?? #imageLiteral(resourceName: "01d")
-        temperatureLabel.text = model.temp
+        temperatureLabel.text = model.temperature
         feelsLikeLabel.text = model.feelsLike
         dataSource.weatherByHours = model.weatherByHours
         collectionView.reloadData()
