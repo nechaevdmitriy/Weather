@@ -61,20 +61,28 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
             model.weatherImage = weatherByHour.weather[0].icon
             days.append(model)
         }
-        
         return days
     }
     
-    func getDataByDay(indexOfDay: Int) -> [WeatherList] {
+    private func getDataByDay(indexOfDay: Int) -> [WeatherList] {
         let stringSelectedDay = getDayString(indexOfDay: indexOfDay)
         guard let infoAboutCurrentDay = weatherData.listByDays[stringSelectedDay] else { return [WeatherList]() }
         return infoAboutCurrentDay
     }
-
+    
+    private func getDayString(indexOfDay: Int) -> String {
+        let date = Date()
+        let calendar = Calendar.current
+        guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return "" }
+        assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) != nil, "Calendar not found")
+        guard let selectedDay = selectedDay.description.split(separator: " ").first?.description else { return ""}
+        let stringSelectedDay = selectedDay
+        return stringSelectedDay
+    }
+    
     func showWeatherList() {
         networkService.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { [weak self] result in
             guard let self = self else { return }
-            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let weather):
@@ -88,18 +96,6 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
                 }
             }
         }
-    }
-    
-    private func getDayString(indexOfDay: Int) -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        let calendar = Calendar.current
-        formatter.dateFormat = "yyyy-MM-dd"
-        guard let selectedDay = calendar.date(byAdding: .day, value: indexOfDay, to: date) else { return "" }
-        assert(calendar.date(byAdding: .day, value: indexOfDay, to: date) != nil, "Calendar not found")
-        guard let selectedDay = selectedDay.description.split(separator: " ").first?.description else { return ""}
-        let stringSelectedDay = selectedDay
-        return stringSelectedDay
     }
     
     private func setUpWeatherOfTheSecondDays() {
@@ -117,5 +113,4 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         infoOfTheFiveDay = createWeatherOfSecondDay(numberOfDay: 4)
         weatherOfTheDays.insert(infoOfTheFiveDay, at: 4)
     }
-    
 }
