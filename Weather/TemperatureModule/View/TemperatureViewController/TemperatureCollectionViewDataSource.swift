@@ -21,15 +21,13 @@ final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataS
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CurrentTemperatureCollectionViewCell.id, for: indexPath) as! CurrentTemperatureCollectionViewCell
             cell.view = CurrentTemperatureCellScreen(frame: cell.contentView.bounds)
-            guard let firstDay = days[0] as? WeatherOfTheFirstDay else { return cell }
-            cell.infoAboutFirstDay = firstDay
-            cell.configure()
+            guard let firstDay = days[0] as? WeatherOfTheFirstDay else { return cell } 
+            cell.configure(firstDay: firstDay)
             return cell
             
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NextDayCollectionViewCell.id, for: indexPath) as! NextDayCollectionViewCell
             guard let otherDay = days[indexPath.row] as? WeatherOfTheOtherDays else { return cell }
-
             cell.configure(model: otherDay)
             return cell
         }

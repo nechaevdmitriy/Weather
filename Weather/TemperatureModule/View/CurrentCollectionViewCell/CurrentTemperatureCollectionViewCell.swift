@@ -13,13 +13,11 @@ protocol CurrentTemperatureCellScreenProtocol: UIView {
 
 final class CurrentTemperatureCollectionViewCell: UICollectionViewCell {
     
-    var infoAboutFirstDay = WeatherOfTheFirstDay()
-    
     static let id = "CurrentTemperatureCollectionViewCell"
     var view: CurrentTemperatureCellScreenProtocol!
     
-    func configure() {
-        view.configure(model: infoAboutFirstDay)
+    func configure(firstDay: WeatherOfTheFirstDay) {
+        view.configure(model: firstDay)
         contentView.addSubview(view)
     }
 }
