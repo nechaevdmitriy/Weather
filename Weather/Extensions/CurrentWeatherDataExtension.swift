@@ -2,7 +2,7 @@
 //  CurrentWeatherDataExtension.swift
 //  Weather
 //
-//  Created by Дмитрий  on 06.10.2021.
+//  Created by Дмитрий  on 07.10.2021.
 //
 
 import Foundation

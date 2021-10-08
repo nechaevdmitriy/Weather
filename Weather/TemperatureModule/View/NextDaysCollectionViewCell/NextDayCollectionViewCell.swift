@@ -18,7 +18,7 @@ final class NextDayCollectionViewCell: UICollectionViewCell {
     var view: NextDayViewProtocol!
     
     func configure(model: WeatherOfTheOtherDays) {
-        view = NextDayCollectionViewScreen()
+        view = NextDayCollectionViewScreen(frame: self.bounds)
         view.configure()
         view.setUpData(model: model)
         contentView.addSubview(view)
