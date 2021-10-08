@@ -7,11 +7,11 @@
 
 import UIKit
 
-class HoursCollectionViewScreen: UIView, HoursCollectionViewCellProtocol {
+final class HoursCollectionViewScreen: UIView, HoursCollectionViewCellProtocol {
     
-    var hourLabel = UILabel()
-    var weatherImage = UIImageView()
-    var temperatureLabel = UILabel()
+    private var hourLabel = UILabel()
+    private var weatherImage = UIImageView()
+    private var temperatureLabel = UILabel()
     
     func setUpData(model: WeatherByHours) {
         setUpUI()
