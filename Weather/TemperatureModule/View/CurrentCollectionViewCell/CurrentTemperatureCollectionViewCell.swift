@@ -17,6 +17,7 @@ final class CurrentTemperatureCollectionViewCell: UICollectionViewCell {
     var view: CurrentTemperatureCellScreenProtocol!
     
     func configure(firstDay: WeatherOfTheFirstDay) {
+        view = CurrentTemperatureCellScreen(frame: contentView.bounds)
         view.configure(model: firstDay)
         contentView.addSubview(view)
     }
