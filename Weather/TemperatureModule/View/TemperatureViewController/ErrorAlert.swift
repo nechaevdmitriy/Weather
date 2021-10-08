@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-class ErrorAlert: UIAlertController, ErrorAlertProtocol {
+final class ErrorAlert: UIAlertController, ErrorAlertProtocol {
     func show() {
         title = "Нет сети"
         message = "Проверьте подключение к интернету"
