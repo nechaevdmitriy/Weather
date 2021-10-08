@@ -15,11 +15,15 @@ protocol TemperatureScreenViewProtocol: UIView {
     func setupDataSource(days: [WeatherDataProtocol])
 }
 
+protocol ErrorAlertProtocol: UIAlertController {
+    func show()
+}
+
 final class TemperatureViewController: UIViewController {
     
     var presenter: TemperatureViewPresenterProtocol!
     var collectionViewScreen: TemperatureScreenViewProtocol!
-    let errorAlert = ErrorAlert()
+    var errorAlert: ErrorAlertProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()

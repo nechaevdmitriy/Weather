@@ -22,6 +22,8 @@ class ModuleBuilder: Builder {
         let presenter = TemperaturePresenter(networkLayer: networkService)
         presenter.view = view
         view.presenter = presenter
+        let errorAlert = ErrorAlert()
+        view.errorAlert = errorAlert
         return view
     }
     
