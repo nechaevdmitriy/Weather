@@ -12,7 +12,7 @@ protocol NetworkWeatherServiceProtocol {
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
 }
 
-class NetworkWeatherManager: NetworkWeatherServiceProtocol {
+final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
     func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
         guard let url = createURL(requesType: requesType) else { return }
