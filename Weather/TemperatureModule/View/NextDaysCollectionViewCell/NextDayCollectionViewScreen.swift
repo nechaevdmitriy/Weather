@@ -7,17 +7,17 @@
 
 import UIKit
 
-class NextDayCollectionViewScreen: UIView, UICollectionViewDelegate, NextDayViewProtocol {
+final class NextDayCollectionViewScreen: UIView, UICollectionViewDelegate, NextDayViewProtocol {
     
-    let layout = UICollectionViewFlowLayout()
-    let dateLabel = UILabel()
-    let dayLabel = UILabel()
-    let temperatureLabel = UILabel()
-    let feelsLikeLabel = UILabel()
-    let lineView = UIView()
-    let weatherImage = UIImageView()
-    var collectionView: UICollectionView!
-    let dataSource = NextDaysCollectionViewDataSource()
+    private let layout = UICollectionViewFlowLayout()
+    private let dateLabel = UILabel()
+    private let dayLabel = UILabel()
+    private let temperatureLabel = UILabel()
+    private let feelsLikeLabel = UILabel()
+    private let lineView = UIView()
+    private let weatherImage = UIImageView()
+    private var collectionView: UICollectionView!
+    private let dataSource = NextDaysCollectionViewDataSource()
     
     func configure() {
         configureCollectionView()
@@ -41,7 +41,6 @@ class NextDayCollectionViewScreen: UIView, UICollectionViewDelegate, NextDayView
         offAutoresizingMasks(elements: [dateLabel, dayLabel, temperatureLabel, feelsLikeLabel, weatherImage, lineView])
         
         NSLayoutConstraint.activate([
-            
             dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             
