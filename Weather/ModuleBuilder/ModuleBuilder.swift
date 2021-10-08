@@ -12,7 +12,7 @@ protocol Builder {
     static func createDetailsTemperatureModule() -> UIViewController
 }
 
-class ModuleBuilder: Builder {
+final class ModuleBuilder: Builder {
     
     static func createTemperatureModule() -> UIViewController {
         let view = TemperatureViewController()
