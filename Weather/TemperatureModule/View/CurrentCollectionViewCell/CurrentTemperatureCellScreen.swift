@@ -73,8 +73,9 @@ final class CurrentTemperatureCellScreen: UIView {
     }
     
     private func setUpImages() {
-        backgroundImage.image = #imageLiteral(resourceName: "Group 33510")
+        backgroundImage.image = #imageLiteral(resourceName: "firstCellBackground")
         weatherImage.image = UIImage(named: infoAboutFirstDay.weatherImage) ?? #imageLiteral(resourceName: "01d")
+        weatherImage.contentMode = .scaleAspectFill
     }
 }
 

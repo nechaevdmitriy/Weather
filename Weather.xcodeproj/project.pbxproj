@@ -29,8 +29,12 @@
 		5A6E823B270DA34900691A41 /* WeatherByHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E823A270DA34900691A41 /* WeatherByHours.swift */; };
 		5A6E824C270F505500691A41 /* NextDayCollectionViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E824B270F505500691A41 /* NextDayCollectionViewScreen.swift */; };
 		5A6E824E270F52C900691A41 /* CurrentWeatherDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E824D270F52C900691A41 /* CurrentWeatherDataExtension.swift */; };
-		5A6E8250270F531B00691A41 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E824F270F531B00691A41 /* ErrorAlert.swift */; };
+		5A6E8250270F531B00691A41 /* ErrorNetworkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E824F270F531B00691A41 /* ErrorNetworkAlert.swift */; };
 		5A6E82522710233900691A41 /* HoursCollectionViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E82512710233900691A41 /* HoursCollectionViewScreen.swift */; };
+		5A6E825527145CA400691A41 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E825427145CA400691A41 /* Router.swift */; };
+		5A6E825927145E6A00691A41 /* DarkModeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E825827145E6A00691A41 /* DarkModeBarButtonItem.swift */; };
+		5A6E825B27146EC600691A41 /* DarkModeErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E825A27146EC600691A41 /* DarkModeErrorAlert.swift */; };
+		5A6E825D271480E200691A41 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E825C271480E200691A41 /* UIImageViewExtension.swift */; };
 		5A743E4726F09BCD00E0EE2F /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA1D9E4C607156292E9CCB6 /* Pods_Weather.framework */; };
 		5A8F259626D38E740029E186 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259526D38E740029E186 /* AppDelegate.swift */; };
 		5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F259726D38E740029E186 /* SceneDelegate.swift */; };
@@ -93,8 +97,12 @@
 		5A6E823A270DA34900691A41 /* WeatherByHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherByHours.swift; sourceTree = "<group>"; };
 		5A6E824B270F505500691A41 /* NextDayCollectionViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextDayCollectionViewScreen.swift; sourceTree = "<group>"; };
 		5A6E824D270F52C900691A41 /* CurrentWeatherDataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherDataExtension.swift; sourceTree = "<group>"; };
-		5A6E824F270F531B00691A41 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		5A6E824F270F531B00691A41 /* ErrorNetworkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorNetworkAlert.swift; sourceTree = "<group>"; };
 		5A6E82512710233900691A41 /* HoursCollectionViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursCollectionViewScreen.swift; sourceTree = "<group>"; };
+		5A6E825427145CA400691A41 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		5A6E825827145E6A00691A41 /* DarkModeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeBarButtonItem.swift; sourceTree = "<group>"; };
+		5A6E825A27146EC600691A41 /* DarkModeErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeErrorAlert.swift; sourceTree = "<group>"; };
+		5A6E825C271480E200691A41 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		5A8F259226D38E740029E186 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A8F259526D38E740029E186 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A8F259726D38E740029E186 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +231,7 @@
 		5A626A9A2705BE2B00DD024C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5A6E825C271480E200691A41 /* UIImageViewExtension.swift */,
 				5A23818E26DE4E1100F31ACB /* StringExtension.swift */,
 				5A95D0062704957B003B5DDA /* UIViewExtension.swift */,
 				5A61AC6826FB1B01003B8CBE /* TextEncodeStringExtensions.swift */,
@@ -240,6 +249,31 @@
 				5A6E823A270DA34900691A41 /* WeatherByHours.swift */,
 			);
 			path = ModelsByDays;
+			sourceTree = "<group>";
+		};
+		5A6E825327145C7600691A41 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				5A6E825427145CA400691A41 /* Router.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		5A6E825627145E0A00691A41 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				5A6E824F270F531B00691A41 /* ErrorNetworkAlert.swift */,
+				5A6E825A27146EC600691A41 /* DarkModeErrorAlert.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		5A6E825727145E4000691A41 /* BarButtonItems */ = {
+			isa = PBXGroup;
+			children = (
+				5A6E825827145E6A00691A41 /* DarkModeBarButtonItem.swift */,
+			);
+			path = BarButtonItems;
 			sourceTree = "<group>";
 		};
 		5A8F258926D38E740029E186 = {
@@ -265,6 +299,7 @@
 			children = (
 				5A8F25BC26D3C3150029E186 /* Services */,
 				5A23819F26DF7B4700F31ACB /* ModuleBuilder */,
+				5A6E825327145C7600691A41 /* Router */,
 				5A95CFE4270494D7003B5DDA /* TemperatureModule */,
 				5AD7EE7D26E6207C00F38EDC /* DetailsTemperatureModule */,
 				5A53865926EA03B500A71E46 /* SavedCityesViewController */,
@@ -364,7 +399,8 @@
 			children = (
 				5A95CFED270494D7003B5DDA /* TemperatureViewController.swift */,
 				5A95CFEC270494D7003B5DDA /* TemperatureCollectionViewDataSource.swift */,
-				5A6E824F270F531B00691A41 /* ErrorAlert.swift */,
+				5A6E825727145E4000691A41 /* BarButtonItems */,
+				5A6E825627145E0A00691A41 /* Alerts */,
 				5A95CFEE270494D7003B5DDA /* TemperatureScreenView */,
 			);
 			path = TemperatureViewController;
@@ -616,15 +652,17 @@
 				5A95D000270494D7003B5DDA /* NextDaysCollectionViewDataSource.swift in Sources */,
 				5A53865C26EA03F000A71E46 /* SavedCityesViewController.swift in Sources */,
 				5AD7EE9326E78B3000F38EDC /* CircleMarker.swift in Sources */,
+				5A6E825B27146EC600691A41 /* DarkModeErrorAlert.swift in Sources */,
 				5A95CFFB270494D7003B5DDA /* TemperatureViewController.swift in Sources */,
 				5A626A9E2705EB4300DD024C /* HTTPRequestType.swift in Sources */,
 				5A6E824C270F505500691A41 /* NextDayCollectionViewScreen.swift in Sources */,
+				5A6E825927145E6A00691A41 /* DarkModeBarButtonItem.swift in Sources */,
 				5A53866526EA4A7300A71E46 /* CityesList.swift in Sources */,
 				5A53866126EA06FE00A71E46 /* CityesCollectionViewCell.swift in Sources */,
 				5A6E82522710233900691A41 /* HoursCollectionViewScreen.swift in Sources */,
 				5A95CFFA270494D7003B5DDA /* TemperatureCollectionViewDataSource.swift in Sources */,
 				5A95CFF9270494D7003B5DDA /* CurrentWeather.swift in Sources */,
-				5A6E8250270F531B00691A41 /* ErrorAlert.swift in Sources */,
+				5A6E8250270F531B00691A41 /* ErrorNetworkAlert.swift in Sources */,
 				5AB4981E26F0A4F800728DD9 /* DetailsWeatherPresenter.swift in Sources */,
 				5AD7EE8226E629E300F38EDC /* DetailsWeatherCollectionViewCell.swift in Sources */,
 				5A626AA02706129F00DD024C /* CurrentTemperatureCellScreen.swift in Sources */,
@@ -640,6 +678,7 @@
 				5A53866C26EB3B0700A71E46 /* MapViewController.swift in Sources */,
 				5A53867226EF475900A71E46 /* MKPinAnnotationView.swift in Sources */,
 				5A95CFF7270494D7003B5DDA /* TemperaturePresenter.swift in Sources */,
+				5A6E825527145CA400691A41 /* Router.swift in Sources */,
 				5A8F259826D38E740029E186 /* SceneDelegate.swift in Sources */,
 				5AD7EE9126E75E2900F38EDC /* ChartPopupView.swift in Sources */,
 				5A2381B226E273AF00F31ACB /* AlertView.swift in Sources */,
@@ -647,6 +686,7 @@
 				5A95CFFF270494D7003B5DDA /* NextDayCollectionViewCell.swift in Sources */,
 				5A95CFFD270494D7003B5DDA /* CurrentTemperatureCollectionViewCell.swift in Sources */,
 				5A6E824E270F52C900691A41 /* CurrentWeatherDataExtension.swift in Sources */,
+				5A6E825D271480E200691A41 /* UIImageViewExtension.swift in Sources */,
 				5A2381A126DF7B5800F31ACB /* ModuleBuilder.swift in Sources */,
 				5A6E823B270DA34900691A41 /* WeatherByHours.swift in Sources */,
 				5A626AA5270713B600DD024C /* WeatherOfTheOtherDays.swift in Sources */,
