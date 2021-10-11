@@ -38,7 +38,7 @@ final class NextDayCollectionViewScreen: UIView, UICollectionViewDelegate, NextD
     }
     
     private func setUpConstraints() {
-        offAutoresizingMasks(elements: [dateLabel, dayLabel, temperatureLabel, feelsLikeLabel, weatherImage, lineView])
+        offAutoresizingMasks(elements: [dateLabel, dayLabel, temperatureLabel, feelsLikeLabel, weatherImage, lineView, collectionView])
         
         NSLayoutConstraint.activate([
             dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
@@ -61,7 +61,12 @@ final class NextDayCollectionViewScreen: UIView, UICollectionViewDelegate, NextD
             feelsLikeLabel.trailingAnchor.constraint(equalTo: weatherImage.leadingAnchor, constant: -8),
             
             temperatureLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            temperatureLabel.trailingAnchor.constraint(equalTo: feelsLikeLabel.leadingAnchor, constant: -8)
+            temperatureLabel.trailingAnchor.constraint(equalTo: feelsLikeLabel.leadingAnchor, constant: -8),
+            
+            collectionView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: 12),
+            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
         ])
     }
     
@@ -112,9 +117,5 @@ extension NextDayCollectionViewScreen: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 70, height: 114)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 72, left: 20, bottom: 16, right: 20)
     }
 }
