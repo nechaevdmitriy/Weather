@@ -23,7 +23,8 @@ final class TemperatureViewController: UIViewController {
     
     var presenter: TemperatureViewPresenterProtocol!
     var collectionViewScreen: TemperatureScreenViewProtocol!
-    var errorAlert: ErrorAlertProtocol!
+    var errorNetworkAlert: ErrorAlertProtocol!
+    var errorDarkModeAlert: ErrorAlertProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +60,12 @@ extension TemperatureViewController: TemperatureViewProtocol {
     }
     
     private func showErrorAlert() {
-        errorAlert.show()
-        present(errorAlert, animated: true, completion: nil)
+        errorNetworkAlert.show()
+        present(errorNetworkAlert, animated: true, completion: nil)
     }
     
     @objc private func switchDarkMode() {
-        
+        errorDarkModeAlert.show()
+        present(errorDarkModeAlert, animated: true, completion: nil)
     }
 }

@@ -9,11 +9,13 @@ import Foundation
 
 import UIKit
 
-final class ErrorAlert: UIAlertController, ErrorAlertProtocol {
+final class ErrorNetworkAlert: UIAlertController, ErrorAlertProtocol {
     func show() {
         title = "Нет сети"
         message = "Проверьте подключение к интернету"
-        let alertAction = UIAlertAction(title: "Ок", style: .cancel, handler: nil)
+        let alertAction = UIAlertAction(title: "Ок", style: .default, handler: nil)
+        if self.actions.count == 0 {
         self.addAction(alertAction)
+        }
     }
 }

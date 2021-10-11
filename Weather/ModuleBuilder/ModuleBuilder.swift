@@ -22,8 +22,10 @@ final class ModuleBuilder: Builder {
         let presenter = TemperaturePresenter(networkLayer: networkService)
         presenter.view = view
         view.presenter = presenter
-        let errorAlert = ErrorAlert()
-        view.errorAlert = errorAlert
+        let errorNetworkAlert = ErrorNetworkAlert()
+        let errorDarkModeAlert = DarkModeErrorAlert()
+        view.errorNetworkAlert = errorNetworkAlert
+        view.errorDarkModeAlert = errorDarkModeAlert
         return view
     }
     
