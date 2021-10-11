@@ -67,11 +67,9 @@ extension TemperatureViewController: TemperatureViewProtocol {
             let appDelegate = UIApplication.shared.windows.first
             if appDelegate?.overrideUserInterfaceStyle == .dark {
                 appDelegate?.overrideUserInterfaceStyle = .light
-                return
+            } else {
+                appDelegate?.overrideUserInterfaceStyle = .dark
             }
-            appDelegate?.overrideUserInterfaceStyle = .dark
-            return
-            
         } else {
             errorDarkModeAlert.show()
             present(errorDarkModeAlert, animated: true, completion: nil)
