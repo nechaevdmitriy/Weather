@@ -19,10 +19,10 @@ class DetailsWeatherPresenter {
         var currentWeather = weather
         networkManager.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { result in
             switch result {
-            case .success(let succes):
-                currentWeather = succes
-            case .failure(let error):
-                print(error)
+            case .succes(value: let value):
+                currentWeather = value
+            case .failure(error: _):
+                break
             }
             self.view.collectionView.reloadData()
         }

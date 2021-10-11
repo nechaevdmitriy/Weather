@@ -82,15 +82,15 @@ extension MapViewController: MKMapViewDelegate {
         anotationView.tintColor = (UIColor(named: "backgroundCellGray") ?? .white)
         
         networkManager.fetchCurrentWeather(forReqquesType: .city(city: (annotation.title ?? "Moscow") ?? "Moscow")) { result in
-            switch result {
-            case .success(let weatherData):
-                DispatchQueue.main.async {
-                    anotationView.feelsLikeLabel.text = Int(weatherData.list[0].main.temp).description
-                    anotationView.temperatureLabel.text = Int(weatherData.list[0].main.feelsLike).description
-                }
-            case .failure(let error):
-                print(error)
-            }
+//            switch result {
+//            case .success(let weatherData):
+//                DispatchQueue.main.async {
+//                    anotationView.feelsLikeLabel.text = Int(weatherData.list[0].main.temp).description
+//                    anotationView.temperatureLabel.text = Int(weatherData.list[0].main.feelsLike).description
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
         }
 
         

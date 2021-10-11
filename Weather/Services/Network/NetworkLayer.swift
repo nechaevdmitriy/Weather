@@ -6,28 +6,30 @@
 //
 
 import Foundation
-import CoreLocation
+import Alamofire
 
 protocol NetworkWeatherServiceProtocol {
-    func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void)
+    func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (RequesResult) -> Void)
+}
+
+enum RequesResult {
+    case succes(value: CurrentWeatherData)
+    case failure(error: Error)
 }
 
 final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
-    func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (Result<CurrentWeatherData, Error>) -> Void) {
-        guard let url = createURL(requesType: requesType) else { return }
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                complitionHandler(.failure(error))
-                return
+    func fetchCurrentWeather(forReqquesType requesType: HTTPRequestType, complitionHandler: @escaping (RequesResult) -> Void) {
+        guard let urlString = createURL(requesType: requesType) else { return }
+        AF.request(urlString).validate().responseDecodable(of: CurrentWeatherData.self) { dataResponse in
+            switch dataResponse.result {
+            case .success(_):
+                guard let data = dataResponse.value else { return }
+                complitionHandler(RequesResult.succes(value: data))
+            case .failure(let error):
+                complitionHandler(RequesResult.failure(error: error))
             }
-            do {
-                let currentWeatherData = try JSONDecoder().decode(CurrentWeatherData.self, from: data!)
-                complitionHandler(.success(currentWeatherData))
-            } catch {
-                complitionHandler(.failure(error))
-            }
-        }.resume()
+        }
     }
     
     private func createURL(requesType: HTTPRequestType) -> URL? {

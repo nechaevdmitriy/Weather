@@ -83,17 +83,18 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     func showWeatherList() {
         networkService.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { [weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let weather):
-                    self.weatherData = weather.toCurrentWeather()
+            
+            switch result {
+            case .succes(value: let value):
+                DispatchQueue.main.async {
+                    self.weatherData = value.toCurrentWeather()
                     self.getInfoByFirstDay()
                     self.setUpWeatherOfTheSecondDays()
-                    self.view.succes(days: self.weatherOfTheDays, title: weather.city.name)
-                case .failure(let error):
-                    print(error)
-                    self.view.failure()
+                    self.view.succes(days: self.weatherOfTheDays, title: (value.city.name))
                 }
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                self.view.failure()
             }
         }
     }

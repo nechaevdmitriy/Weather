@@ -89,27 +89,27 @@ extension SavedCityesViewController: UICollectionViewDelegate, UICollectionViewD
         cell.layer.cornerRadius = 16
         
         networkManager.fetchCurrentWeather(forReqquesType: .city(city: item.city)) { CurrentWeather in
-            switch CurrentWeather {
-            
-            case .success(let data):
-                DispatchQueue.main.async {
-                    cell.temperatureLabel.text = Int(data.list[0].main.temp).description
-                    cell.feelsLikeLabel.text = Int(data.list[0].main.feelsLike).description
-                    
-                    switch data.list[0].weather[0].weatherDescription {
-                    case "дождь", "небольшой дождь":
-                        cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
-                    case "гроза":
-                        cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
-                    default:
-                        cell.weatherImage.image = #imageLiteral(resourceName: "sun")
-                    }
-                    
-                }
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+//            switch CurrentWeather {
+//            
+//            case .success(let data):
+//                DispatchQueue.main.async {
+//                    cell.temperatureLabel.text = Int(data.list[0].main.temp).description
+//                    cell.feelsLikeLabel.text = Int(data.list[0].main.feelsLike).description
+//                    
+//                    switch data.list[0].weather[0].weatherDescription {
+//                    case "дождь", "небольшой дождь":
+//                        cell.weatherImage.image = #imageLiteral(resourceName: "Rain")
+//                    case "гроза":
+//                        cell.weatherImage.image = #imageLiteral(resourceName: "Thunder")
+//                    default:
+//                        cell.weatherImage.image = #imageLiteral(resourceName: "sun")
+//                    }
+//                    
+//                }
+//                
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
         }
         
         return cell
