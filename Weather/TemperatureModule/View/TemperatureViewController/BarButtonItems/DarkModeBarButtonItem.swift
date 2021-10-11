@@ -12,6 +12,7 @@ class DarkModeBarButtonItemButton: UIButton {
     var backgroundImage: UIImageView = {
         var imgview = UIImageView()
         imgview.image = #imageLiteral(resourceName: "backgroundItemImage")
+        imgview.setImageColor(color: UIColor(named: "secondCell") ?? .red)
         imgview.contentMode = .scaleAspectFit
         return imgview
     }()
@@ -19,6 +20,7 @@ class DarkModeBarButtonItemButton: UIButton {
     var iconImage: UIImageView = {
         var imgview = UIImageView()
         imgview.image = #imageLiteral(resourceName: "Loader 1")
+        imgview.setImageColor(color: UIColor(named: "grayText") ?? .red)
         imgview.contentMode = .scaleAspectFit
         return imgview
     }()
