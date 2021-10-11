@@ -45,15 +45,24 @@ extension TemperatureViewController: TemperatureViewProtocol {
     
     private func setUpNavBar(title: String) {
         assert(navigationController != nil, "Empty navigationController")
+        let darkModeItem = DarkModeBarButtonItem(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        darkModeItem.addTarget(self, action: #selector(switchDarkMode), for: .touchUpInside)
+        let rightItem = UIBarButtonItem(customView: darkModeItem)
+        
         guard let navController = navigationController else { return }
         self.title = title
         navController.navigationBar.barTintColor = .white
         navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.extraBold(size: 18)!]
         navController.navigationBar.shadowImage = UIImage()
+        self.navigationItem.rightBarButtonItem = rightItem
     }
     
     private func showErrorAlert() {
         errorAlert.show()
         present(errorAlert, animated: true, completion: nil)
+    }
+    
+    @objc private func switchDarkMode() {
+        
     }
 }
