@@ -46,17 +46,15 @@ extension TemperatureViewController: TemperatureViewProtocol {
     
     private func setUpNavBar(title: String) {
         assert(navigationController != nil, "Empty navigationController")
+        self.title = title
         
         let darkModeItemButton = DarkModeBarButtonItemButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
         darkModeItemButton.addTarget(self, action: #selector(switchDarkMode), for: .touchUpInside)
         let switchThemeItem = UIBarButtonItem(customView: darkModeItemButton)
         self.navigationItem.rightBarButtonItem = switchThemeItem
-        
-        guard let navController = navigationController else { return }
-        self.title = title
-        navController.navigationBar.barTintColor = .white
-        navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.extraBold(size: 18)!]
-        navController.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.barTintColor = UIColor(named: "background")
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.extraBold(size: 18)!]
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     private func showErrorAlert() {
@@ -65,7 +63,12 @@ extension TemperatureViewController: TemperatureViewProtocol {
     }
     
     @objc private func switchDarkMode() {
-        errorDarkModeAlert.show()
-        present(errorDarkModeAlert, animated: true, completion: nil)
+        if #available(iOS 13.0, *) {
+            navigationController?.overrideUserInterfaceStyle = .dark
+            self.overrideUserInterfaceStyle = .dark
+        } else {
+            errorDarkModeAlert.show()
+            present(errorDarkModeAlert, animated: true, completion: nil)
+        }
     }
 }

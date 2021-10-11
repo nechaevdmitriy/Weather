@@ -13,7 +13,7 @@ final class DarkModeErrorAlert: UIAlertController, ErrorAlertProtocol {
         message = "Темная тема доступна только с версии iOS 13 и выше"
         let alertAction = UIAlertAction(title: "Ок", style: .default, handler: nil)
         if self.actions.count == 0 {
-        self.addAction(alertAction)
+            self.addAction(alertAction)
         }
     }
 }

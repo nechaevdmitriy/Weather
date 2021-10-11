@@ -15,7 +15,7 @@ final class ErrorNetworkAlert: UIAlertController, ErrorAlertProtocol {
         message = "Проверьте подключение к интернету"
         let alertAction = UIAlertAction(title: "Ок", style: .default, handler: nil)
         if self.actions.count == 0 {
-        self.addAction(alertAction)
+            self.addAction(alertAction)
         }
     }
 }
