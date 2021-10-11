@@ -23,8 +23,7 @@ final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
         guard let urlString = createURL(requesType: requesType) else { return }
         AF.request(urlString).validate().responseDecodable(of: CurrentWeatherData.self) { dataResponse in
             switch dataResponse.result {
-            case .success(_):
-                guard let data = dataResponse.value else { return }
+            case .success(let data):
                 complitionHandler(RequesResult.succes(value: data))
             case .failure(let error):
                 complitionHandler(RequesResult.failure(error: error))
