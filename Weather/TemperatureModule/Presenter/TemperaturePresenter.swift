@@ -41,8 +41,8 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
         dateOfDay.time = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM,")
         dateOfDay.day = String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "E")
         dateOfDay.feelsLike = Int(info[numberOfDay].main.feelsLike).description + "°"
-        dateOfDay.temperature = Int(info[0].main.temp).description + "°"
-        dateOfDay.weatherImage = info[0].weather[0].icon
+        dateOfDay.temperature = Int(info[5].main.temp).description + "°"
+        dateOfDay.weatherImage = info[5].weather[0].icon
         dateOfDay.weatherByHours = getWeatherByHours(numberOfDay: numberOfDay)
         return dateOfDay
     }
@@ -50,16 +50,16 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private func getWeatherByHours(numberOfDay: Int) -> [WeatherByHours] {
         var days = [WeatherByHours]()
         let info = getDataByDay(indexOfDay: numberOfDay)
-        let countOfHoursInDay = 8
+        let countOfHoursInDay = 6
         
-        for indexOfTheDay in 0...(countOfHoursInDay - 1) {
-            let weatherByHour = info[indexOfTheDay]
+        for indexOfTheHour in 0..<countOfHoursInDay {
+            let weatherByHour = info[indexOfTheHour + 2]
             var model = WeatherByHours()
             let dtTxt = weatherByHour.dtTxt.split(separator: " ")[1].description.split(separator: ":")[0].description + ":00"
             model.hour = dtTxt
             model.temp = Int(weatherByHour.main.temp).description + "°"
             model.weatherImage = weatherByHour.weather[0].icon
-            days.append(model)
+            days.insert(model, at: indexOfTheHour)
         }
         return days
     }
