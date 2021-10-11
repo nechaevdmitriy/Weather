@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DarkModeBarButtonItem: UIButton {
+class DarkModeBarButtonItemButton: UIButton {
     
     var backgroundImage: UIImageView = {
         var imgview = UIImageView()
