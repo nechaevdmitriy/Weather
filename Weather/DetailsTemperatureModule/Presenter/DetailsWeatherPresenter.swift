@@ -24,7 +24,7 @@ class DetailsWeatherPresenter {
             case .failure(error: _):
                 break
             }
-            self.view.collectionView.reloadData()
+            //self.view.collectionView.reloadData()
         }
         return currentWeather
     }

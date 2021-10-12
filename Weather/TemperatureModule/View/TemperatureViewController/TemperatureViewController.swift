@@ -9,6 +9,7 @@ import UIKit
 
 protocol TemperatureViewPresenterProtocol: AnyObject {
     func showWeatherList()
+    func tapOnTheCell(model: WeatherDataProtocol)
 }
 
 protocol TemperatureScreenViewProtocol: UIView {
@@ -63,6 +64,7 @@ extension TemperatureViewController: TemperatureViewProtocol {
     }
     
     @objc private func switchDarkMode() {
+        
         if #available(iOS 13, *) {
             let appDelegate = UIApplication.shared.windows.first
             if appDelegate?.overrideUserInterfaceStyle == .dark {

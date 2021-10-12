@@ -18,9 +18,15 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private let networkService: NetworkWeatherServiceProtocol
     private var weatherData: CurrentWeather!
     private var weatherOfTheDays = [WeatherDataProtocol]()
+    private var router: RouterProtocol
     
-    required init(networkLayer: NetworkWeatherServiceProtocol) {
+    required init(networkLayer: NetworkWeatherServiceProtocol, router: RouterProtocol) {
         self.networkService = networkLayer
+        self.router = router
+    }
+    
+    func tapOnTheCell(model: WeatherDataProtocol) {
+        router.showDetail(model: model)
     }
     
     func getInfoByFirstDay() {

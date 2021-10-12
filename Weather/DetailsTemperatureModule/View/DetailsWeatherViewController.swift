@@ -9,28 +9,28 @@ import UIKit
 
 class DetailsWeatherViewController: UIViewController {
     
-    //MARK: - Properties
-        var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        return cv
-    }()
+//    //MARK: - Properties
+//        var collectionView: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .vertical
+//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        return cv
+//    }()
     
     var presenter = DetailsWeatherPresenter()
     var list: WeatherList?
-    
+    var weatherData: WeatherDataProtocol!
     //MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(collectionView)
-        view.backgroundColor = UIColor(named: "backgroundApp")
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(DetailsWeatherCollectionViewCell.nib(), forCellWithReuseIdentifier: DetailsWeatherCollectionViewCell.id)
-        collectionView.register(ChartCollectionViewCell.nib(), forCellWithReuseIdentifier: ChartCollectionViewCell.id)
-        setUpConstraints()
+//        view.addSubview(collectionView)
+//        view.backgroundColor = UIColor(named: "backgroundApp")
+//        collectionView.dataSource = self
+//        collectionView.delegate = self
+//        collectionView.register(DetailsWeatherCollectionViewCell.nib(), forCellWithReuseIdentifier: DetailsWeatherCollectionViewCell.id)
+//        collectionView.register(ChartCollectionViewCell.nib(), forCellWithReuseIdentifier: ChartCollectionViewCell.id)
+        //setUpConstraints()
         setUpNavBar()
     }
     
@@ -75,18 +75,18 @@ class DetailsWeatherViewController: UIViewController {
         self.navigationItem.setRightBarButtonItems([searchAllertItem, switchThemeItem], animated: false)
     }
     
-    private func setUpConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = UIColor(named: "backgroundApp")
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
+//    private func setUpConstraints() {
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        collectionView.backgroundColor = UIColor(named: "backgroundApp")
+//
+//        NSLayoutConstraint.activate([
+//            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+//            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+//        ])
+//    }
     
 }
 
