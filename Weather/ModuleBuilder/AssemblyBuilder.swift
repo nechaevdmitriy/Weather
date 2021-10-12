@@ -13,26 +13,25 @@ protocol AssemblyBuilderProtocol {
 }
 
 final class AssemblyBuilder: AssemblyBuilderProtocol {
-    func createDetailsTemperatureModule(router: RouterProtocol) -> UIViewController {
-        let view = DetailsWeatherViewController()
-        let presenter = DetailsWeatherPresenter()
-        view.presenter = presenter
-        return view
-    }
-    
     func createTemperatureModule(router: RouterProtocol) -> UIViewController {
         let view = TemperatureViewController()
+        let errorNetworkAlert = ErrorNetworkAlert()
+        let errorDarkModeAlert = DarkModeErrorAlert()
+        view.errorNetworkAlert = errorNetworkAlert
+        view.errorDarkModeAlert = errorDarkModeAlert
         let screenView = TemperatureScreenView()
         view.collectionViewScreen = screenView
         let networkService = NetworkWeatherManager()
         let presenter = TemperaturePresenter(networkLayer: networkService, router: router)
         presenter.view = view
         view.presenter = presenter
-        let errorNetworkAlert = ErrorNetworkAlert()
-        let errorDarkModeAlert = DarkModeErrorAlert()
-        view.errorNetworkAlert = errorNetworkAlert
-        view.errorDarkModeAlert = errorDarkModeAlert
         return view
     }
     
+    func createDetailsTemperatureModule(router: RouterProtocol) -> UIViewController {
+        let view = DetailsWeatherViewController()
+        let presenter = DetailsWeatherPresenter()
+        view.presenter = presenter
+        return view
+    }
 }

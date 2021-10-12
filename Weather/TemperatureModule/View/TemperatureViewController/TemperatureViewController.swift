@@ -41,26 +41,16 @@ extension TemperatureViewController: TemperatureViewProtocol {
     }
     
     func failure() {
-        showErrorAlert()
         print("Данные не пришли")
     }
     
     private func setUpNavBar(title: String) {
         assert(navigationController != nil, "Empty navigationController")
-        self.title = title
-        
         let darkModeItemButton = DarkModeBarButtonItemButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
         darkModeItemButton.addTarget(self, action: #selector(switchDarkMode), for: .touchUpInside)
         let switchThemeItem = UIBarButtonItem(customView: darkModeItemButton)
         self.navigationItem.rightBarButtonItem = switchThemeItem
-        navigationController?.navigationBar.barTintColor = UIColor(named: "background")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.extraBold(size: 18)!]
-        navigationController?.navigationBar.shadowImage = UIImage()
-    }
-    
-    private func showErrorAlert() {
-        errorNetworkAlert.show()
-        present(errorNetworkAlert, animated: true, completion: nil)
+        self.title = title
     }
     
     @objc private func switchDarkMode() {
