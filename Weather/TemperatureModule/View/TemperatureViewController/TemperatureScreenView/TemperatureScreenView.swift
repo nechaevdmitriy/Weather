@@ -11,7 +11,7 @@ final class TemperatureScreenView: UIView, UICollectionViewDelegate {
     
     private let layout = UICollectionViewFlowLayout()
     private var collectionView: UICollectionView!
-    private let dataSource = TemperatureCollectionViewDataSource()
+    private let dataSource = TemperatureCollectionViewDataSourceAdapter()
     
     init() {
         super.init(frame: .zero)

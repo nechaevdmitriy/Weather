@@ -16,9 +16,7 @@ protocol TemperatureScreenViewProtocol: UIView {
     func setupDataSource(days: [WeatherDataProtocol])
 }
 
-protocol ErrorAlertProtocol: UIAlertController {
-    func show()
-}
+protocol ErrorAlertProtocol: UIAlertController {}
 
 final class TemperatureViewController: UIViewController {
     
@@ -45,7 +43,6 @@ extension TemperatureViewController: TemperatureViewProtocol {
     }
     
     func failure() {
-        errorNetworkAlert.show()
         present(errorNetworkAlert, animated: true, completion: nil)
     }
     
@@ -68,7 +65,6 @@ extension TemperatureViewController: TemperatureViewProtocol {
                 appDelegate?.overrideUserInterfaceStyle = .dark
             }
         } else {
-            errorDarkModeAlert.show()
             present(errorDarkModeAlert, animated: true, completion: nil)
         }
     }

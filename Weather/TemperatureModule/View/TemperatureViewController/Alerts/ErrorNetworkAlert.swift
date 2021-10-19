@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 final class ErrorNetworkAlert: UIAlertController, ErrorAlertProtocol {
-    func show() {
+    override func viewDidLoad() {
         title = "Нет сети"
         message = "Проверьте подключение к интернету"
         let alertAction = UIAlertAction(title: "Ок", style: .default, handler: nil)

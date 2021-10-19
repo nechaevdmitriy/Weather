@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TemperatureCollectionViewDataSource: NSObject, UICollectionViewDataSource {
+final class TemperatureCollectionViewDataSourceAdapter: NSObject, UICollectionViewDataSource {
     
     var days = [WeatherDataProtocol]()
     

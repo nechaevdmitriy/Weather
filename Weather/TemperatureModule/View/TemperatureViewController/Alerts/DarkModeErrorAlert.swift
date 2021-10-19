@@ -8,7 +8,7 @@
 import UIKit
 
 final class DarkModeErrorAlert: UIAlertController, ErrorAlertProtocol {
-    func show() {
+    override func viewDidLoad() {
         title = "iOS ниже 13"
         message = "Темная тема доступна только с версии iOS 13 и выше"
         let alertAction = UIAlertAction(title: "Ок", style: .destructive, handler: nil)
