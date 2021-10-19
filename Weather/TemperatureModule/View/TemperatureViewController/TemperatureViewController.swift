@@ -27,9 +27,13 @@ final class TemperatureViewController: UIViewController {
     var errorNetworkAlert: ErrorAlertProtocol!
     var errorDarkModeAlert: ErrorAlertProtocol!
     
+    override func loadView() {
+        super.loadView()
+        presenter.showWeatherList()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.showWeatherList()
         view = collectionViewScreen
     }
 }
@@ -41,7 +45,8 @@ extension TemperatureViewController: TemperatureViewProtocol {
     }
     
     func failure() {
-        print("Данные не пришли")
+        errorNetworkAlert.show()
+        present(errorNetworkAlert, animated: true, completion: nil)
     }
     
     private func setUpNavBar(title: String) {
