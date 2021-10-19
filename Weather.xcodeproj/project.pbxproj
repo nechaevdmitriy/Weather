@@ -287,9 +287,9 @@
 		5A95CFE4270494D7003B5DDA /* TemperatureModule */ = {
 			isa = PBXGroup;
 			children = (
-				5A95CFE5270494D7003B5DDA /* Presenter */,
 				5A95CFE8270494D7003B5DDA /* Model */,
 				5A95CFEA270494D7003B5DDA /* View */,
+				5A95CFE5270494D7003B5DDA /* Presenter */,
 			);
 			path = TemperatureModule;
 			sourceTree = "<group>";

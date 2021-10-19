@@ -8,8 +8,8 @@
 import Foundation
 
 struct CurrentWeather {
-    var weatherData: CurrentWeatherData
-    var city: String
-    var list: [WeatherList]
-    var listByDays: [String : [WeatherList]]
+    let weatherData: CurrentWeatherData
+    let city: String
+    let list: [WeatherList]
+    let listByDays: [String : [WeatherList]]
 }
