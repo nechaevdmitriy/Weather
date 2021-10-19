@@ -9,7 +9,6 @@ import UIKit
 
 protocol AssemblyBuilderProtocol {
     func createTemperatureModule(router: RouterProtocol) -> UIViewController
-    func createDetailsTemperatureModule(router: RouterProtocol) -> UIViewController
 }
 
 final class AssemblyBuilder: AssemblyBuilderProtocol {
@@ -24,13 +23,6 @@ final class AssemblyBuilder: AssemblyBuilderProtocol {
         let networkService = NetworkWeatherManager()
         let presenter = TemperaturePresenter(networkLayer: networkService, router: router)
         presenter.view = view
-        view.presenter = presenter
-        return view
-    }
-    
-    func createDetailsTemperatureModule(router: RouterProtocol) -> UIViewController {
-        let view = DetailsWeatherViewController()
-        let presenter = DetailsWeatherPresenter()
         view.presenter = presenter
         return view
     }

@@ -14,7 +14,6 @@ protocol HeadRouterProtocol {
 
 protocol RouterProtocol: HeadRouterProtocol {
     func initialViewController()
-    func showDetail(model: WeatherDataProtocol)
     func popToRoot()
 }
 
@@ -31,11 +30,6 @@ class Router: RouterProtocol {
     func initialViewController() {
         let mainViewController = assemblyBuilder.createTemperatureModule(router: self)
         navigationController.viewControllers = [mainViewController]
-    }
-    
-    func showDetail(model: WeatherDataProtocol) {
-        let detailViewController = assemblyBuilder.createDetailsTemperatureModule(router: self)
-        navigationController.pushViewController(detailViewController, animated: true)
     }
     
     func popToRoot() {
