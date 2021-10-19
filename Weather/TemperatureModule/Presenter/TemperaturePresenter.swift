@@ -31,7 +31,13 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     
     func getInfoByFirstDay() {
         var dateOfDay = WeatherOfTheFirstDay()
-        let info = getDataByDay(indexOfDay: 1)
+        
+        let info: [WeatherList] = {
+            var list = getDataByDay(indexOfDay: 0)
+            if list.isEmpty { list = getDataByDay(indexOfDay: 1) }
+            return list
+        }()
+        
         let stringSelectedDay = getDayString(indexOfDay: 0)
         dateOfDay.time = "Сегодня, " + String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM, E")
         dateOfDay.temperature = Int(info[0].main.temp).description + "°"
