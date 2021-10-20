@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct DetailsWeatherModel: WeatherDataProtocol {
+protocol DetailsWeatherModelProtocol: WeatherDataProtocol {
+    var time: String { get }
+    var weatherImage: String { get }
+    var temperature: String { get }
+    var weatherDescription: String { get }
+    var windDescription: String { get }
+    var humidity: String { get }
+    var rainfall: String { get }
+}
+
+struct DetailsWeatherModel: DetailsWeatherModelProtocol {
     var time: String
     var weatherImage: String
     var temperature: String

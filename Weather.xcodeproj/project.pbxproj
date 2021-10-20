@@ -13,6 +13,9 @@
 		5A27F2EC27208CFC00FCEB41 /* DetailsWeatherPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27F2EB27208CFC00FCEB41 /* DetailsWeatherPresenter.swift */; };
 		5A27F2EE2720938100FCEB41 /* DetailsWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27F2ED2720938100FCEB41 /* DetailsWeatherView.swift */; };
 		5A27F2F0272094BF00FCEB41 /* Extension+DetailWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27F2EF272094BF00FCEB41 /* Extension+DetailWeatherView.swift */; };
+		5A27F2F427209F3D00FCEB41 /* DetailsWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27F2F327209F3D00FCEB41 /* DetailsWeatherCollectionViewCell.swift */; };
+		5A27F2F627209FA600FCEB41 /* Extension + DetailsWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27F2F527209FA600FCEB41 /* Extension + DetailsWeatherCollectionViewCell.swift */; };
+		5A27F2F82720C1A900FCEB41 /* Extension + TemperatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27F2F72720C1A900FCEB41 /* Extension + TemperatureViewController.swift */; };
 		5A61AC6926FB1B01003B8CBE /* TextEncodeStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A61AC6826FB1B01003B8CBE /* TextEncodeStringExtensions.swift */; };
 		5A626AA02706129F00DD024C /* CurrentTemperatureCellScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A626A9F2706129F00DD024C /* CurrentTemperatureCellScreen.swift */; };
 		5A626AA32707078D00DD024C /* WeatherOfTheFirstDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A626AA22707078D00DD024C /* WeatherOfTheFirstDay.swift */; };
@@ -62,6 +65,9 @@
 		5A27F2EB27208CFC00FCEB41 /* DetailsWeatherPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWeatherPresenter.swift; sourceTree = "<group>"; };
 		5A27F2ED2720938100FCEB41 /* DetailsWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWeatherView.swift; sourceTree = "<group>"; };
 		5A27F2EF272094BF00FCEB41 /* Extension+DetailWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+DetailWeatherView.swift"; sourceTree = "<group>"; };
+		5A27F2F327209F3D00FCEB41 /* DetailsWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		5A27F2F527209FA600FCEB41 /* Extension + DetailsWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + DetailsWeatherCollectionViewCell.swift"; sourceTree = "<group>"; };
+		5A27F2F72720C1A900FCEB41 /* Extension + TemperatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + TemperatureViewController.swift"; sourceTree = "<group>"; };
 		5A61AC6826FB1B01003B8CBE /* TextEncodeStringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEncodeStringExtensions.swift; sourceTree = "<group>"; };
 		5A626A9F2706129F00DD024C /* CurrentTemperatureCellScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTemperatureCellScreen.swift; sourceTree = "<group>"; };
 		5A626AA22707078D00DD024C /* WeatherOfTheFirstDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOfTheFirstDay.swift; sourceTree = "<group>"; };
@@ -172,10 +178,28 @@
 		5A27F2EA27208ABE00FCEB41 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5A27F2F127209ED400FCEB41 /* ViewController */,
+				5A27F2F227209EE600FCEB41 /* DetailsWeatherCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5A27F2F127209ED400FCEB41 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
 				5A27F2ED2720938100FCEB41 /* DetailsWeatherView.swift */,
 				5A27F2EF272094BF00FCEB41 /* Extension+DetailWeatherView.swift */,
 			);
-			path = View;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5A27F2F227209EE600FCEB41 /* DetailsWeatherCell */ = {
+			isa = PBXGroup;
+			children = (
+				5A27F2F327209F3D00FCEB41 /* DetailsWeatherCollectionViewCell.swift */,
+				5A27F2F527209FA600FCEB41 /* Extension + DetailsWeatherCollectionViewCell.swift */,
+			);
+			path = DetailsWeatherCell;
 			sourceTree = "<group>";
 		};
 		5A626A9A2705BE2B00DD024C /* Extensions */ = {
@@ -352,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				5A95CFED270494D7003B5DDA /* TemperatureViewController.swift */,
+				5A27F2F72720C1A900FCEB41 /* Extension + TemperatureViewController.swift */,
 				5A95CFEC270494D7003B5DDA /* TemperatureCollectionViewDataSource.swift */,
 				5A6E825727145E4000691A41 /* BarButtonItems */,
 				5A6E825627145E0A00691A41 /* Alerts */,
@@ -518,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A61AC6926FB1B01003B8CBE /* TextEncodeStringExtensions.swift in Sources */,
+				5A27F2F82720C1A900FCEB41 /* Extension + TemperatureViewController.swift in Sources */,
 				5A95D000270494D7003B5DDA /* NextDaysCollectionViewDataSource.swift in Sources */,
 				5A27F2EC27208CFC00FCEB41 /* DetailsWeatherPresenter.swift in Sources */,
 				5A6E825B27146EC600691A41 /* DarkModeErrorAlert.swift in Sources */,
@@ -547,10 +573,12 @@
 				5A95CFFD270494D7003B5DDA /* CurrentTemperatureCollectionViewCell.swift in Sources */,
 				5A6E824E270F52C900691A41 /* CurrentWeatherDataExtension.swift in Sources */,
 				5A6E825D271480E200691A41 /* UIImageViewExtension.swift in Sources */,
+				5A27F2F427209F3D00FCEB41 /* DetailsWeatherCollectionViewCell.swift in Sources */,
 				5A2381A126DF7B5800F31ACB /* AssemblyBuilder.swift in Sources */,
 				5A6E823B270DA34900691A41 /* WeatherByHours.swift in Sources */,
 				5A626AA5270713B600DD024C /* WeatherOfTheOtherDays.swift in Sources */,
 				5A95CFFC270494D7003B5DDA /* TemperatureScreenView.swift in Sources */,
+				5A27F2F627209FA600FCEB41 /* Extension + DetailsWeatherCollectionViewCell.swift in Sources */,
 				5A95D00F270498D5003B5DDA /* CurrentWeatherData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

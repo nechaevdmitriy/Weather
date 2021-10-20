@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import SwiftUI
 
 extension DetailsWeatherViewController {
-    func createCollectionView() -> UICollectionView {
+    final func createCollectionView() -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

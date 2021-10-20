@@ -9,7 +9,8 @@ import UIKit
 
 final class DetailsWeatherViewController: UIViewController {
     
-    var collectionView: UICollectionView!
+    private var collectionView: UICollectionView!
+    weak var presenter: DetailsWeatherPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,7 @@ final class DetailsWeatherViewController: UIViewController {
 }
 
 extension DetailsWeatherViewController: DetailWeatherViewProtocol {
-    func setWeatherData(data: WeatherDataProtocol) {
+    func setWeatherData(data: DetailsWeatherModelProtocol) {
         
     }
 }

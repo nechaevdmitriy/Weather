@@ -31,7 +31,7 @@ final class CurrentTemperatureCellScreen: UIView {
             currentDateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             currentDateLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
-            weatherImage.topAnchor.constraint(equalTo: currentDateLabel.bottomAnchor, constant: 12),
+            weatherImage.topAnchor.constraint(equalTo: currentDateLabel.bottomAnchor, constant: 16),
             weatherImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             weatherImage.widthAnchor.constraint(equalToConstant: 100),
             weatherImage.heightAnchor.constraint(equalToConstant: 100),

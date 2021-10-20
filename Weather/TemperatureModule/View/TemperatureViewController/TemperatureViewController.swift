@@ -24,6 +24,7 @@ final class TemperatureViewController: UIViewController {
     var collectionViewScreen: TemperatureScreenViewProtocol!
     var errorNetworkAlert: ErrorAlertProtocol!
     var errorDarkModeAlert: ErrorAlertProtocol!
+    var bottomImageBlur: UIImageView!
     
     override func loadView() {
         super.loadView()
@@ -33,6 +34,7 @@ final class TemperatureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = collectionViewScreen
+        bottomImageBlur = createBottomImage()
     }
 }
 
@@ -61,6 +63,7 @@ extension TemperatureViewController: TemperatureViewProtocol {
             let appDelegate = UIApplication.shared.windows.first
             if appDelegate?.overrideUserInterfaceStyle == .dark {
                 appDelegate?.overrideUserInterfaceStyle = .light
+                
             } else {
                 appDelegate?.overrideUserInterfaceStyle = .dark
             }
