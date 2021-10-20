@@ -93,7 +93,7 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     }
     
     func showWeatherList() {
-        networkService.fetchCurrentWeather(forReqquesType: .city(city: RequestParameters.city)) { [weak self] result in
+        networkService.fetchCurrentWeather() { [weak self] result in
             guard let self = self else { return }
             
             switch result {
