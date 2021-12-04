@@ -9,7 +9,7 @@ import UIKit
 
 protocol TemperatureViewPresenterProtocol: AnyObject {
     func showWeatherList()
-    func tapOnTheCell(model: WeatherDataProtocol)
+    func tapOnTheCell()
 }
 
 protocol TemperatureScreenViewProtocol: UIView {
@@ -25,6 +25,10 @@ final class TemperatureViewController: UIViewController {
     var errorNetworkAlert: ErrorAlertProtocol!
     var errorDarkModeAlert: ErrorAlertProtocol!
     var bottomImageBlur: UIImageView!
+    
+    func tapOnTheCell() {
+        presenter.tapOnTheCell()
+    }
     
     override func loadView() {
         super.loadView()

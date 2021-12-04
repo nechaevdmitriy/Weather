@@ -15,6 +15,9 @@ protocol WeatherDataProtocol {
 
 protocol WeatherOfTheFirstDayProtocol: WeatherDataProtocol {
     var weatherDescription: String { get }
+    var humidity: String { get }
+    var rainfall: String { get }
+    var windDescription: String { get }
 }
 
 struct WeatherOfTheFirstDay: WeatherOfTheFirstDayProtocol {
@@ -23,18 +26,17 @@ struct WeatherOfTheFirstDay: WeatherOfTheFirstDayProtocol {
     var weatherImage: String
     var temperature: String
     var weatherDescription: String
+    var humidity: String
+    var rainfall: String
+    var windDescription: String
     
     init() {
         time = ""
         weatherImage = ""
         temperature = ""
         weatherDescription = ""
-    }
-    
-    init(todayDate: String, weatherImage: String, currentTemp: String, weatherDescription: String) {
-        self.time = todayDate
-        self.weatherImage = weatherImage
-        self.temperature = currentTemp
-        self.weatherDescription = weatherDescription
+        humidity = ""
+        rainfall = ""
+        windDescription = ""
     }
 }

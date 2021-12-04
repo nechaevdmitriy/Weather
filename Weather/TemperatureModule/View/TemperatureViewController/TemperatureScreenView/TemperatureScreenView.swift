@@ -7,11 +7,12 @@
 
 import UIKit
 
-final class TemperatureScreenView: UIView, UICollectionViewDelegate {
+final class TemperatureScreenView: UIView {
     
     private let layout = UICollectionViewFlowLayout()
     private var collectionView: UICollectionView!
     private let dataSource = TemperatureCollectionViewDataSourceAdapter()
+    weak var parent: TemperatureViewProtocol!
     
     init() {
         super.init(frame: .zero)
@@ -69,5 +70,11 @@ extension TemperatureScreenView: TemperatureScreenViewProtocol {
     
     func reloadData() {
         collectionView.reloadData()
+    }
+}
+
+extension TemperatureScreenView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        parent.tapOnTheCell()
     }
 }

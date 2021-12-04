@@ -2,7 +2,7 @@
 //  DetailsWeatherDescriptionModel.swift
 //  Weather
 //
-//  Created by Дмитрий  on 20.10.2021.
+//  Created by Дмитрий  on 04.12.2021.
 //
 
 import Foundation

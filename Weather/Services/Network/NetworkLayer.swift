@@ -21,7 +21,9 @@ final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
     func fetchCurrentWeather(complitionHandler: @escaping (RequesResult) -> Void) {
         guard let urlString = createURL() else { return }
-        AF.request(urlString).validate().responseDecodable(of: CurrentWeatherData.self) { dataResponse in
+        let request = URLRequest(url: urlString)
+        AF.request(request).validate().responseDecodable(of: CurrentWeatherData.self) { dataResponse in
+            
             switch dataResponse.result {
             case .success(let data):
                 complitionHandler(RequesResult.succes(value: data))

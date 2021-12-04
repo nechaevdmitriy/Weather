@@ -38,6 +38,8 @@ final class HoursCollectionViewScreen: UIView, HoursCollectionViewCellProtocol {
         temperatureLabel.text = "temp"
         temperatureLabel.font = UIFont.extraBold(size: 16)
         temperatureLabel.textAlignment = .center
+        temperatureLabel.adjustsFontSizeToFitWidth = true
+        temperatureLabel.minimumScaleFactor = 0.5
         
         self.addSubview(temperatureLabel)
     }

@@ -10,6 +10,7 @@ import Foundation
 protocol TemperatureViewProtocol: AnyObject {
     func succes(days: [WeatherDataProtocol], title: String)
     func failure()
+    func tapOnTheCell()
 }
 
 final class TemperaturePresenter: TemperatureViewPresenterProtocol {
@@ -18,31 +19,35 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     private let networkService: NetworkWeatherServiceProtocol
     private var weatherData: CurrentWeather!
     private var weatherOfTheDays = [WeatherDataProtocol]()
-    private var router: RouterProtocol
+    private var router: RouterProtocol!
     
     required init(networkLayer: NetworkWeatherServiceProtocol, router: RouterProtocol) {
         self.networkService = networkLayer
         self.router = router
     }
     
-    func tapOnTheCell(model: WeatherDataProtocol) {
-//        router.showDetail(model: model)
+    func tapOnTheCell() {
+        guard let model = weatherOfTheDays.first as? WeatherOfTheFirstDay else { return }
+        router.showDetail(model: model)
     }
-    
+
     func getInfoByFirstDay() {
         var dateOfDay = WeatherOfTheFirstDay()
-        
+
         let info: [WeatherList] = {
             var list = getDataByDay(indexOfDay: 0)
             if list.isEmpty { list = getDataByDay(indexOfDay: 1) }
             return list
         }()
-        
+
         let stringSelectedDay = getDayString(indexOfDay: 0)
         dateOfDay.time = "Сегодня, " + String.changeDateFormat(dateString: stringSelectedDay, from: "yyy-MM-dd", to: "d MMMM, E")
         dateOfDay.temperature = Int(info[0].main.temp).description + "°"
         dateOfDay.weatherDescription = info[0].weather[0].weatherDescription
         dateOfDay.weatherImage = info[0].weather[0].icon
+        dateOfDay.humidity = info[0].main.humidity.description + " %"
+        dateOfDay.rainfall = info[0].main.tempKf.description
+        dateOfDay.windDescription = Int(info[0].wind.speed).description + " м/с"
         weatherOfTheDays.insert(dateOfDay, at: 0)
     }
     
@@ -95,7 +100,6 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
     func showWeatherList() {
         networkService.fetchCurrentWeather() { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .succes(value: let value):
                 DispatchQueue.main.async {
