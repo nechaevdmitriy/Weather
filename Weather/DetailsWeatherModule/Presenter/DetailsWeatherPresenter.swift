@@ -8,11 +8,9 @@
 import Foundation
 
 protocol DetailWeatherViewProtocol: AnyObject {
-    func setWeatherData(data: WeatherOfTheFirstDayProtocol)
 }
 
 protocol DetailsWeatherPresenterProtocol: AnyObject {
-    func showData()
 }
 
 final class DetailsWeatherPresenter: DetailsWeatherPresenterProtocol {
@@ -24,10 +22,6 @@ final class DetailsWeatherPresenter: DetailsWeatherPresenterProtocol {
     init(view: DetailWeatherViewProtocol, weatherData: WeatherOfTheFirstDayProtocol) {
         self.view = view
         self.weatherData = weatherData
-    }
-    
-    func showData() {
-        view.setWeatherData(data: weatherData)
     }
     
     func configureDetailsWeatherModel() -> WeatherOfTheFirstDayProtocol {

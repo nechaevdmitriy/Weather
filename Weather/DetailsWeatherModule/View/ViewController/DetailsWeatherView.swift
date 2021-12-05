@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailsWeatherViewController: UIViewController, UICollectionViewDelegate {
+final class DetailsWeatherViewController: UIViewController, UICollectionViewDelegate, DetailWeatherViewProtocol {
     
     private var collectionView: UICollectionView!
     let dataSource = DetailWeatherCollectionViewDataSource()
@@ -34,12 +34,5 @@ final class DetailsWeatherViewController: UIViewController, UICollectionViewDele
 extension DetailsWeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.bounds.width, height: 400)
-    }
-}
-
-extension DetailsWeatherViewController: DetailWeatherViewProtocol {
-    
-    func setWeatherData(data: WeatherOfTheFirstDayProtocol) {
-        
     }
 }
