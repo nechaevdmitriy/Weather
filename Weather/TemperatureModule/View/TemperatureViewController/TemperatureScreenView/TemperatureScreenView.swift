@@ -75,6 +75,7 @@ extension TemperatureScreenView: TemperatureScreenViewProtocol {
 
 extension TemperatureScreenView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.row == 0 else { return }
         parent.tapOnTheCell()
     }
 }

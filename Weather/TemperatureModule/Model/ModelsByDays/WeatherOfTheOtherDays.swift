@@ -23,18 +23,10 @@ struct WeatherOfTheOtherDays: WeatherOfTheOtherDaysProtocol {
     var weatherByHours = [WeatherByHours]()
     
     init() {
-        time = ""
-        day = ""
-        temperature = ""
-        feelsLike = ""
-        weatherImage = ""
-    }
-    
-    init(date: String, day: String, temp: String, feelsLike: String, weatherImage: String) {
-        self.time = date
-        self.day = day
-        self.temperature = temp
-        self.feelsLike = feelsLike
-        self.weatherImage = weatherImage
+        time = "00:00"
+        day = "not found"
+        temperature = "0"
+        feelsLike = "0"
+        weatherImage = "0"
     }
 }

@@ -31,12 +31,12 @@ struct WeatherOfTheFirstDay: WeatherOfTheFirstDayProtocol {
     var windDescription: String
     
     init() {
-        time = ""
+        time = "00:00"
         weatherImage = ""
-        temperature = ""
-        weatherDescription = ""
-        humidity = ""
-        rainfall = ""
-        windDescription = ""
+        temperature = "0"
+        weatherDescription = "not found"
+        humidity = "0"
+        rainfall = "0"
+        windDescription = "0"
     }
 }

@@ -13,14 +13,8 @@ struct WeatherByHours {
     var weatherImage: String
     
     init() {
-        hour = ""
-        temp = ""
-        weatherImage = ""
-    }
-    
-    init(hour: String, temp: String, weatherImage: String) {
-        self.hour = hour
-        self.temp = temp
-        self.weatherImage = weatherImage
+        hour = "0"
+        temp = "0"
+        weatherImage = "not found"
     }
 }
