@@ -23,6 +23,8 @@ final class AssemblyBuilder: AssemblyBuilderProtocol {
         screenView.parent = view
         view.collectionViewScreen = screenView
         let networkService = NetworkWeatherManager()
+        let weatherstorageManager = WeatherStorageManager()
+        networkService.storageDelegate = weatherstorageManager
         let presenter = TemperaturePresenter(networkLayer: networkService, router: router)
         presenter.view = view
         view.presenter = presenter

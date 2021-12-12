@@ -19,6 +19,8 @@ enum RequesResult {
 
 final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
+    var storageDelegate: WeatherStorageManagerDelegate!
+    
     func fetchCurrentWeather(complitionHandler: @escaping (RequesResult) -> Void) {
         guard let urlString = createURL() else { return }
         let request = URLRequest(url: urlString)
@@ -26,15 +28,16 @@ final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
             
             switch dataResponse.result {
             case .success(let data):
-                UserDefaults.standard.set(try? PropertyListEncoder().encode(data), forKey: "weather")
+                self.storageDelegate.setData(data: data)
                 complitionHandler(RequesResult.succes(value: data))
             case .failure(let error):
-                if let data = UserDefaults.standard.value(forKey:"weather") as? Data {
-                    if let weatherData = try? PropertyListDecoder().decode(CurrentWeatherData.self, from: data) {
-                        complitionHandler(RequesResult.succes(value: weatherData))
+                self.storageDelegate.getData { result in
+                    switch result {
+                    case .succes(let data):
+                        complitionHandler(RequesResult.succes(value: data))
+                    case .failure:
+                        complitionHandler(RequesResult.failure(error: error))
                     }
-                } else {
-                    complitionHandler(RequesResult.failure(error: error))
                 }
             }
         }
