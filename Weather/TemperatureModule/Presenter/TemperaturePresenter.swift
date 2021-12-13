@@ -106,7 +106,6 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
                 self.getInfoByFirstDay()
                 self.setUpWeatherOfTheSecondDays()
                 self.view.succes(days: self.weatherOfTheDays, title: (value.city.name))
-                
             case .failure(error: let error):
                 print(error.localizedDescription)
                 self.view.failure()
