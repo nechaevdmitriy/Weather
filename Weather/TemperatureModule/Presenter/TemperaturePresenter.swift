@@ -102,12 +102,11 @@ final class TemperaturePresenter: TemperatureViewPresenterProtocol {
             guard let self = self else { return }
             switch result {
             case .succes(value: let value):
-                DispatchQueue.main.async {
-                    self.weatherData = value.toCurrentWeather()
-                    self.getInfoByFirstDay()
-                    self.setUpWeatherOfTheSecondDays()
-                    self.view.succes(days: self.weatherOfTheDays, title: (value.city.name))
-                }
+                self.weatherData = value.toCurrentWeather()
+                self.getInfoByFirstDay()
+                self.setUpWeatherOfTheSecondDays()
+                self.view.succes(days: self.weatherOfTheDays, title: (value.city.name))
+                
             case .failure(error: let error):
                 print(error.localizedDescription)
                 self.view.failure()
