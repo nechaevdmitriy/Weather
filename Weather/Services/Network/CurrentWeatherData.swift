@@ -15,41 +15,29 @@ struct CurrentWeatherData: Codable {
 struct City: Codable {
     let id: Int
     let name: String
-    let coord: Coord
     let country: String
-    let population, timezone, sunrise, sunset: Int
-}
-
-struct Coord: Codable {
-    let lat, lon: Double
 }
 
 struct WeatherList: Codable {
     let dt: Int
     let main: Main
     let weather: [Weather]
-    let clouds: Clouds
     let wind: Wind
     let visibility: Int
     let pop: Double
-    let sys: Sys
     let dtTxt: String
     let rain: Rain?
 
     enum CodingKeys: String, CodingKey {
-        case dt, main, weather, clouds, wind, visibility, pop, sys
+        case dt, main, weather, wind, visibility, pop
         case dtTxt = "dt_txt"
         case rain
     }
 }
 
-struct Clouds: Codable {
-    let all: Int
-}
-
 struct Main: Codable {
     let temp, feelsLike, tempMin, tempMax: Double
-    let pressure, seaLevel, grndLevel, humidity: Int
+    let humidity: Int
     let tempKf: Double
 
     enum CodingKeys: String, CodingKey {
@@ -57,9 +45,6 @@ struct Main: Codable {
         case feelsLike = "feels_like"
         case tempMin = "temp_min"
         case tempMax = "temp_max"
-        case pressure
-        case seaLevel = "sea_level"
-        case grndLevel = "grnd_level"
         case humidity
         case tempKf = "temp_kf"
     }
@@ -71,10 +56,6 @@ struct Rain: Codable {
     enum CodingKeys: String, CodingKey {
         case the3H = "3h"
     }
-}
-
-struct Sys: Codable {
-    let pod: String
 }
 
 struct Weather: Codable {

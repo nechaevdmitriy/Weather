@@ -9,10 +9,10 @@ import Foundation
 import Alamofire
 
 protocol NetworkWeatherServiceProtocol {
-    func fetchCurrentWeather(complitionHandler: @escaping (RequesResult) -> Void)
+    func fetchCurrentWeather(complitionHandler: @escaping (RequestResult) -> Void)
 }
 
-enum RequesResult {
+enum RequestResult {
     case succes(value: CurrentWeatherData)
     case failure(error: Error)
 }
@@ -21,7 +21,7 @@ final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
     
     var storageDelegate: WeatherStorageManagerDelegate!
     
-    func fetchCurrentWeather(complitionHandler: @escaping (RequesResult) -> Void) {
+    func fetchCurrentWeather(complitionHandler: @escaping (RequestResult) -> Void) {
         guard let urlString = createURL() else { return }
         let request = URLRequest(url: urlString)
         AF.request(request).validate().responseDecodable(of: CurrentWeatherData.self) { dataResponse in
@@ -29,14 +29,14 @@ final class NetworkWeatherManager: NetworkWeatherServiceProtocol {
             switch dataResponse.result {
             case .success(let data):
                 self.storageDelegate.setData(data: data)
-                complitionHandler(RequesResult.succes(value: data))
+                complitionHandler(RequestResult.succes(value: data))
             case .failure(let error):
                 self.storageDelegate.getData { result in
                     switch result {
                     case .succes(let data):
-                        complitionHandler(RequesResult.succes(value: data))
+                        complitionHandler(RequestResult.succes(value: data))
                     case .failure:
-                        complitionHandler(RequesResult.failure(error: error))
+                        complitionHandler(RequestResult.failure(error: error))
                     }
                 }
             }
